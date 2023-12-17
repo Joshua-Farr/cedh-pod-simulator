@@ -9,11 +9,12 @@ interface CardInfoProps {
 const StyledTile = styled.div`
   border-radius: 15px;
   width: 100%;
-  padding: 0.5em 0.75em;
+  padding: 0.5em 0.35em;
   background-color: #16324f;
   color: white;
   //   border: 2px solid white;
   height: 70px;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -27,7 +28,7 @@ const StyledImage = styled.img`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
   //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-  height: 100%;
+  height: 75%;
 `;
 
 const StyledCardName = styled.span`
