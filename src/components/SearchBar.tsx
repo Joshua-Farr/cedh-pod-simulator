@@ -1,30 +1,51 @@
-// import Autocomplete from "@mui/material/Autocomplete";
-// import TextField from "@mui/material/TextField";
-// import { getCardByName } from "../utils/magicAPI";
-
-import styled from "styled-components";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 export const SearchBar = () => {
-  const StyledSearchBar = styled.div`
-    font-size: 1rem;
-    margin: 1rem 0;
-  `;
+  const mtgCardNames = [
+    "Abjure",
+    "Abnormal Endurance",
+    "Aboleth Spawn",
+    "Abolish",
+    "Abominable Treefolk",
+    "Abomination",
+    "Abomination of Gudul",
+    "Abomination of Llanowar",
+    "Aboroth",
+    "Aboshan's Desire",
+    "Aboshan, Cephalid Emperor",
+    "About Face",
+    "Abrade",
+    "Abrupt Decay",
+    "Absolute Grace",
+    "Absolute Law",
+    "Absolver Thrull",
+    "Absorb",
+    "Absorb Energy",
+    "Absorb Identity",
+  ];
+
   return (
-    //     <Autocomplete
-    //       freeSolo
-    //       disableClearable
-    //       options={cardNames}
-    //       renderInput={(params) => (
-    //         <TextField
-    //           {...params}
-    //           label="Search for a card"
-    //           InputProps={{
-    //             ...params.InputProps,
-    //             type: "search",
-    //           }}
-    //         />
-    //       )}
-    //     />
-    <StyledSearchBar>Search for a card:</StyledSearchBar>
+    <Autocomplete
+      style={{ marginBottom: "20px", borderRadius: "50px" }}
+      freeSolo
+      disableClearable
+      options={mtgCardNames}
+      renderInput={(params: any) => (
+        <TextField
+          style={{ backgroundColor: "white" }}
+          {...params}
+          label="Search for a card"
+          InputProps={{
+            ...params.InputProps,
+            type: "search",
+          }}
+        />
+      )}
+    />
+
+    // <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+
+    // <StyledSearchBar>Search for a card:</StyledSearchBar>
   );
 };

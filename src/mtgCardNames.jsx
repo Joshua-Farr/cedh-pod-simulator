@@ -1,4 +1,4 @@
-export default mtgCardNames = [
+export const mtgCardNames = [
   "Abjure",
   "Abnormal Endurance",
   "Aboleth Spawn",
