@@ -9,7 +9,7 @@ const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    background-color: #816026;
+    background-color: rgba(198, 146, 57, 0.655);
     transition: 0.33s ease-out;
   }
 `;

@@ -12,6 +12,8 @@ const StyledTile = styled.div`
   border: 1px solid white;
   padding: 1.5em 1.35em;
   background-color: #16324f;
+  // background-color: rgba(198, 146, 57, 0.2); <-- for when the tile is the chosen commander
+
   color: white;
   display: flex;
   flex-direction: column;

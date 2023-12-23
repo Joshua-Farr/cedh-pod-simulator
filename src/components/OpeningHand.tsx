@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { getCardImage } from "../utils/magicAPI";
 import { getOpeningHand } from "../utils/getOpeningHand";
+import { defaultDecklist } from "../commanderList";
 
 export const OpeningHand = () => {
   const StyledTile = styled.div`
@@ -29,47 +30,21 @@ export const OpeningHand = () => {
     pointer-events: none;
   `;
 
-  const hand = [
-    "Abjure",
-    "Abnormal Endurance",
-    "Aboleth Spawn",
-    "Abolish",
-    "Abominable Treefolk",
-    "Abomination",
-    "Abomination of Gudul",
-  ];
-
   const fetchImages = async (decklist: string[]) => {
-    const url = await Promise.all(decklist.map((card) => getCardImage(card)));
+    const url = await Promise.all(decklist.map((card) => getCardImage(card))); //Parallel fetching of
     return url;
   };
 
-  const openingSeven = fetchImages(getOpeningHand(hand)); //will need to modify once have access to the decklist
+  const randomSeven = getOpeningHand(defaultDecklist);
 
-  console.log("*** OPENING HAND: ", openingSeven);
+  const images = fetchImages(randomSeven);
 
-  const cardImages = [
-    "src/assets/city-of-traitors.jpg",
-    "src/assets/mox-opal.jpg",
-    "src/assets/windswept-heath.jpg",
-    "src/assets/mystic-remora.jpg",
-    "src/assets/aminatou-s-augury.jpg",
-    "src/assets/generator-servant.jpg",
-    "src/assets/delayed-blast-fireball.jpg",
-  ];
+  // const myArray: (string | undefined)[] = getStringArray();
 
-  let openinghand = getOpeningHand(cardImages);
-
-  let handOfSeven = openinghand.map((card) => {
+  let handOfSeven = images.map((card) => {
     return <Card src={card} />;
   });
 
-  console.log(
-    "HERE ARE THE RANDOM CARDS, HAND OF 7",
-    typeof handOfSeven,
-    " : ",
-    handOfSeven
-  );
-
-  return <StyledTile>{handOfSeven}</StyledTile>;
+  // return <StyledTile>{handOfSeven}</StyledTile>;
+  return <>hello</>;
 };

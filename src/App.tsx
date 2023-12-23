@@ -31,17 +31,20 @@ const Title = styled.span`
   margin: 0;
 `;
 
+export const CommanderContext = createContext<{
+  commanderSettings: Commander;
+  setCommanderSettings: React.Dispatch<React.SetStateAction<Commander>>;
+}>({
+  commanderSettings: { commander: "Narset, Enlightened Master", decklist: [] },
+  setCommanderSettings: () => {},
+});
+
 function App() {
+  const [modal, setModal] = useState(false);
+
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
-    commander: "Yuriko, the Tiger's Shadow",
+    commander: "Narset, Enlightened Master",
     decklist: [],
-  });
-
-  const [modal, setModal] = useState(true);
-
-  const CommanderContext = createContext({
-    commanderSettings,
-    setCommanderSettings,
   });
 
   useEffect(() => {
@@ -65,7 +68,7 @@ function App() {
           <Title>cEDH Pod Randomizer</Title>
           <TableWrapper>
             <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
-            <CardInfoTile name={"Narset, Enlightened Master"} />
+            <CardInfoTile name={commanderSettings.commander} />
             <CardInfoTile name={"Magda, Brazen Outlaw"} />
             <CardInfoTile name={"Niv-Mizzet, Parun"} />
           </TableWrapper>

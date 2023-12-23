@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import { Commander } from "../types/types";
 import { allCommanders } from "../commanderList";
+import { CommanderContext } from "../App";
 
 type ButtonProps = {
   toggle: () => void;
@@ -11,7 +12,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
   const [tempCommanderSettings, setTempCommanderSettings] = useState<Commander>(
     { commander: "", decklist: [] as string[] }
   );
-  // const { commanderSettings, setCommanderSettings } = useContext();
+  const { setCommanderSettings } = useContext(CommanderContext);
 
   const Wrapper = styled.div`
     display: flex;
@@ -22,6 +23,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     padding: 1.5em;
     position: relative;
     background-color: #0f1c2f;
+    // border: 2px solid red;
   `;
 
   const DeckInput = styled.textarea`
@@ -53,6 +55,14 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     }
   `;
 
+  const FormWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    // border: 2px solid green;
+    background-color: #0f1c2f;
+    color: white;
+  `;
+
   //Might need to fix this a little bit
   const setCommander = (name: string) => {
     setTempCommanderSettings((prev) => {
@@ -74,9 +84,14 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     );
   });
 
+  const updateGlobalState = () => {
+    setCommanderSettings(tempCommanderSettings);
+  };
+
   return (
     <Wrapper>
-      <form>
+      <FormWrapper>
+        {/* <form> */}
         <h2>Choose A Commander:</h2>
         <CommanderSelect
           value={tempCommanderSettings.commander}
@@ -99,8 +114,17 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
             //Set overall decklist to the one imported
           }}
         />
-        <Button onClick={() => props.toggle()}>Use This Commander</Button>
-      </form>
+        <Button
+          onClick={() => {
+            updateGlobalState();
+            console.log("UPDATED USER STATE");
+            props.toggle();
+          }}
+        >
+          Use This Commander
+        </Button>
+        {/* </form> */}
+      </FormWrapper>
     </Wrapper>
   );
 };
