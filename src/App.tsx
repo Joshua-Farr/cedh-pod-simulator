@@ -1,8 +1,6 @@
-import { CardInfoTile } from "./components/CardInfoTile";
-// import { getCardImage } from "./utils/magicAPI";
 import styled from "styled-components";
+import { CardInfoTile } from "./components/CardInfoTile";
 import { OpeningHand } from "./components/OpeningHand";
-import { Button } from "@mui/material";
 import { ButtonBar } from "./components/ButtonBar";
 import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
@@ -16,21 +14,16 @@ const Wrapper = styled.div`
   height: 100vh;
   width: 100%;
   gap: 20px;
+  position: absolute;
 `;
 
 const TableWrapper = styled.div`
-  // border: 5px solid green;
   width: 1000px;
   height: 100vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1em;
-
-  // display: grid;
-  // grid-template-columns: 1fr 1fr;
-  // grid-gap: 0.75em;
 `;
 
 const Title = styled.span`
@@ -39,7 +32,12 @@ const Title = styled.span`
 `;
 
 function App() {
-  const [commanderSettings, setCommanderSettings] = useState<Commander>();
+  const [commanderSettings, setCommanderSettings] = useState<Commander>({
+    commander: "Yuriko, the Tiger's Shadow",
+    decklist: [],
+  });
+
+  const [modal, setModal] = useState(true);
 
   const CommanderContext = createContext({
     commanderSettings,
@@ -53,24 +51,30 @@ function App() {
     );
   }, [commanderSettings]);
 
-  // console.log(getCardImage("Chalice of the void"));
+  const toggleModal = () => {
+    console.log("We are toggling!!!");
+    setModal((prev) => !prev);
+  };
+
   return (
-    <CommanderContext.Provider
-      value={{ commanderSettings, setCommanderSettings }}
-    >
-      <Wrapper>
-        <Title>cEDH Pod Randomizer</Title>
-        <TableWrapper>
-          <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
-          <CardInfoTile name={"Narset, Enlightened Master"} commander />
-          <CardInfoTile name={"Magda, Brazen Outlaw"} />
-          <CardInfoTile name={"Niv-Mizzet, Parun"} />
-        </TableWrapper>
-        <ButtonBar />
-        <OpeningHand />
-      </Wrapper>
-    </CommanderContext.Provider>
-    // <ChooseCommanderModal />
+    <>
+      <CommanderContext.Provider
+        value={{ commanderSettings, setCommanderSettings }}
+      >
+        <Wrapper>
+          <Title>cEDH Pod Randomizer</Title>
+          <TableWrapper>
+            <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
+            <CardInfoTile name={"Narset, Enlightened Master"} />
+            <CardInfoTile name={"Magda, Brazen Outlaw"} />
+            <CardInfoTile name={"Niv-Mizzet, Parun"} />
+          </TableWrapper>
+          <ButtonBar toggle={toggleModal} />
+          <OpeningHand />
+        </Wrapper>
+      </CommanderContext.Provider>
+      {modal && <ChooseCommanderModal toggle={toggleModal} />}
+    </>
   );
 }
 

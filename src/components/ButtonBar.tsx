@@ -19,10 +19,14 @@ const Wrapper = styled.div`
   gap: 10px;
 `;
 
-export const ButtonBar = () => {
+type ButtonProps = {
+  toggle: () => void;
+};
+
+export const ButtonBar = (props: ButtonProps) => {
   return (
     <Wrapper>
-      <Button>Change Commander</Button>
+      <Button onClick={() => props.toggle()}>Change Commander</Button>
       <Button>Randomize Pod</Button>
       <Button>Randomize Hand</Button>
     </Wrapper>

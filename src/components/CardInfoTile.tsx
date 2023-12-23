@@ -19,6 +19,13 @@ const StyledTile = styled.div`
   justify-content: center;
   text-align: center;
   //   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: 0.1s ease-in;
+  }
 `;
 
 const StyledImage = styled.img`
@@ -28,6 +35,7 @@ const StyledImage = styled.img`
   //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
   //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
   height: 250px;
+  pointer-events: none;
 `;
 
 const StyledCardName = styled.span`

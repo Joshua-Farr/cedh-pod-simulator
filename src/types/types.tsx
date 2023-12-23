@@ -1,4 +1,4 @@
-export type Commander = {
+export interface Commander {
   commander: string;
   decklist: string[];
-};
+}
