@@ -41,9 +41,9 @@ export const OpeningHand = () => {
 
   // const myArray: (string | undefined)[] = getStringArray();
 
-  let handOfSeven = images.map((card) => {
-    return <Card src={card} />;
-  });
+  // let handOfSeven = images.map((card) => {
+  //   return <Card src={card} />;
+  // });
 
   // return <StyledTile>{handOfSeven}</StyledTile>;
   return <>hello</>;

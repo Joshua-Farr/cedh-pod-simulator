@@ -49,8 +49,10 @@ export const CardInfoTile = (props: CardInfoProps) => {
   const [pictureUrl, setPictureUrl] = useState<string | undefined>(undefined);
 
   const fetchImage = async () => {
+    console.log("FETCHING IMAGE");
     try {
       const url = await getCardImage(`${props.name}`);
+      console.log("IMAGE LOCATED AT: ", url);
       setPictureUrl(url);
     } catch (error) {
       console.error("Trouble fetching image, ", error);

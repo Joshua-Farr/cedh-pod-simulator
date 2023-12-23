@@ -23,9 +23,10 @@ const getAllCardNames = async () => {
   }
   console.log("hello");
 };
+
 const getCardImage = async (name: string) => {
   try {
-    const card = await getCardData(name);
+    const card = await Scry.Cards.byName(name);
     return card?.image_uris?.png;
   } catch (e) {
     console.error("COULD NOT RETRIEVE IMAGE. ", e);
