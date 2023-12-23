@@ -11,7 +11,7 @@ export const OpeningHand = () => {
     color: white;
     display: flex;
     align-items: center;
-    gap: 0.25em;
+    gap: 0.5em;
     justify-content: center;
     text-align: center;
     //   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -58,6 +58,15 @@ export const OpeningHand = () => {
 
   console.log("*** OPENING HAND: ", openingSeven);
 
-  return <></>;
-  //   <StyledTile>{openingHand}</StyledTile>;
+  return (
+    <StyledTile>
+      <Card src={"src/assets/narset.jpg"} />
+      <Card src={"src/assets/narset.jpg"} />
+      <Card src={"src/assets/narset.jpg"} />
+      <Card src={"src/assets/narset.jpg"} />
+      <Card src={"src/assets/narset.jpg"} />
+      <Card src={"src/assets/narset.jpg"} />
+      <Card src={"src/assets/narset.jpg"} />
+    </StyledTile>
+  );
 };
