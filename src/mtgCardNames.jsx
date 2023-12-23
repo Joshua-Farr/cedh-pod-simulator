@@ -1,11 +1,4 @@
 export const mtgCardNames = [
-  "Abjure",
-  "Abnormal Endurance",
-  "Aboleth Spawn",
-  "Abolish",
-  "Abominable Treefolk",
-  "Abomination",
-  "Abomination of Gudul",
   "Abomination of Llanowar",
   "Aboroth",
   "Aboshan's Desire",

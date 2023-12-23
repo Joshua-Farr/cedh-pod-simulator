@@ -1,59 +1,47 @@
 import { CardInfoTile } from "./components/CardInfoTile";
-import FooterMenu from "./components/FooterMenu";
-import { SearchBar } from "./components/SearchBar";
 // import { getCardImage } from "./utils/magicAPI";
 import styled from "styled-components";
+import { OpeningHand } from "./components/OpeningHand";
+import { Button } from "@mui/material";
+import { ButtonBar } from "./components/ButtonBar";
 
-const Columns = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
-  border: 2px solid red;
-  width: 50%;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
 `;
 
-const ColumnsDown = styled.div`
+const TableWrapper = styled.div`
+  // border: 5px solid green;
+  width: 1000px;
+  height: 100vh;
+
   display: flex;
-  flex-direction: columns;
-  height: 100%;
-  border: 2px solid pink;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
+  // grid-gap: 0.75em;
 `;
 
 function App() {
   // console.log(getCardImage("Chalice of the void"));
   return (
-    <div>
-      <SearchBar />
-      <Columns>
-        <ColumnsDown>
-          <CardInfoTile
-            name={"Narset, Enlightened Master"}
-            price={12}
-            set="hello"
-          />
-          <CardInfoTile
-            name={"Narset, Enlightened Master"}
-            price={12}
-            set="hello"
-          />
-        </ColumnsDown>
-      </Columns>
-      <Columns>
-        <ColumnsDown>
-          <CardInfoTile
-            name={"Narset, Enlightened Master"}
-            price={12}
-            set="hello"
-          />
-          <CardInfoTile
-            name={"Narset, Enlightened Master"}
-            price={12}
-            set="hello"
-          />
-        </ColumnsDown>
-      </Columns>
-      <FooterMenu />
-    </div>
+    <Wrapper>
+      <TableWrapper>
+        <CardInfoTile name={"Narset, Enlightened Master"} />
+        <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
+        <CardInfoTile name={"Magda, Brazen Outlaw"} />
+        <CardInfoTile name={"Niv-Mizzet, Parun"} />
+      </TableWrapper>
+      <ButtonBar />
+      <OpeningHand />
+    </Wrapper>
   );
 }
 

@@ -1,63 +1,60 @@
 import styled from "styled-components";
 
+import { getCardImage } from "../utils/magicAPI";
+import { useEffect, useState } from "react";
+
 interface CardInfoProps {
   name: string;
-  price: number;
-  set: string;
 }
 
 const StyledTile = styled.div`
   border-radius: 15px;
-  width: 100%;
-  padding: 0.5em 0.35em;
+  border: 1px solid white;
+  padding: 1.5em 1.35em;
   background-color: #16324f;
   color: white;
-  //   border: 2px solid white;
-  height: 70px;
-  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  text-align: center;
   //   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  margin-bottom: 10px;
 `;
 
 const StyledImage = styled.img`
-  max-height: 200 px;
-  border-radius: 3px;
+  // max-height: 100%;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
   //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-  height: 75%;
+  height: 250px;
 `;
 
 const StyledCardName = styled.span`
-  font-size: 0.875rem;
-`;
-
-// const StyledSetInfo = styled.span`
-//   font-size: 0.625rem;
-// `;
-
-const StyledCardPrice = styled.span`
-  font-size: 0.75rem;
-`;
-
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  font-size: 1rem;
+  margin-bottom: 1em;
 `;
 
 export const CardInfoTile = (props: CardInfoProps) => {
+  const [pictureUrl, setPictureUrl] = useState<string | undefined>(undefined);
+
+  const fetchImage = async () => {
+    try {
+      const url = await getCardImage(`${props.name}`);
+      setPictureUrl(url);
+    } catch (error) {
+      console.error("Trouble fetching image, ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, [props.name]);
+
   return (
     <StyledTile>
-      <StyledImage src="src/assets/narset.jpg" />
-      <StyledContainer>
-        <StyledCardName>{props.name}</StyledCardName>
-        {/* <StyledSetInfo>{props.set}</StyledSetInfo> */}
-        <StyledCardPrice>5 x ${props.price}.00</StyledCardPrice>
-      </StyledContainer>
+      <StyledCardName>{props.name}</StyledCardName>
+      {pictureUrl && <StyledImage src={pictureUrl} />}
     </StyledTile>
   );
 };
