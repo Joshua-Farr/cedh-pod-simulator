@@ -46,7 +46,14 @@ export const ChooseCommanderModal = () => {
     <Wrapper>
       <form>
         <h2>Choose A Commander:</h2>
-        <CommanderSelect>
+        <CommanderSelect
+          onChange={(e) => {
+            console.log("CHANGED COMMANDER ", e.target.value);
+            setCommanderSettings((prev) => {
+              return { ...prev, commander: `${e.target.value}` };
+            });
+          }}
+        >
           <option value="Tayam, Luminous Enigma">Tayam, Luminous Enigma</option>
           <option value="Najeela, the Blade-Blossom">
             Najeela, the Blade-Blossom
