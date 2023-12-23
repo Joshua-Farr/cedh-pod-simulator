@@ -5,6 +5,8 @@ import { OpeningHand } from "./components/OpeningHand";
 import { Button } from "@mui/material";
 import { ButtonBar } from "./components/ButtonBar";
 import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
+import { createContext, useEffect, useState } from "react";
+import { Commander } from "./types/types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,20 +39,38 @@ const Title = styled.span`
 `;
 
 function App() {
+  const [commanderSettings, setCommanderSettings] = useState<Commander>();
+
+  const CommanderContext = createContext({
+    commanderSettings,
+    setCommanderSettings,
+  });
+
+  useEffect(() => {
+    return console.log(
+      "Commander Settings have been updated!, --> ",
+      commanderSettings
+    );
+  }, [commanderSettings]);
+
   // console.log(getCardImage("Chalice of the void"));
   return (
-    // <Wrapper>
-    //   <Title>cEDH Pod Randomizer</Title>
-    //   <TableWrapper>
-    //     <CardInfoTile name={"Narset, Enlightened Master"} />
-    //     <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
-    //     <CardInfoTile name={"Magda, Brazen Outlaw"} />
-    //     <CardInfoTile name={"Niv-Mizzet, Parun"} />
-    //   </TableWrapper>
-    //   <ButtonBar />
-    //   <OpeningHand />
-    // </Wrapper>
-    <ChooseCommanderModal />
+    <CommanderContext.Provider
+      value={{ commanderSettings, setCommanderSettings }}
+    >
+      <Wrapper>
+        <Title>cEDH Pod Randomizer</Title>
+        <TableWrapper>
+          <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
+          <CardInfoTile name={"Narset, Enlightened Master"} commander />
+          <CardInfoTile name={"Magda, Brazen Outlaw"} />
+          <CardInfoTile name={"Niv-Mizzet, Parun"} />
+        </TableWrapper>
+        <ButtonBar />
+        <OpeningHand />
+      </Wrapper>
+    </CommanderContext.Provider>
+    // <ChooseCommanderModal />
   );
 }
 

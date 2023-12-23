@@ -60,13 +60,13 @@ export const OpeningHand = () => {
 
   return (
     <StyledTile>
-      <Card src={"src/assets/narset.jpg"} />
-      <Card src={"src/assets/narset.jpg"} />
-      <Card src={"src/assets/narset.jpg"} />
-      <Card src={"src/assets/narset.jpg"} />
-      <Card src={"src/assets/narset.jpg"} />
-      <Card src={"src/assets/narset.jpg"} />
-      <Card src={"src/assets/narset.jpg"} />
+      <Card src={"src/assets/city-of-traitors.jpg"} />
+      <Card src={"src/assets/mox-opal.jpg"} />
+      <Card src={"src/assets/windswept-heath.jpg"} />
+      <Card src={"src/assets/mystic-remora.jpg"} />
+      <Card src={"src/assets/aminatou-s-augury.jpg"} />
+      <Card src={"src/assets/generator-servant.jpg"} />
+      <Card src={"src/assets/delayed-blast-fireball.jpg"} />
     </StyledTile>
   );
 };

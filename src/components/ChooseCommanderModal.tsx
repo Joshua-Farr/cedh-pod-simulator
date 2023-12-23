@@ -1,9 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Commander } from "../types/types";
+import { allCommanders } from "../commanderList";
 
 export const ChooseCommanderModal = () => {
   const [commanderSettings, setCommanderSettings] = useState<Commander>();
+
+  const commanderOptions = allCommanders.map((commander: string) => {
+    return (
+      <option id={commander} value={commander}>
+        {commander}
+      </option>
+    );
+  });
 
   const Wrapper = styled.div`
     display: flex;
@@ -49,26 +58,23 @@ export const ChooseCommanderModal = () => {
         <CommanderSelect
           onChange={(e) => {
             console.log("CHANGED COMMANDER ", e.target.value);
-            setCommanderSettings((prev) => {
-              return { ...prev, commander: `${e.target.value}` };
-            });
+            //Set chosen commander to the one imported.
+
+            // setCommanderSettings((prev) => {
+            //   return { ...prev, commander: `${e.target.value}` };
+            // });
           }}
         >
-          <option value="Tayam, Luminous Enigma">Tayam, Luminous Enigma</option>
-          <option value="Najeela, the Blade-Blossom">
-            Najeela, the Blade-Blossom
-          </option>
-          <option value="Niv-Mizzet, Parun">Niv-Mizzet, Parun</option>
-          <option value="Shorikai, Genesis Engine">
-            Shorikai, Genesis Engine
-          </option>
-          <option value="Winota, Joiner of Forces">
-            Winota, Joiner of Forces
-          </option>
-          <option value="Kinnan, Bonder Prodigy">Kinnan, Bonder Prodigy</option>
+          {commanderOptions}
         </CommanderSelect>
         <h2>Upload Your Decklist</h2>
-        <DeckInput />
+        <DeckInput
+          onChange={(e) => {
+            const deckArray = e.target.value.replace(/\r\n/g, "\n").split("\n");
+            console.log(deckArray);
+            //Set overall decklist to the one imported
+          }}
+        />
         <Button>Use This Commander</Button>
       </form>
     </Wrapper>
