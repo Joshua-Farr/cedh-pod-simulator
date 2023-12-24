@@ -1,4 +1,4 @@
-export const formatCommanderNames = (names: string) => {
+export const formatCommanderNames = (names: string | string[]) => {
   const updatedNames = [];
 
   for (let i = 0; i < names.length; i++) {

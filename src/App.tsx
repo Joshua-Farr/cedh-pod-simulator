@@ -6,6 +6,7 @@ import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
 import { getCommanders } from "./utils/getCommanders";
+import { formatCommanderNames } from "./utils/formatCommanderNames";
 
 const Wrapper = styled.div`
   display: flex;
@@ -61,7 +62,7 @@ function App() {
     setModal((prev) => !prev);
   };
 
-  let allFourCommanders = getCommanders();
+  let allFourCommanders = formatCommanderNames(getCommanders());
 
   let commanders = allFourCommanders.map((commander) => {
     return <CardInfoTile name={commander} />;

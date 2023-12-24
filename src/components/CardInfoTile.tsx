@@ -22,6 +22,7 @@ const StyledTile = styled.div`
   text-align: center;
   //   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   user-select: none;
+  object-fit: contain;
 
   &:hover {
     cursor: pointer;
@@ -30,19 +31,33 @@ const StyledTile = styled.div`
   }
 `;
 
-const StyledImage = styled.img`
-  // max-height: 100%;
+// const StyledImage = styled.img`
+//   // max-height: 100%;
+//   border-radius: 10px;
+//   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+//   //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+//   //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+//   height: 250px;
+//   pointer-events: none;
+// `;
+
+const StyledDoubleImage = styled.img`
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-  //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-  height: 250px;
+  height: 200px;
   pointer-events: none;
 `;
 
 const StyledCardName = styled.span`
   font-size: 1rem;
   margin-bottom: 1em;
+`;
+
+const CommanderWrapper = styled.div`
+  display: flex;
+  gap: 5px;
+  // max-width: 250px;
+  border: 2px solid green;
 `;
 
 export const CardInfoTile = (props: CardInfoProps) => {
@@ -75,23 +90,26 @@ export const CardInfoTile = (props: CardInfoProps) => {
     }
   };
 
-  fetchImages();
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
-  let commanderImages: string[] = [];
+  let commanderImages: any[] = [];
 
   if (Array.isArray(pictureUrl)) {
-    commanderImages = pictureUrl;
-    commanderImages.map((name) => <StyledImage key={name} src={name} />);
+    commanderImages = pictureUrl.map((name) => (
+      <StyledDoubleImage key={name} src={name} />
+    ));
   }
 
   return (
     <StyledTile>
       <StyledCardName>{props.name}</StyledCardName>
-      {Array.isArray(pictureUrl) ? (
-        commanderImages
-      ) : (
+      {/* {Array.isArray(pictureUrl) ? ( */}
+      <CommanderWrapper>{commanderImages}</CommanderWrapper>
+      {/* ) : (
         <StyledImage src={pictureUrl} />
-      )}
+      )} */}
     </StyledTile>
   );
 };
