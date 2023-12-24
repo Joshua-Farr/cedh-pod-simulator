@@ -9,5 +9,7 @@ export const getOpeningHand = (decklist: string[]): string[] => {
     openingHand.push(tempDecklist[randomCard]);
     tempDecklist.splice(randomCard, 1);
   }
+
+  console.log("HERE IS THE OPENING HAND: ", openingHand);
   return openingHand;
 };

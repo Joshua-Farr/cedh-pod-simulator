@@ -1,45 +1,27 @@
 import * as Scry from "scryfall-sdk";
 
-const getCardData = async (name: string) => {
-  try {
-    return await Scry.Cards.byName(name);
-  } catch (e) {
-    console.error("getCardByName API REQUEST FAILED. ", e);
-  }
-};
-
-const getAllCardNames = async () => {
-  try {
-    console.log("Requesting all card names from scryfall");
-
-    const cardNames = await fetch(
-      "https://api.scryfall.com/catalog/card-names"
-    );
-    console.log("this is what we fetched!", cardNames);
-
-    return await Scry.Catalog.cardNames.name;
-  } catch (e) {
-    console.error(" getAllCardNames API REQUEST FAILED. ", e);
-  }
-  console.log("hello");
-};
-
 const getCardImage = async (name: string) => {
   try {
+    console.log("API HAS BEEN CALLED.");
     const card = await Scry.Cards.byName(name);
+    console.log("TRYING TO GET CARD IMAGE FOR: ", name);
+    console.log(`HERE IS ${name}'S URL: `, card.image_uris?.png);
     return card?.image_uris?.png;
   } catch (e) {
-    console.error("COULD NOT RETRIEVE IMAGE. ", e);
+    console.error("COULD NOT RETRIEVE IMAGE. HERE IS WHY: ", e);
   }
 };
 
-const getCardPrice = async (name: string) => {
+const getTinyCardImage = async (name: string) => {
   try {
-    const card = await getCardData(name);
-    return card?.prices.usd;
+    console.log("API HAS BEEN CALLED.");
+    const card = await Scry.Cards.byName(name);
+    console.log("TRYING TO GET CARD IMAGE FOR: ", name);
+    console.log(`HERE IS ${name}'S URL: `, card.image_uris?.small);
+    return card?.image_uris?.png;
   } catch (e) {
-    console.error("COULD NOT RETRIEVE CARD PRICE. ", e);
+    console.error("COULD NOT RETRIEVE IMAGE. HERE IS WHY: ", e);
   }
 };
 
-export { getCardData, getAllCardNames, getCardImage, getCardPrice };
+export { getCardImage, getTinyCardImage };

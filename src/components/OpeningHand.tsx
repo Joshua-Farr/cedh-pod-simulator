@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { getCardImage } from "../utils/magicAPI";
+import { getTinyCardImage } from "../utils/magicAPI";
 import { getOpeningHand } from "../utils/getOpeningHand";
 import { defaultDecklist } from "../commanderList";
+import { useState, useEffect } from "react";
 
 export const OpeningHand = () => {
   const StyledTile = styled.div`
@@ -31,20 +32,28 @@ export const OpeningHand = () => {
   `;
 
   const fetchImages = async (decklist: string[]) => {
-    const url = await Promise.all(decklist.map((card) => getCardImage(card))); //Parallel fetching of
+    const url = await Promise.all(
+      decklist.map((card) => getTinyCardImage(card))
+    ); //Parallel fetching of cards in hand
     return url;
   };
 
-  const randomSeven = getOpeningHand(defaultDecklist);
+  const [images, setImages] = useState<(string | undefined)[]>([]);
 
-  const images = fetchImages(randomSeven);
+  const fetchData = async () => {
+    const randomSeven = getOpeningHand(defaultDecklist);
+    const fetchedImages = await fetchImages(randomSeven);
+    setImages(fetchedImages);
+  };
 
-  // const myArray: (string | undefined)[] = getStringArray();
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  // let handOfSeven = images.map((card) => {
-  //   return <Card src={card} />;
-  // });
+  let handOfSeven = images.map((card) => {
+    return <Card src={card} data-original-img="src/assets/cardback.jpg" />;
+  });
 
-  // return <StyledTile>{handOfSeven}</StyledTile>;
-  return <>hello</>;
+  return <StyledTile>{handOfSeven}</StyledTile>;
+  // return <>hello</>;
 };

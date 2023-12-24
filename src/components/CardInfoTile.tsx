@@ -4,7 +4,7 @@ import { getCardImage } from "../utils/magicAPI";
 import { useEffect, useState } from "react";
 
 interface CardInfoProps {
-  name: string;
+  name: string | string[];
 }
 
 const StyledTile = styled.div`
@@ -46,27 +46,52 @@ const StyledCardName = styled.span`
 `;
 
 export const CardInfoTile = (props: CardInfoProps) => {
-  const [pictureUrl, setPictureUrl] = useState<string | undefined>(undefined);
+  const [pictureUrl, setPictureUrl] = useState<string | string[] | undefined>();
 
-  const fetchImage = async () => {
-    console.log("FETCHING IMAGE");
+  const fetchImages = async () => {
+    let temp: string | string[] = props.name || [];
+
     try {
-      const url = await getCardImage(`${props.name}`);
-      console.log("IMAGE LOCATED AT: ", url);
-      setPictureUrl(url);
+      if (Array.isArray(temp)) {
+        const results = await Promise.allSettled(
+          temp.map(async (name) => await getCardImage(name))
+        );
+        const images = results
+          .filter((result) => result.status === "fulfilled")
+          .map(
+            (result) =>
+              (result as PromiseFulfilledResult<string | undefined>).value
+          )
+          .filter((value) => value !== undefined) as string[];
+
+        setPictureUrl(images);
+      } else {
+        // If props.name is a single string, fetch the image for that string
+        const image = await getCardImage(temp);
+        setPictureUrl(image ? [image] : []);
+      }
     } catch (error) {
-      console.error("Trouble fetching image, ", error);
+      console.error("Trouble fetching the commander's image, ", error);
     }
   };
 
-  useEffect(() => {
-    fetchImage();
-  }, [props.name]);
+  fetchImages();
+
+  let commanderImages: string[] = [];
+
+  if (Array.isArray(pictureUrl)) {
+    commanderImages = pictureUrl;
+    commanderImages.map((name) => <StyledImage key={name} src={name} />);
+  }
 
   return (
     <StyledTile>
       <StyledCardName>{props.name}</StyledCardName>
-      {pictureUrl && <StyledImage src={pictureUrl} />}
+      {Array.isArray(pictureUrl) ? (
+        commanderImages
+      ) : (
+        <StyledImage src={pictureUrl} />
+      )}
     </StyledTile>
   );
 };

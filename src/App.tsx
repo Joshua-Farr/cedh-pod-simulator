@@ -5,6 +5,7 @@ import { ButtonBar } from "./components/ButtonBar";
 import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
+import { getCommanders } from "./utils/getCommanders";
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,12 +19,13 @@ const Wrapper = styled.div`
 `;
 
 const TableWrapper = styled.div`
-  width: 1000px;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1em;
+  border: 2px solid red;
 `;
 
 const Title = styled.span`
@@ -35,7 +37,7 @@ export const CommanderContext = createContext<{
   commanderSettings: Commander;
   setCommanderSettings: React.Dispatch<React.SetStateAction<Commander>>;
 }>({
-  commanderSettings: { commander: "Narset, Enlightened Master", decklist: [] },
+  commanderSettings: { commander: "Raffine, Scheming Seer", decklist: [] },
   setCommanderSettings: () => {},
 });
 
@@ -43,7 +45,7 @@ function App() {
   const [modal, setModal] = useState(false);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
-    commander: "Narset, Enlightened Master",
+    commander: "Raffine, Scheming Seer",
     decklist: [],
   });
 
@@ -59,6 +61,12 @@ function App() {
     setModal((prev) => !prev);
   };
 
+  let allFourCommanders = getCommanders();
+
+  let commanders = allFourCommanders.map((commander) => {
+    return <CardInfoTile name={commander} />;
+  });
+
   return (
     <>
       <CommanderContext.Provider
@@ -67,10 +75,11 @@ function App() {
         <Wrapper>
           <Title>cEDH Pod Randomizer</Title>
           <TableWrapper>
-            <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
+            {/* <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
             <CardInfoTile name={commanderSettings.commander} />
             <CardInfoTile name={"Magda, Brazen Outlaw"} />
-            <CardInfoTile name={"Niv-Mizzet, Parun"} />
+            <CardInfoTile name={"Niv-Mizzet, Parun"} /> */}
+            {commanders}
           </TableWrapper>
           <ButtonBar toggle={toggleModal} />
           <OpeningHand />
