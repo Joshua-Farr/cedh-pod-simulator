@@ -1,8 +1,6 @@
 import { topFiftyCommanders } from "../commanderList";
-
 import { CommanderContext } from "../App";
 import { useContext } from "react";
-import { formatCommanderNames } from "./formatCommanderNames";
 
 function shuffleArray(array: any[]) {
   for (var i = array.length - 1; i > 0; i--) {
@@ -25,10 +23,6 @@ export const getCommanders = (): string[] => {
     allCommanders.push(tempTopFiftyCommanders[random]);
     tempTopFiftyCommanders.splice(random, 1);
   }
-
-  console.log("*** here it is: ", formatCommanderNames(allCommanders));
-
-  console.log("*** ALL THE COMMANDERS HERE: ", allCommanders);
 
   shuffleArray(allCommanders);
 

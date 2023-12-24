@@ -44,9 +44,8 @@ export const OpeningHand = () => {
   const fetchData = async () => {
     const randomSeven = getOpeningHand(defaultDecklist);
     console.log("*** GETTING OPENING HAND YAAA, ", randomSeven);
-    const fetchedImages = await fetchImages(randomSeven);
+    const fetchedImages = await fetchImages(randomSeven); //Delay in fetching happening here...
     setImages(fetchedImages);
-    console.log("*** GOT THE OPENING HAND YASSSQUEEN", randomSeven);
   };
 
   useEffect(() => {
@@ -54,8 +53,8 @@ export const OpeningHand = () => {
   }, []);
 
   let handOfSeven = images.map((card) => {
-    // return <Card src={card || `src/assets/cardback.jpg`} />;
-    return <Card src={`src/assets/cardback.jpg`} />;
+    return <Card src={card} />;
+    // return <Card src={`src/assets/cardback.jpg`} />;
   });
 
   console.log("*** getting the random hand!", handOfSeven);

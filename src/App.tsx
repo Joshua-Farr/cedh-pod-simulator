@@ -58,11 +58,8 @@ function App() {
   }, [commanderSettings]);
 
   const toggleModal = () => {
-    console.log("We are toggling!!!");
     setModal((prev) => !prev);
   };
-
-  // let allFourCommanders = getCommanders();
 
   let allFourCommanders = formatCommanderNames(getCommanders());
 
@@ -77,13 +74,7 @@ function App() {
       >
         <Wrapper>
           <Title>cEDH Pod Randomizer</Title>
-          <TableWrapper>
-            {/* <CardInfoTile name={"Yuriko, the Tiger's Shadow"} />
-            <CardInfoTile name={commanderSettings.commander} />
-            <CardInfoTile name={"Magda, Brazen Outlaw"} />
-            <CardInfoTile name={"Niv-Mizzet, Parun"} /> */}
-            {commanders}
-          </TableWrapper>
+          <TableWrapper>{commanders}</TableWrapper>
           <ButtonBar toggle={toggleModal} />
           <OpeningHand />
         </Wrapper>

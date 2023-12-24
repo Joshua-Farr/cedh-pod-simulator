@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { formatNameForDisplay } from "../utils/formatNameForDisplay";
 import { getCardImage } from "../utils/magicAPI";
 import { useEffect, useState } from "react";
 
@@ -86,7 +86,7 @@ export const CardInfoTile = (props: CardInfoProps) => {
         setPictureUrl(image ? [image] : []);
       }
     } catch (error) {
-      console.error("Trouble fetching the commander's image, ", error);
+      console.error(`Trouble fetching ${temp}'s image: , `, error);
     }
   };
 
@@ -104,7 +104,7 @@ export const CardInfoTile = (props: CardInfoProps) => {
 
   return (
     <StyledTile>
-      <StyledCardName>{props.name}</StyledCardName>
+      <StyledCardName>{formatNameForDisplay(props.name)}</StyledCardName>
       {/* {Array.isArray(pictureUrl) ? ( */}
       <CommanderWrapper>{commanderImages}</CommanderWrapper>
       {/* ) : (
