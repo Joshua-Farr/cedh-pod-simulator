@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { formatNameForDisplay } from "../utils/formatNameForDisplay";
 import { getCardImage } from "../utils/magicAPI";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { CommanderContext } from "../App";
 
 interface CardInfoProps {
   name: string | string[];
@@ -12,7 +13,6 @@ const StyledTile = styled.div`
   border: 1px solid white;
   padding: 1.5em 1.35em;
   background-color: #16324f;
-  // background-color: rgba(198, 146, 57, 0.2); <-- for when the tile is the chosen commander
 
   color: white;
   display: flex;
@@ -29,6 +29,10 @@ const StyledTile = styled.div`
     transform: scale(1.45);
     transition: 0.1s ease-in;
   }
+`;
+
+const StyledCommander = styled(StyledTile)`
+  background-color: rgba(198, 146, 57, 0.2);
 `;
 
 // const StyledImage = styled.img`
@@ -62,6 +66,16 @@ const CommanderWrapper = styled.div`
 
 export const CardInfoTile = (props: CardInfoProps) => {
   const [pictureUrl, setPictureUrl] = useState<string | string[] | undefined>();
+
+  const isItMyCommander = (): boolean => {
+    const currentCommander =
+      useContext(CommanderContext).commanderSettings.commander;
+
+    if (currentCommander === formatNameForDisplay(props.name)) {
+      return true;
+    }
+    return false;
+  };
 
   const fetchImages = async () => {
     let temp: string | string[] = props.name || [];
@@ -103,13 +117,18 @@ export const CardInfoTile = (props: CardInfoProps) => {
   }
 
   return (
-    <StyledTile>
-      <StyledCardName>{formatNameForDisplay(props.name)}</StyledCardName>
-      {/* {Array.isArray(pictureUrl) ? ( */}
-      <CommanderWrapper>{commanderImages}</CommanderWrapper>
-      {/* ) : (
-        <StyledImage src={pictureUrl} />
-      )} */}
-    </StyledTile>
+    <>
+      {isItMyCommander() ? (
+        <StyledCommander>
+          <StyledCardName>{formatNameForDisplay(props.name)}</StyledCardName>
+          <CommanderWrapper>{commanderImages}</CommanderWrapper>
+        </StyledCommander>
+      ) : (
+        <StyledTile>
+          <StyledCardName>{formatNameForDisplay(props.name)}</StyledCardName>
+          <CommanderWrapper>{commanderImages}</CommanderWrapper>
+        </StyledTile>
+      )}
+    </>
   );
 };
