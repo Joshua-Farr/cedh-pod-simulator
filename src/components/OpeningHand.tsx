@@ -31,19 +31,22 @@ export const OpeningHand = () => {
     pointer-events: none;
   `;
 
+  const [images, setImages] = useState<(string | undefined)[]>([]);
+
   const fetchImages = async (decklist: string[]) => {
+    console.log("FETCH IMAGE FUNCTION CALLED!");
     const url = await Promise.all(
       decklist.map((card) => getTinyCardImage(card))
     ); //Parallel fetching of cards in hand
     return url;
   };
 
-  const [images, setImages] = useState<(string | undefined)[]>([]);
-
   const fetchData = async () => {
     const randomSeven = getOpeningHand(defaultDecklist);
+    console.log("*** GETTING OPENING HAND YAAA, ", randomSeven);
     const fetchedImages = await fetchImages(randomSeven);
     setImages(fetchedImages);
+    console.log("*** GOT THE OPENING HAND YASSSQUEEN", randomSeven);
   };
 
   useEffect(() => {
@@ -51,9 +54,11 @@ export const OpeningHand = () => {
   }, []);
 
   let handOfSeven = images.map((card) => {
-    return <Card src={card} data-original-img="src/assets/cardback.jpg" />;
+    // return <Card src={card || `src/assets/cardback.jpg`} />;
+    return <Card src={`src/assets/cardback.jpg`} />;
   });
 
+  console.log("*** getting the random hand!", handOfSeven);
+
   return <StyledTile>{handOfSeven}</StyledTile>;
-  // return <>hello</>;
 };

@@ -20,13 +20,13 @@ const StyledTile = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  //   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   user-select: none;
   object-fit: contain;
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.08);
+    // transform: scale(1.08);
+    transform: scale(1.45);
     transition: 0.1s ease-in;
   }
 `;
@@ -57,7 +57,7 @@ const CommanderWrapper = styled.div`
   display: flex;
   gap: 5px;
   // max-width: 250px;
-  border: 2px solid green;
+  // border: 2px solid green;
 `;
 
 export const CardInfoTile = (props: CardInfoProps) => {

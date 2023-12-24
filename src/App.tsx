@@ -26,7 +26,7 @@ const TableWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1em;
-  border: 2px solid red;
+  // border: 2px solid red;
 `;
 
 const Title = styled.span`
@@ -61,6 +61,8 @@ function App() {
     console.log("We are toggling!!!");
     setModal((prev) => !prev);
   };
+
+  // let allFourCommanders = getCommanders();
 
   let allFourCommanders = formatCommanderNames(getCommanders());
 
