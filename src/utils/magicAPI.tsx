@@ -3,8 +3,8 @@ import * as Scry from "scryfall-sdk";
 //To-do: handle cases when the card is dual sided
 
 const getCardImage = async (name: string) => {
+  console.log("*** TRYING TO GET THIS CARD IMAGE IN THE API: ", name);
   try {
-    console.log("API has been called.");
     const card = await Scry.Cards.byName(name);
     console.log("*** HERE IS THE JSON RESPONSE: ", card);
     console.log("Trying to get card image for: ", name);

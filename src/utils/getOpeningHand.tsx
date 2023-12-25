@@ -1,5 +1,5 @@
 export const getOpeningHand = (decklist: string[]): string[] => {
-  console.log("PASSED DECKLIST: ", decklist);
+  console.log("OPENING HAND: ", decklist);
 
   let tempDecklist = decklist;
   const openingHand = [];

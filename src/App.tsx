@@ -1,12 +1,14 @@
 import styled from "styled-components";
-import { CardInfoTile } from "./components/CardInfoTile";
+// import { CommanderTile } from "./components/CommanderTile";
 import { OpeningHand } from "./components/OpeningHand";
 import { ButtonBar } from "./components/ButtonBar";
 import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
-import { getCommanders } from "./utils/getCommanders";
-import { formatCommanderNames } from "./utils/formatCommanderNames";
+// import { getCommanders } from "./utils/getCommanders";
+// import { formatCommanderNames } from "./utils/formatCommanderNames";
+import { defaultDecklist } from "./commanderList";
+import { Commanders } from "./components/Commanders";
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,17 +39,26 @@ const Title = styled.span`
 export const CommanderContext = createContext<{
   commanderSettings: Commander;
   setCommanderSettings: React.Dispatch<React.SetStateAction<Commander>>;
+  setCurrentCommanders: React.Dispatch<React.SetStateAction<string[]>>;
 }>({
-  commanderSettings: { commander: "Raffine, Scheming Seer", decklist: [] },
+  commanderSettings: {
+    commander: "Raffine, Scheming Seer",
+    decklist: defaultDecklist,
+  },
   setCommanderSettings: () => {},
+  setCurrentCommanders: () => {},
 });
 
 function App() {
   const [modal, setModal] = useState(false);
 
+  const [state, setState] = useState(true);
+
+  const [currentCommanders, setCurrentCommanders] = useState<string[]>([]);
+
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Raffine, Scheming Seer",
-    decklist: [],
+    decklist: defaultDecklist,
   });
 
   useEffect(() => {
@@ -61,21 +72,25 @@ function App() {
     setModal((prev) => !prev);
   };
 
-  let allFourCommanders = formatCommanderNames(getCommanders());
-
-  let commanders = allFourCommanders.map((commander) => {
-    return <CardInfoTile name={commander} />;
-  });
+  const toggleState = () => {
+    setState((prev) => !prev);
+  };
 
   return (
     <>
       <CommanderContext.Provider
-        value={{ commanderSettings, setCommanderSettings }}
+        value={{
+          commanderSettings,
+          setCommanderSettings,
+          setCurrentCommanders,
+        }}
       >
         <Wrapper>
           <Title>cEDH Pod Randomizer</Title>
-          <TableWrapper>{commanders}</TableWrapper>
-          <ButtonBar toggle={toggleModal} />
+          <TableWrapper>
+            <Commanders />
+          </TableWrapper>
+          <ButtonBar toggle={toggleModal} render={toggleState} />
           <OpeningHand />
         </Wrapper>
       </CommanderContext.Provider>

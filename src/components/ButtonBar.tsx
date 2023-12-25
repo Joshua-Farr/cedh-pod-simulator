@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { CommanderContext } from "../App";
 
 const Button = styled.button`
   background-color: #c69239;
@@ -21,13 +23,14 @@ const Wrapper = styled.div`
 
 type ButtonProps = {
   toggle: () => void;
+  render: () => void;
 };
 
 export const ButtonBar = (props: ButtonProps) => {
   return (
     <Wrapper>
       <Button onClick={() => props.toggle()}>Change Commander</Button>
-      <Button>Randomize Pod</Button>
+      <Button onClick={() => props.render()}>Randomize Pod</Button>
       <Button>Randomize Hand</Button>
     </Wrapper>
   );

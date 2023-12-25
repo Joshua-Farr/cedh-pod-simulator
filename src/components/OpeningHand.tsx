@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { getTinyCardImage } from "../utils/magicAPI";
 import { getOpeningHand } from "../utils/getOpeningHand";
+import { useState, useEffect, useContext } from "react";
+import { RegularTile } from "./RegularTile";
+import { CommanderContext } from "../App";
 import { defaultDecklist } from "../commanderList";
-import { useState, useEffect } from "react";
 
 export const OpeningHand = () => {
   const StyledTile = styled.div`
@@ -21,43 +22,16 @@ export const OpeningHand = () => {
     user-select: none;
   `;
 
-  const Card = styled.img`
-    // max-height: 100%;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-    //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-    height: 200px;
-    pointer-events: none;
-  `;
+  const { commanderSettings } = useContext(CommanderContext);
 
-  const [images, setImages] = useState<(string | undefined)[]>([]);
+  const currentDecklist = commanderSettings.decklist;
 
-  const fetchImages = async (decklist: string[]) => {
-    console.log("FETCH IMAGE FUNCTION CALLED!");
-    const url = await Promise.all(
-      decklist.map((card) => getTinyCardImage(card))
-    ); //Parallel fetching of cards in hand
-    return url;
-  };
+  const openingHand = getOpeningHand(currentDecklist);
+  console.log("*** HERE IS THE OPENING HAND!, ", openingHand);
 
-  const fetchData = async () => {
-    const randomSeven = getOpeningHand(defaultDecklist);
-    console.log("*** GETTING OPENING HAND YAAA, ", randomSeven);
-    const fetchedImages = await fetchImages(randomSeven); //Delay in fetching happening here...
-    setImages(fetchedImages);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  let handOfSeven = images.map((card) => {
-    return <Card src={card} />;
-    // return <Card src={`src/assets/cardback.jpg`} />;
+  let handOfSeven = openingHand.map((card) => {
+    return <RegularTile key={card} name={card} />;
   });
-
-  console.log("*** getting the random hand!", handOfSeven);
 
   return <StyledTile>{handOfSeven}</StyledTile>;
 };

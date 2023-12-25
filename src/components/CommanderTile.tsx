@@ -32,25 +32,25 @@ const StyledTile = styled.div`
 `;
 
 const StyledCommander = styled(StyledTile)`
-  background-color: rgba(198, 146, 57, 0.2);
+  background-color: #343330;
 `;
 
-// const StyledImage = styled.img`
-//   // max-height: 100%;
-//   border-radius: 10px;
-//   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-//   //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-//   //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-//   height: 250px;
-//   pointer-events: none;
-// `;
-
-const StyledDoubleImage = styled.img`
+const StyledImage = styled.img`
+  // max-height: 100%;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  height: 200px;
+  //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+  //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  height: 250px;
   pointer-events: none;
 `;
+
+// const StyledDoubleImage = styled.img`
+//   border-radius: 10px;
+//   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+//   height: 200px;
+//   pointer-events: none;
+// `;
 
 const StyledCardName = styled.span`
   font-size: 1rem;
@@ -64,7 +64,7 @@ const CommanderWrapper = styled.div`
   // border: 2px solid green;
 `;
 
-export const CardInfoTile = (props: CardInfoProps) => {
+export const CommanderTile = (props: CardInfoProps) => {
   const [pictureUrl, setPictureUrl] = useState<string | string[] | undefined>();
 
   const isItMyCommander = (): boolean => {
@@ -111,8 +111,8 @@ export const CardInfoTile = (props: CardInfoProps) => {
   let commanderImages: any[] = [];
 
   if (Array.isArray(pictureUrl)) {
-    commanderImages = pictureUrl.map((name) => (
-      <StyledDoubleImage key={name} src={name} />
+    commanderImages = pictureUrl.map((url, index) => (
+      <StyledImage key={index} src={url} alt={`Commander Image ${index}`} />
     ));
   }
 
