@@ -91,7 +91,7 @@ function App() {
             <Commanders />
           </TableWrapper>
           <ButtonBar toggle={toggleModal} render={toggleState} />
-          <OpeningHand />
+          {/* <OpeningHand /> */}
         </Wrapper>
       </CommanderContext.Provider>
       {modal && <ChooseCommanderModal toggle={toggleModal} />}

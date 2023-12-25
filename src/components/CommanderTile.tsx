@@ -36,7 +36,11 @@ const StyledCommander = styled(StyledTile)`
 `;
 
 const ImageWrapper = styled.div`
+<<<<<<< HEAD
   // border: 2px solid green;
+=======
+  border: 2px solid green;
+>>>>>>> d481f20526524812b5b843cf00b675bb39aabde5
 `;
 
 const StyledImage = styled.img`
