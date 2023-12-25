@@ -13,9 +13,13 @@ export const Commanders = () => {
     setCurrentCommanders(allFourCommanders);
   }, []);
 
+  console.log("*** CALLING THE API FOR THE COMMANDER TILE");
+
   let commanders = allFourCommanders.map((commander) => {
     return <CommanderTile name={commander} />;
   });
+
+  console.log("*** GENERATING FOUR NEW COMMANDER TILES! FOR: ", commanders);
 
   return commanders;
 };

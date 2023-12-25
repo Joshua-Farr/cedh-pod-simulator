@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useContext } from "react";
-import { CommanderContext } from "../App";
 
 const Button = styled.button`
   background-color: #c69239;
