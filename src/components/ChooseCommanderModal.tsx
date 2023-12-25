@@ -12,7 +12,8 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
   const [tempCommanderSettings, setTempCommanderSettings] = useState<Commander>(
     { commander: "", decklist: [] as string[] }
   );
-  const { setCommanderSettings } = useContext(CommanderContext);
+  const { commanderSettings, setCommanderSettings } =
+    useContext(CommanderContext);
 
   const Wrapper = styled.div`
     display: flex;
@@ -101,6 +102,8 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
             // console.log("CHANGED COMMANDER TO", e.target.value);
           }}
         >
+          <option>{commanderSettings.commander}</option>
+
           {commanderOptions}
         </CommanderSelect>
         <h2>Upload Your Decklist:</h2>
@@ -118,7 +121,10 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
         <Button
           onClick={() => {
             updateGlobalState();
-            console.log("UPDATED USER STATE");
+            console.log(
+              "UPDATED USER STATE WITH NEW COMMANDER: ",
+              tempCommanderSettings.commander
+            );
             props.toggle();
           }}
         >

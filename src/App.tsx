@@ -42,7 +42,7 @@ export const CommanderContext = createContext<{
   setCurrentCommanders: React.Dispatch<React.SetStateAction<string[]>>;
 }>({
   commanderSettings: {
-    commander: "Raffine, Scheming Seer",
+    commander: "Yuriko, the Tiger's Shadow",
     decklist: defaultDecklist,
   },
   setCommanderSettings: () => {},
@@ -57,7 +57,7 @@ function App() {
   const [, setCurrentCommanders] = useState<string[]>([]);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
-    commander: "Raffine, Scheming Seer",
+    commander: "Yuriko, the Tiger's Shadow",
     decklist: defaultDecklist,
   });
 
@@ -91,7 +91,7 @@ function App() {
             <Commanders />
           </TableWrapper>
           <ButtonBar toggle={toggleModal} render={toggleState} />
-          {/* <OpeningHand /> */}
+          <OpeningHand />
         </Wrapper>
       </CommanderContext.Provider>
       {modal && <ChooseCommanderModal toggle={toggleModal} />}
