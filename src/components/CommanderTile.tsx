@@ -71,6 +71,10 @@ const CommanderWrapper = styled.div`
 export const CommanderTile = (props: CardInfoProps) => {
   const [pictureUrl, setPictureUrl] = useState<string | string[] | undefined>();
 
+  console.log("*** COMMANDER TILE FOR: ", props.name);
+
+  //Names are being passed in correctly to this component from above
+
   const isItMyCommander = (): boolean => {
     const currentCommander =
       useContext(CommanderContext).commanderSettings.commander;
@@ -82,6 +86,7 @@ export const CommanderTile = (props: CardInfoProps) => {
   };
 
   const fetchImages = async () => {
+    console.log("*** GENERATING NEW IMAGES FOR:", props.name);
     let temp: string | string[] = props.name || [];
 
     try {
@@ -110,7 +115,7 @@ export const CommanderTile = (props: CardInfoProps) => {
 
   useEffect(() => {
     fetchImages();
-  }, []);
+  }, [props.name]);
 
   let commanderImages: any[] = [];
 
@@ -119,6 +124,15 @@ export const CommanderTile = (props: CardInfoProps) => {
       <StyledImage key={index} src={url} alt={`Commander Image ${index}`} />
     ));
   }
+
+  console.log(
+    "*** HERE ARE THE IMAGES THAT WERE RETURNED FOR",
+    props.name,
+    ": ",
+    commanderImages
+  );
+
+  //commanderImages is returning the images from the previous commander!
 
   return (
     <>

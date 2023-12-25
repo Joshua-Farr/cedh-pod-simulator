@@ -6,7 +6,7 @@ const getCardImage = async (name: string) => {
   console.log("*** TRYING TO GET THIS CARD IMAGE IN THE API: ", name);
   try {
     const card = await Scry.Cards.byName(name);
-    console.log("*** HERE IS THE JSON RESPONSE: ", card);
+    // console.log("*** HERE IS THE JSON RESPONSE: ", card);
     console.log("Trying to get card image for: ", name);
     console.log(`Here is ${name}'s URL: `, card.image_uris?.png);
 
