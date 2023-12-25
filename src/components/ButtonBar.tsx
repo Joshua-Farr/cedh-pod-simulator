@@ -29,7 +29,13 @@ export const ButtonBar = (props: ButtonProps) => {
     <Wrapper>
       <Button onClick={() => props.toggle()}>Change Commander</Button>
       <Button onClick={() => props.render()}>Randomize Pod</Button>
-      <Button>Randomize Hand</Button>
+      <Button
+        onClick={() => {
+          console.log("*** Randomizing Player Hand!");
+        }}
+      >
+        Randomize Hand
+      </Button>
     </Wrapper>
   );
 };

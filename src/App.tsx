@@ -52,9 +52,9 @@ export const CommanderContext = createContext<{
 function App() {
   const [modal, setModal] = useState(false);
 
-  const [state, setState] = useState(true);
+  const [, setState] = useState(true);
 
-  const [currentCommanders, setCurrentCommanders] = useState<string[]>([]);
+  const [, setCurrentCommanders] = useState<string[]>([]);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Raffine, Scheming Seer",
@@ -91,7 +91,7 @@ function App() {
             <Commanders />
           </TableWrapper>
           <ButtonBar toggle={toggleModal} render={toggleState} />
-          {/* <OpeningHand /> */}
+          <OpeningHand />
         </Wrapper>
       </CommanderContext.Provider>
       {modal && <ChooseCommanderModal toggle={toggleModal} />}

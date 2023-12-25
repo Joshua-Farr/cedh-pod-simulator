@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCardImage } from "../utils/magicAPI";
+import { getTinyCardImage } from "../utils/magicAPI";
 import styled from "styled-components";
 
 interface CardInfoProps {
@@ -24,7 +24,7 @@ export const RegularTile = (props: CardInfoProps) => {
 
     try {
       // If props.name is a single string, fetch the image for that string
-      const image = await getCardImage(props.name);
+      const image = await getTinyCardImage(props.name);
       setPictureUrl(image);
     } catch (error) {
       console.error(`Trouble fetching ${temp}'s image: , `, error);
@@ -33,7 +33,7 @@ export const RegularTile = (props: CardInfoProps) => {
 
   useEffect(() => {
     fetchImages();
-  }, []);
+  }, [props.name]);
 
   return <Card src={pictureUrl} />;
 };
