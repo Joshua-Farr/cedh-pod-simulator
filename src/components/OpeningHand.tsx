@@ -6,6 +6,8 @@ import { CommanderContext } from "../App";
 import { defaultDecklist } from "../commanderList";
 
 export const OpeningHand = () => {
+  console.log("*** THE OPENING HAND HAS BEEN RENDERED");
+
   const StyledTile = styled.div`
     border-radius: 15px;
     border: 1px solid white;
@@ -24,6 +26,9 @@ export const OpeningHand = () => {
 
   const { commanderSettings } = useContext(CommanderContext);
 
+  const [currentHand, setCurrentHand] =
+    useState<React.SetStateAction<JSX.Element[]>>();
+
   const currentDecklist = commanderSettings.decklist;
 
   const openingHand = getOpeningHand(currentDecklist);
@@ -33,5 +38,11 @@ export const OpeningHand = () => {
     return <RegularTile key={card} name={card} />;
   });
 
-  return <StyledTile>{handOfSeven}</StyledTile>;
+  useEffect(() => {
+    setCurrentHand(handOfSeven);
+  }, []);
+
+  console.log("*** HERE IS YOUR CURRENT HAND!!"), currentHand;
+
+  return <StyledTile>{currentHand}</StyledTile>;
 };

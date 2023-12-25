@@ -35,6 +35,10 @@ const StyledCommander = styled(StyledTile)`
   background-color: #343330;
 `;
 
+const ImageWrapper = styled.div`
+  border: 2px solid green;
+`;
+
 const StyledImage = styled.img`
   // max-height: 100%;
   border-radius: 10px;
@@ -121,12 +125,16 @@ export const CommanderTile = (props: CardInfoProps) => {
       {isItMyCommander() ? (
         <StyledCommander>
           <StyledCardName>{formatNameForDisplay(props.name)}</StyledCardName>
-          <CommanderWrapper>{commanderImages}</CommanderWrapper>
+          <ImageWrapper>
+            <CommanderWrapper>{commanderImages}</CommanderWrapper>
+          </ImageWrapper>
         </StyledCommander>
       ) : (
         <StyledTile>
           <StyledCardName>{formatNameForDisplay(props.name)}</StyledCardName>
-          <CommanderWrapper>{commanderImages}</CommanderWrapper>
+          <ImageWrapper>
+            <CommanderWrapper>{commanderImages}</CommanderWrapper>
+          </ImageWrapper>
         </StyledTile>
       )}
     </>

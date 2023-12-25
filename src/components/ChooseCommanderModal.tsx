@@ -68,6 +68,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     setTempCommanderSettings((prev) => {
       return { ...prev, commander: name };
     });
+    console.log("COMMANDER UPDDATED TO: ", name);
   };
 
   const setDeckList = (userDecklist: string[]) => {
@@ -97,7 +98,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
           value={tempCommanderSettings.commander}
           onChange={(e) => {
             setCommander(e.target.value);
-            console.log("CHANGED COMMANDER TO", e.target.value);
+            // console.log("CHANGED COMMANDER TO", e.target.value);
           }}
         >
           {commanderOptions}
