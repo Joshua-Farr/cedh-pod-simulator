@@ -24,7 +24,6 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     padding: 1.5em;
     position: relative;
     background-color: #0f1c2f;
-    // border: 2px solid red;
   `;
 
   const DeckInput = styled.textarea`
@@ -59,12 +58,10 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
   const FormWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    // border: 2px solid green;
     background-color: #0f1c2f;
     color: white;
   `;
 
-  //Might need to fix this a little bit
   const setCommander = (name: string) => {
     setTempCommanderSettings((prev) => {
       return { ...prev, commander: name };
@@ -93,17 +90,14 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
   return (
     <Wrapper>
       <FormWrapper>
-        {/* <form> */}
         <h2>Choose A Commander:</h2>
         <CommanderSelect
           value={tempCommanderSettings.commander}
           onChange={(e) => {
             setCommander(e.target.value);
-            // console.log("CHANGED COMMANDER TO", e.target.value);
           }}
         >
           <option>{commanderSettings.commander}</option>
-
           {commanderOptions}
         </CommanderSelect>
         <h2>Upload Your Decklist:</h2>
@@ -114,23 +108,17 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
           onChange={(e) => {
             const deckArray = e.target.value.replace(/\r\n/g, "\n").split("\n");
             setDeckList(deckArray);
-            console.log("UPDATED DECKLIST TO INCLUDE:", deckArray);
             //Set overall decklist to the one imported
           }}
         />
         <Button
           onClick={() => {
             updateGlobalState();
-            console.log(
-              "UPDATED USER STATE WITH NEW COMMANDER: ",
-              tempCommanderSettings.commander
-            );
             props.toggle();
           }}
         >
           Use This Commander
         </Button>
-        {/* </form> */}
       </FormWrapper>
     </Wrapper>
   );

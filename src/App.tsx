@@ -1,12 +1,9 @@
 import styled from "styled-components";
-// import { CommanderTile } from "./components/CommanderTile";
 import { OpeningHand } from "./components/OpeningHand";
 import { ButtonBar } from "./components/ButtonBar";
 import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
-// import { getCommanders } from "./utils/getCommanders";
-// import { formatCommanderNames } from "./utils/formatCommanderNames";
 import { defaultDecklist } from "./commanderList";
 import { Commanders } from "./components/Commanders";
 
@@ -91,7 +88,7 @@ function App() {
             <Commanders />
           </TableWrapper>
           <ButtonBar toggle={toggleModal} render={toggleState} />
-          {/* <OpeningHand /> */}
+          <OpeningHand />
         </Wrapper>
       </CommanderContext.Provider>
       {modal && <ChooseCommanderModal toggle={toggleModal} />}

@@ -7,11 +7,8 @@ interface CardInfoProps {
 }
 
 const Card = styled.img`
-  // max-height: 100%;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-  //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
   height: 200px;
   pointer-events: none;
 `;

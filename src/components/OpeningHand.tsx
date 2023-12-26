@@ -3,7 +3,6 @@ import { getOpeningHand } from "../utils/getOpeningHand";
 import { useState, useEffect, useContext } from "react";
 import { RegularTile } from "./RegularTile";
 import { CommanderContext } from "../App";
-import { defaultDecklist } from "../commanderList";
 
 export const OpeningHand = () => {
   console.log("*** THE OPENING HAND HAS BEEN RENDERED");
