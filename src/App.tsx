@@ -39,7 +39,7 @@ export const CommanderContext = createContext<{
   setCurrentCommanders: React.Dispatch<React.SetStateAction<string[]>>;
 }>({
   commanderSettings: {
-    commander: "Yuriko, the Tiger's Shadow",
+    commander: "Kinnan, Bonder Prodigy",
     decklist: defaultDecklist,
   },
   setCommanderSettings: () => {},
@@ -54,7 +54,7 @@ function App() {
   const [, setCurrentCommanders] = useState<string[]>([]);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
-    commander: "Yuriko, the Tiger's Shadow",
+    commander: "Kinnan, Bonder Prodigy",
     decklist: defaultDecklist,
   });
 

@@ -43,5 +43,5 @@ export const OpeningHand = () => {
 
   console.log("*** HERE IS YOUR CURRENT HAND!!"), currentHand;
 
-  return <StyledTile>{currentHand}</StyledTile>;
+  return <StyledTile>{handOfSeven}</StyledTile>;
 };
