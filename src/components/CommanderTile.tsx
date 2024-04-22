@@ -36,11 +36,7 @@ const StyledCommander = styled(StyledTile)`
 `;
 
 const ImageWrapper = styled.div`
-<<<<<<< HEAD
   // border: 2px solid green;
-=======
-  border: 2px solid green;
->>>>>>> d481f20526524812b5b843cf00b675bb39aabde5
 `;
 
 const StyledImage = styled.img`
@@ -75,7 +71,7 @@ const CommanderWrapper = styled.div`
 export const CommanderTile = (props: CardInfoProps) => {
   const [pictureUrl, setPictureUrl] = useState<string | string[] | undefined>();
 
-  console.log("*** COMMANDER TILE FOR: ", props.name);
+  console.log("CREATING A COMMANDER TILE FOR: ", props.name);
 
   //Names are being passed in correctly to this component from above
 

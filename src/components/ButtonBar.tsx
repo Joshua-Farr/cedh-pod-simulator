@@ -34,7 +34,7 @@ export const ButtonBar = (props: ButtonProps) => {
           console.log("*** Randomizing Player Hand!");
         }}
       >
-        Randomize Hand
+        Draw New Hand
       </Button>
     </Wrapper>
   );

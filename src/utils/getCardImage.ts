@@ -1,6 +1,6 @@
 import * as Scry from "scryfall-sdk";
 
-const getTinyCardImage = async (name: string) => {
+export const getTinyCardImage = async (name: string) => {
   try {
     const card = await Scry.Cards.byName(name);
     console.log(`HERE IS ${name}'S URL: `, card.image_uris?.small);

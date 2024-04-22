@@ -26,5 +26,6 @@ export const getCommanders = (): string[] => {
 
   shuffleArray(allCommanders);
 
+  console.log("THESE ARE THE GENERATED COMMANDERS:", allCommanders);
   return allCommanders;
 };

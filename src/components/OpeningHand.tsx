@@ -5,8 +5,6 @@ import { RegularTile } from "./RegularTile";
 import { CommanderContext } from "../App";
 
 export const OpeningHand = () => {
-  console.log("*** THE OPENING HAND HAS BEEN RENDERED");
-
   const StyledTile = styled.div`
     border-radius: 15px;
     border: 1px solid white;
@@ -37,11 +35,9 @@ export const OpeningHand = () => {
     return <RegularTile key={card} name={card} />;
   });
 
-  useEffect(() => {
-    setCurrentHand(handOfSeven);
-  }, []);
-
-  console.log("*** HERE IS YOUR CURRENT HAND!!"), currentHand;
+  // useEffect(() => {
+  //   setCurrentHand(handOfSeven);
+  // }, []);
 
   return <StyledTile>{handOfSeven}</StyledTile>;
 };

@@ -58,12 +58,12 @@ function App() {
     decklist: defaultDecklist,
   });
 
-  useEffect(() => {
-    return console.log(
-      "Commander Settings have been updated!, --> ",
-      commanderSettings
-    );
-  }, [commanderSettings]);
+  // useEffect(() => {
+  //   return console.log(
+  //     "Commander Settings have been updated!, --> ",
+  //     commanderSettings
+  //   );
+  // }, [commanderSettings]);
 
   const toggleModal = () => {
     setModal((prev) => !prev);
