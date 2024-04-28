@@ -83,7 +83,7 @@ function App() {
         }}
       >
         <Wrapper>
-          <Title>cEDH Pod Randomizer</Title>
+          <Title>cEDH Pod Simulator</Title>
           <TableWrapper>
             <Commanders />
           </TableWrapper>
