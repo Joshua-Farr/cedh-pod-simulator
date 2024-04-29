@@ -26,7 +26,7 @@ const StyledTile = styled.div`
   &:hover {
     cursor: pointer;
     // transform: scale(1.08);
-    transform: scale(1.45);
+    transform: scale(1.08);
     transition: 0.1s ease-in;
   }
 `;
@@ -49,13 +49,6 @@ const StyledImage = styled.img`
   pointer-events: none;
 `;
 
-// const StyledDoubleImage = styled.img`
-//   border-radius: 10px;
-//   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-//   height: 200px;
-//   pointer-events: none;
-// `;
-
 const StyledCardName = styled.span`
   font-size: 1rem;
   margin-bottom: 1em;
@@ -72,8 +65,6 @@ export const CommanderTile = (props: CardInfoProps) => {
   const [pictureUrl, setPictureUrl] = useState<string | string[] | undefined>();
 
   console.log("CREATING A COMMANDER TILE FOR: ", props.name);
-
-  //Names are being passed in correctly to this component from above
 
   const isItMyCommander = (): boolean => {
     const currentCommander =
@@ -124,15 +115,6 @@ export const CommanderTile = (props: CardInfoProps) => {
       <StyledImage key={index} src={url} alt={`Commander Image ${index}`} />
     ));
   }
-
-  console.log(
-    "*** HERE ARE THE IMAGES THAT WERE RETURNED FOR",
-    props.name,
-    ": ",
-    commanderImages
-  );
-
-  //commanderImages is returning the images from the previous commander!
 
   return (
     <>

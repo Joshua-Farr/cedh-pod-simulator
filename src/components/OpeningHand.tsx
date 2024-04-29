@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { getOpeningHand } from "../utils/getOpeningHand";
-import { useState, useEffect, useContext } from "react";
-import { RegularTile } from "./RegularTile";
-import { CommanderContext } from "../App";
+import { MagicCard } from "./MagicCard";
 
-export const OpeningHand = () => {
-  const StyledTile = styled.div`
+
+interface handProps {
+  hand: string[];
+}
+
+export const OpeningHand: React.FC<handProps> = ( {hand}) => {
+  const HandWrapper = styled.div`
     border-radius: 15px;
     border: 1px solid white;
     padding: 1.5em 1.35em;
@@ -21,23 +23,9 @@ export const OpeningHand = () => {
     user-select: none;
   `;
 
-  const { commanderSettings } = useContext(CommanderContext);
-
-  const [currentHand, setCurrentHand] =
-    useState<React.SetStateAction<JSX.Element[]>>();
-
-  const currentDecklist = commanderSettings.decklist;
-
-  const openingHand = getOpeningHand(currentDecklist);
-  console.log("*** HERE IS THE OPENING HAND!, ", openingHand);
-
-  let handOfSeven = openingHand.map((card) => {
-    return <RegularTile key={card} name={card} />;
+  let handOfSeven = hand.map((card) => {
+    return <MagicCard url={card} />;
   });
 
-  // useEffect(() => {
-  //   setCurrentHand(handOfSeven);
-  // }, []);
-
-  return <StyledTile>{handOfSeven}</StyledTile>;
+  return <HandWrapper>{handOfSeven}</HandWrapper>;
 };

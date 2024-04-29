@@ -6,6 +6,8 @@ import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
 import { defaultDecklist } from "./commanderList";
 import { Commanders } from "./components/Commanders";
+import { getHandOfSeven } from "./utils/getOpeningHand";
+import { getTinyCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,6 +43,7 @@ export const CommanderContext = createContext<{
   commanderSettings: {
     commander: "Kinnan, Bonder Prodigy",
     decklist: defaultDecklist,
+    hand: [],
   },
   setCommanderSettings: () => {},
   setCurrentCommanders: () => {},
@@ -56,14 +59,30 @@ function App() {
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
     decklist: defaultDecklist,
-  });
+    hand: [],
+  }); 
 
-  // useEffect(() => {
-  //   return console.log(
-  //     "Commander Settings have been updated!, --> ",
-  //     commanderSettings
-  //   );
-  // }, [commanderSettings]);
+  
+  const fetchData = async () => {
+    const playerHand = getHandOfSeven(commanderSettings.decklist);
+    console.log(`Here is your opening hand: ${playerHand}`);
+    const handWithURLs = await Promise.all(playerHand.map(async (card) => {
+      return await getTinyCardImage(card);
+
+    }));
+    console.log("Hand with URLS: ", handWithURLs);
+    return handWithURLs;
+  };
+  
+  const fetchDataAndSetUrls = async () => {
+    const hand = await fetchData();
+    setCommanderSettings({...commanderSettings, hand: hand.filter((card) => card !== undefined) as string[],
+    });
+  };
+
+useEffect(() => {
+  fetchDataAndSetUrls();
+}, []);
 
   const toggleModal = () => {
     setModal((prev) => !prev);
@@ -84,11 +103,11 @@ function App() {
       >
         <Wrapper>
           <Title>cEDH Pod Simulator</Title>
-          <TableWrapper>
+          {/* <TableWrapper>
             <Commanders />
-          </TableWrapper>
-          <ButtonBar toggle={toggleModal} render={toggleState} />
-          <OpeningHand />
+          </TableWrapper> */}
+          {/* <ButtonBar toggle={toggleModal} render={toggleState} /> */}
+          <OpeningHand hand={commanderSettings.hand}/>
         </Wrapper>
       </CommanderContext.Provider>
       {modal && <ChooseCommanderModal toggle={toggleModal} />}
