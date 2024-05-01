@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface MagicCardProps {
-  url: string;
+  url: string ;
 }
 
 const Card = styled.img`
@@ -17,6 +17,5 @@ const Card = styled.img`
 `;
 
 export const MagicCard = (props: MagicCardProps) => {
-
   return <Card src={props.url} />;
 };

@@ -77,7 +77,6 @@ export const CommanderTile = (props: CardInfoProps) => {
   };
 
   const fetchImages = async () => {
-    console.log("*** GENERATING NEW IMAGES FOR:", props.name);
     let temp: string | string[] = props.name || [];
 
     try {

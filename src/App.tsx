@@ -8,6 +8,8 @@ import { defaultDecklist } from "./commanderList";
 import { Commanders } from "./components/Commanders";
 import { getHandOfSeven } from "./utils/getOpeningHand";
 import { getTinyCardImage } from "./utils/magicAPI";
+import { formatCommanderNames } from "./utils/formatCommanderNames";
+import { getCommanders } from "./utils/getCommanders";
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,6 +45,7 @@ export const CommanderContext = createContext<{
   commanderSettings: {
     commander: "Kinnan, Bonder Prodigy",
     decklist: defaultDecklist,
+    currentCommanders: [],
     hand: [],
   },
   setCommanderSettings: () => {},
@@ -58,7 +61,9 @@ function App() {
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
     decklist: defaultDecklist,
-    hand: ["https://cards.scryfall.io/small/front/6/6/66024e69-ad60-4c9a-a0ca-da138d33ad80.jpg?1685554120"],
+    currentCommanders: [],
+    // ["Kraum, Ludevic's Opus / Tymna the Weaver", "Kinnan, Bonder Prodigy","Atraxa, Grand Unifier","Rograkh, Son of Rohgahh / Silas Renn, Seeker Adept"  ],
+    hand: ["src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg"],
   }); 
 
   
@@ -81,6 +86,34 @@ function App() {
       throw error;
     }
   };
+
+  const fetchCommanders= async () => {
+    const allFourCommanders = formatCommanderNames(getCommanders());
+
+    console.log(`Here are your commanders: ${allFourCommanders}`);
+    
+    try {
+      const commanderURLS = await Promise.all(allFourCommanders.map(async (card) => {
+        console.log(`Fetching ${card} image from API!`);
+        const cardUrl = await getTinyCardImage(card);
+        console.log(`Found the URL for commander: ${card}, it's: ${cardUrl}`);
+        return cardUrl;
+      }));
+      
+      console.log(`Here are the commander URLs: ${commanderURLS}`);
+      return commanderURLS;
+    } catch (error) {
+      console.error("Error fetching commander:", error);
+      throw error;
+    }
+  };
+
+  const fetchCommandersAndSetUrls = async () => {
+    const commanders = await fetchCommanders();
+    console.log(`Here are the commanders that were fetched: ${commanders}`)
+    setCommanderSettings({...commanderSettings, currentCommanders: commanders.filter((card) => card !== undefined) as string[],
+    });
+  };
   
   const fetchHandAndSetUrls = async () => {
     const hand = await fetchHand();
@@ -91,7 +124,9 @@ function App() {
 
 useEffect(() => {
   fetchHandAndSetUrls();
+  fetchCommandersAndSetUrls();
   console.log(`Opening Hand: ${commanderSettings.hand}`)
+  console.log(`Starting Commanders: ${commanderSettings.currentCommanders}`)
 }, []);
 
 // useEffect(()=>{
@@ -118,9 +153,9 @@ useEffect(() => {
       >
         <Wrapper>
           <Title>cEDH Pod Simulator</Title>
-          {/* <TableWrapper>
-            <Commanders />
-          </TableWrapper> */}
+          <TableWrapper>
+            <Commanders currentCommanders={commanderSettings.currentCommanders} />
+          </TableWrapper>
           <ButtonBar toggle={toggleModal} render={toggleState} />
           <OpeningHand hand={commanderSettings.hand}/>
         </Wrapper>

@@ -1,15 +1,12 @@
-import { formatCommanderNames } from "../utils/formatCommanderNames";
 import { CommanderTile } from "./CommanderTile";
-import { getCommanders } from "../utils/getCommanders";
 
-export const Commanders = () => {
-  let allFourCommanders = formatCommanderNames(getCommanders());
+interface CommandersProps {
+  currentCommanders: string[];
+}
 
-  let commanders = allFourCommanders.map((commander) => {
-    return <CommanderTile name={commander} />;
+export const Commanders: React.FC<CommandersProps> = ({ currentCommanders }) => {
+  const commanders = currentCommanders.map((commander: string) => {
+    return <CommanderTile key={commander} name={commander} />;
   });
-
-  console.log("*** GENERATING FOUR NEW COMMANDER TILES! FOR: ", commanders);
-
-  return commanders;
+  return <>{commanders}</>;
 };
