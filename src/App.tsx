@@ -50,39 +50,54 @@ export const CommanderContext = createContext<{
 });
 
 function App() {
+
   const [modal, setModal] = useState(false);
-
   const [, setState] = useState(true);
-
   const [, setCurrentCommanders] = useState<string[]>([]);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
     decklist: defaultDecklist,
-    hand: [],
+    hand: ["https://cards.scryfall.io/small/front/6/6/66024e69-ad60-4c9a-a0ca-da138d33ad80.jpg?1685554120"],
   }); 
 
   
-  const fetchData = async () => {
+  const fetchHand = async () => {
     const playerHand = getHandOfSeven(commanderSettings.decklist);
     console.log(`Here is your opening hand: ${playerHand}`);
-    const handWithURLs = await Promise.all(playerHand.map(async (card) => {
-      return await getTinyCardImage(card);
-
-    }));
-    console.log("Hand with URLS: ", handWithURLs);
-    return handWithURLs;
+    
+    try {
+      const handWithURLs = await Promise.all(playerHand.map(async (card) => {
+        console.log(`Fetching ${card} image from API!`);
+        const cardUrl = await getTinyCardImage(card);
+        console.log(`Found the URL for ${card}, it's: ${cardUrl}`);
+        return cardUrl;
+      }));
+      
+      console.log(`Here is the hand with URLs: ${handWithURLs}`);
+      return handWithURLs;
+    } catch (error) {
+      console.error("Error fetching hand:", error);
+      throw error;
+    }
   };
   
-  const fetchDataAndSetUrls = async () => {
-    const hand = await fetchData();
+  const fetchHandAndSetUrls = async () => {
+    const hand = await fetchHand();
+    console.log(`Here is the hand that was fetched: ${hand}`)
     setCommanderSettings({...commanderSettings, hand: hand.filter((card) => card !== undefined) as string[],
     });
   };
 
 useEffect(() => {
-  fetchDataAndSetUrls();
+  fetchHandAndSetUrls();
+  console.log(`Opening Hand: ${commanderSettings.hand}`)
 }, []);
+
+// useEffect(()=>{
+//   // console.log(`Here are the commander Settings: Commander: ${commanderSettings.commander}, Opening Hand: ${commanderSettings.hand}`)
+
+// },[commanderSettings])
 
   const toggleModal = () => {
     setModal((prev) => !prev);
@@ -106,7 +121,7 @@ useEffect(() => {
           {/* <TableWrapper>
             <Commanders />
           </TableWrapper> */}
-          {/* <ButtonBar toggle={toggleModal} render={toggleState} /> */}
+          <ButtonBar toggle={toggleModal} render={toggleState} />
           <OpeningHand hand={commanderSettings.hand}/>
         </Wrapper>
       </CommanderContext.Provider>

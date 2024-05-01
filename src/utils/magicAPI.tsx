@@ -23,7 +23,7 @@ const getCardImage = async (name: string) => {
   try {
     await addRequestToQueue(async () => {
       const card = await Scry.Cards.byName(name);
-      console.log("Card data:", card);
+      // console.log("Card data:", card);
       if (card.card_faces[0]) {
         return card.card_faces[0].image_uris?.png;
       } else {
@@ -36,25 +36,29 @@ const getCardImage = async (name: string) => {
 };
 
 const getTinyCardImage = async (name: string) => {
-
-  
   try {
-      await addRequestToQueue(async () => {
-        const card = await Scry.Cards.byName(name);
-        let cardURL : string |undefined = ""
-        console.log("Card data:", card);
-        if(card.layout === "modal_dfc" || card.layout === "transform"){
-          console.log("THIS IS A MODAL CARD")
-          cardURL = card.card_faces[0].image_uris?.small;
-          console.log("WHAT HE HECK ", cardURL)
-        }
-        console.log("Here is the URL: ",card?.image_uris?.small )
-        cardURL = card?.image_uris?.small;
-        return cardURL;
-      }); 
-    
+    const cardURL = await new Promise<string | undefined>(async (resolve, reject) => {
+      try {
+        await addRequestToQueue(async () => {
+          const card = await Scry.Cards.byName(name);
+          let cardURL : string | undefined = "";
+          // console.log("Card data:", card);
+          if (card.layout === "modal_dfc" || card.layout === "transform") {
+            cardURL = card.card_faces[0].image_uris?.small;
+          } else {
+            cardURL = card?.image_uris?.small;
+          }
+          console.log("Here is the URL: ", cardURL);
+          resolve(cardURL);
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+    return cardURL;
   } catch (error) {
     console.error("Could not retrieve tiny card image, here is why: ", error);
+    throw error;
   }
 };
 
