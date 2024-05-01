@@ -156,7 +156,7 @@ useEffect(() => {
           <TableWrapper>
             <Commanders currentCommanders={commanderSettings.currentCommanders} />
           </TableWrapper>
-          <ButtonBar toggle={toggleModal} render={toggleState} />
+          <ButtonBar toggle={toggleModal} render={toggleState} newHand={()=>  fetchHandAndSetUrls()}/>s
           <OpeningHand hand={commanderSettings.hand}/>
         </Wrapper>
       </CommanderContext.Provider>

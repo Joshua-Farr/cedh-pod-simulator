@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 type ButtonProps = {
   toggle: () => void;
   render: () => void;
+  newHand: () => void;
 };
 
 export const ButtonBar = (props: ButtonProps) => {
@@ -32,6 +33,7 @@ export const ButtonBar = (props: ButtonProps) => {
       <Button
         onClick={() => {
           console.log("*** Randomizing Player Hand!");
+          props.newHand()
         }}
       >
         Draw New Hand
