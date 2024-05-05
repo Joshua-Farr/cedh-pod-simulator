@@ -61,8 +61,8 @@ function App() {
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
     decklist: defaultDecklist,
-    currentCommanders: [],
-    // ["Kraum, Ludevic's Opus / Tymna the Weaver", "Kinnan, Bonder Prodigy","Atraxa, Grand Unifier","Rograkh, Son of Rohgahh / Silas Renn, Seeker Adept"  ],
+    currentCommanders: 
+    ["Island", "Kinnan, Bonder Prodigy","Atraxa, Grand Unifier","Silas Renn, Seeker Adept"  ],
     hand: ["src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg","src/assets/cardback.jpg"],
   }); 
 
@@ -87,33 +87,33 @@ function App() {
     }
   };
 
-  const fetchCommanders= async () => {
-    const allFourCommanders = formatCommanderNames(getCommanders());
+  // const fetchCommanders= async () => {
+  //   const allFourCommanders = formatCommanderNames(getCommanders());
 
-    console.log(`Here are your commanders: ${allFourCommanders}`);
+  //   console.log(`Here are your commanders: ${allFourCommanders}`);
     
-    try {
-      const commanderURLS = await Promise.all(allFourCommanders.map(async (card) => {
-        console.log(`Fetching ${card} image from API!`);
-        const cardUrl = await getTinyCardImage(card);
-        console.log(`Found the URL for commander: ${card}, it's: ${cardUrl}`);
-        return cardUrl;
-      }));
+  //   try {
+  //     const commanderURLS = await Promise.all(allFourCommanders.map(async (card) => {
+  //       console.log(`Fetching ${card} image from API!`);
+  //       const cardUrl = await getTinyCardImage(card);
+  //       console.log(`Found the URL for commander: ${card}, it's: ${cardUrl}`);
+  //       return cardUrl;
+  //     }));
       
-      console.log(`Here are the commander URLs: ${commanderURLS}`);
-      return commanderURLS;
-    } catch (error) {
-      console.error("Error fetching commander:", error);
-      throw error;
-    }
-  };
+  //     console.log(`Here are the commander URLs: ${commanderURLS}`);
+  //     return commanderURLS;
+  //   } catch (error) {
+  //     console.error("Error fetching commander:", error);
+  //     throw error;
+  //   }
+  // };
 
-  const fetchCommandersAndSetUrls = async () => {
-    const commanders = await fetchCommanders();
-    console.log(`Here are the commanders that were fetched: ${commanders}`)
-    setCommanderSettings({...commanderSettings, currentCommanders: commanders.filter((card) => card !== undefined) as string[],
-    });
-  };
+  // const fetchCommandersAndSetUrls = async () => {
+  //   const commanders = await fetchCommanders();
+  //   console.log(`Here are the commanders that were fetched: ${commanders}`)
+  //   setCommanderSettings({...commanderSettings, currentCommanders: commanders.filter((card) => card !== undefined) as string[],
+  //   });
+  // };
   
   const fetchHandAndSetUrls = async () => {
     const hand = await fetchHand();
@@ -124,7 +124,7 @@ function App() {
 
 useEffect(() => {
   fetchHandAndSetUrls();
-  fetchCommandersAndSetUrls();
+  // fetchCommandersAndSetUrls();
   console.log(`Opening Hand: ${commanderSettings.hand}`)
   console.log(`Starting Commanders: ${commanderSettings.currentCommanders}`)
 }, []);
@@ -156,7 +156,7 @@ useEffect(() => {
           <TableWrapper>
             <Commanders currentCommanders={commanderSettings.currentCommanders} />
           </TableWrapper>
-          <ButtonBar toggle={toggleModal} render={toggleState} newHand={()=>  fetchHandAndSetUrls()}/>s
+          <ButtonBar toggle={toggleModal} render={toggleState} newHand={()=> fetchHandAndSetUrls()}/>
           <OpeningHand hand={commanderSettings.hand}/>
         </Wrapper>
       </CommanderContext.Provider>

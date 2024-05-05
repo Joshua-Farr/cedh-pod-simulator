@@ -23,7 +23,6 @@ export const OpeningHand: React.FC<handProps> = ( {hand}) => {
     user-select: none;
   `;
 
-  // console.log("HERE IS THE HAND THAT WAS PASSED THROUGH: ", hand)
   let handOfSeven = hand.map((card) => {
     return <MagicCard url={card} />;
   });
