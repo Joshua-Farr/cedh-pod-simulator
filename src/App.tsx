@@ -6,7 +6,7 @@ import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
 import {
   defaultDecklist,
-  testCommanders,
+  grindToDustDecklist,
   topFiftyCommanders,
 } from "./commanderList";
 import { Commanders } from "./components/Commanders";
@@ -22,16 +22,16 @@ const Wrapper = styled.div`
   width: 100%;
   gap: 20px;
   position: absolute;
+  // border: 3px solid red;
 `;
 
 const TableWrapper = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1em;
-  // border: 2px solid red;
+  // border: 2px solid green;
 `;
 
 const Title = styled.span`
@@ -45,7 +45,7 @@ export const CommanderContext = createContext<{
 }>({
   commanderSettings: {
     commander: "Kinnan, Bonder Prodigy",
-    decklist: defaultDecklist,
+    decklist: grindToDustDecklist,
     currentCommanders: [],
     hand: [],
   },
@@ -120,11 +120,12 @@ function App() {
               currentCommanders={commanderSettings.currentCommanders}
             />
           </TableWrapper>
-          {/* <ButtonBar
+          <ButtonBar
             toggle={toggleModal}
-            render={toggleState}
+            // render={toggleState}
             newHand={() => fetchHandAndSetUrls()}
-          /> */}
+            newCommanders={() => fetchCommandersAndSetUrls()}
+          />
           <OpeningHand hand={commanderSettings.hand} />
         </Wrapper>
       </CommanderContext.Provider>

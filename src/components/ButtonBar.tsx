@@ -21,19 +21,19 @@ const Wrapper = styled.div`
 
 type ButtonProps = {
   toggle: () => void;
-  render: () => void;
   newHand: () => void;
+  newCommanders: () => void;
 };
 
 export const ButtonBar = (props: ButtonProps) => {
   return (
     <Wrapper>
-      <Button onClick={() => props.toggle()}>Change Commander</Button>
-      <Button onClick={() => props.render()}>Randomize Pod</Button>
+      {/* <Button onClick={() => props.toggle()}>Change Commander</Button> */}
+      <Button onClick={() => props.newCommanders()}>Randomize Pod</Button>
       <Button
         onClick={() => {
           console.log("*** Randomizing Player Hand!");
-          props.newHand()
+          props.newHand();
         }}
       >
         Draw New Hand
