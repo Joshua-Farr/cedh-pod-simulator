@@ -1,3 +1,12 @@
+const testCommanders = [
+  "Kinnan, Bonder Prodigy",
+  "Najeela, the Blade-Blossom",
+  "Tivit, Seller of Secrets",
+  "Sisay, Weatherlight Captain",
+  "Dihada, Binder of Wills",
+  "Ob Nixilis, Captive Kingpin",
+];
+
 const allCommanders: string[] = [
   "Kraum, Ludevic's Opus / Tymna the Weaver",
   "Kinnan, Bonder Prodigy",
@@ -360,4 +369,4 @@ const defaultDecklist = [
   "Yavimaya Coast",
 ];
 
-export { allCommanders, topFiftyCommanders, defaultDecklist };
+export { allCommanders, topFiftyCommanders, defaultDecklist, testCommanders };

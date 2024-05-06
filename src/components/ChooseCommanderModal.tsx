@@ -9,9 +9,9 @@ type ButtonProps = {
 };
 
 export const ChooseCommanderModal = (props: ButtonProps) => {
-  const [tempCommanderSettings, setTempCommanderSettings] = useState<Commander>(
-    { commander: "", decklist: [] as string[] }
-  );
+  const [tempCommanderSettings, setTempCommanderSettings] =
+    useState<Commander>();
+    // { commander: "", decklist: [] as string[] }
   const { commanderSettings, setCommanderSettings } =
     useContext(CommanderContext);
 
