@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { OpeningHand } from "./components/OpeningHand";
 import { ButtonBar } from "./components/ButtonBar";
-import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
+// import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
 import {
@@ -129,7 +129,7 @@ function App() {
           <OpeningHand hand={commanderSettings.hand} />
         </Wrapper>
       </CommanderContext.Provider>
-      {modal && <ChooseCommanderModal toggle={toggleModal} />}
+      {/* {modal && <ChooseCommanderModal toggle={toggleModal} />} */}
     </>
   );
 }

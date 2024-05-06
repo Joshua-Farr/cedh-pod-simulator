@@ -8,13 +8,13 @@ export const fetchHand = async (decklist: string[]) => {
   try {
     const cards = getAllCardImages(playerHand);
 
-    const handWithURLs: string[] | null | undefined = [];
+    const handWithURLs: string[] = [];
 
     for (const card of await cards) {
       if (card.layout === "modal_dfc" || card.layout === "transform") {
-        handWithURLs.push(card.card_faces[0].image_uris?.small);
+        handWithURLs.push(card.card_faces[0]?.image_uris?.small || "");
       } else {
-        handWithURLs.push(card?.image_uris?.small);
+        handWithURLs.push(card?.image_uris?.small || "");
       }
     }
 

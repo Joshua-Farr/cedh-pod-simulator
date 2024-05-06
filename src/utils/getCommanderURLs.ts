@@ -12,16 +12,21 @@ export const getCommanderURLs = async (commanderList: string[] | string) => {
     if (!Array.isArray(commanderList)) {
       const url = getCardImage(commanderList);
       console.log("COmmander URL", url);
-      return [url];
+      return [url || ""];
     } else {
-      const formattedCommanderNames = formatCommanderNames(commanderList);
+      const filteredCommanderList = commanderList.filter(Boolean); // Remove undefined values
+      const formattedCommanderNames = formatCommanderNames(
+        filteredCommanderList
+      );
+
+      // const formattedCommanderNames = formatCommanderNames(commanderList);
       const commanders = await getAllCardImages(formattedCommanderNames);
 
       console.log(`Here are the commander URLs: ${commanders}`);
 
       for (const card of await commanders) {
         if (card && card.image_uris && card.image_uris.large) {
-          handWithURLs.push(card?.image_uris?.large);
+          handWithURLs.push(card?.image_uris?.large || "");
         }
       }
     }
