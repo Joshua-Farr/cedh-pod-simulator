@@ -121,7 +121,10 @@ function App() {
             />
           </TableWrapper>
           <ButtonBar
-            toggle={toggleModal}
+            toggle={() => {
+              console.log("toggled!");
+            }}
+            // toggleModal}
             // render={toggleState}
             newHand={() => fetchHandAndSetUrls()}
             newCommanders={() => fetchCommandersAndSetUrls()}
