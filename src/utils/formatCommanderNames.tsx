@@ -1,4 +1,6 @@
-export const formatCommanderNames = (names: string | string[]) => {
+export const formatCommanderNames = (
+  names: string | string[]
+): string[] | string => {
   if (!Array.isArray(names)) return names;
 
   const updatedNames = [];

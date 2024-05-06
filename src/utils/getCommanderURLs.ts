@@ -3,7 +3,11 @@ import { getAllCardImages, getCardImage } from "./magicAPI";
 
 export const getCommanderURLs = async (commanderList: string[] | string) => {
   try {
-    let handWithURLs: string[] | null | undefined = [];
+    if (!commanderList) {
+      throw new Error("Commander list is empty or undefined");
+    }
+
+    let handWithURLs: string[] = [];
 
     if (!Array.isArray(commanderList)) {
       const url = getCardImage(commanderList);
@@ -16,7 +20,9 @@ export const getCommanderURLs = async (commanderList: string[] | string) => {
       console.log(`Here are the commander URLs: ${commanders}`);
 
       for (const card of await commanders) {
-        handWithURLs.push(card?.image_uris?.large);
+        if (card && card.image_uris && card.image_uris.large) {
+          handWithURLs.push(card?.image_uris?.large);
+        }
       }
     }
 
