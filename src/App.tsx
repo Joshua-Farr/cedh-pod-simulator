@@ -57,7 +57,7 @@ function App() {
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
-    decklist: defaultDecklist,
+    decklist: grindToDustDecklist,
     currentCommanders: [],
     hand: [
       "src/assets/cardback.jpg",
