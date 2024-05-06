@@ -53,7 +53,7 @@ export const CommanderContext = createContext<{
 });
 
 function App() {
-  const [modal, setModal] = useState(false);
+  // const [, setModal] = useState(false);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
@@ -101,9 +101,9 @@ function App() {
     );
   }, [commanderSettings]);
 
-  const toggleModal = () => {
-    setModal((prev) => !prev);
-  };
+  // const toggleModal = () => {
+  //   setModal((prev) => !prev);
+  // };
 
   return (
     <>
