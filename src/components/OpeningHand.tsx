@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { MagicCard } from "./MagicCard";
 
-
 interface handProps {
   hand: string[];
 }
 
-export const OpeningHand: React.FC<handProps> = ( {hand}) => {
+export const OpeningHand: React.FC<handProps> = ({ hand }) => {
   const HandWrapper = styled.div`
     border-radius: 15px;
     border: 1px solid white;

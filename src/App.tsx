@@ -4,11 +4,7 @@ import { ButtonBar } from "./components/ButtonBar";
 // import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
-import {
-  defaultDecklist,
-  grindToDustDecklist,
-  topFiftyCommanders,
-} from "./commanderList";
+import { grindToDustDecklist, topFiftyCommanders } from "./commanderList";
 import { Commanders } from "./components/Commanders";
 import { fetchHand } from "./utils/fetchHandOfSeven";
 import { getFourCommanderNames } from "./utils/getFourCommanderNames";
