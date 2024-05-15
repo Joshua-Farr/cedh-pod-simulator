@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { formatNameForDisplay } from "../utils/formatNameForDisplay";
-import { useState, useContext } from "react";
-import { CommanderContext } from "../App";
 
 interface CardInfoProps {
   commanders: string | string[];
@@ -64,69 +62,37 @@ const CommanderWrapper = styled.div`
 `;
 
 export const CommanderTile = (props: CardInfoProps) => {
-  // const isItMyCommander = (): boolean => {
-  //   const currentCommander =
-  //     useContext(CommanderContext).commanderSettings.commander;
-
-  //   if (
-  //     currentCommander === formatNameForDisplay(props.commanders[props.index])
-  //   ) {
-  //     return true;
-  //   }
-  //   return false;
-  // };
-
-  // const fetchImages = async () => {
-  //   let temp: string | string[] = props.name || [];
-
-  //   try {
-  //     if (Array.isArray(temp)) {
-  //       const results = await Promise.allSettled(
-  //         temp.map(async (name) => await getCardImage(name))
-  //       );
-  //       const images = results
-  //         .filter((result) => result.status === "fulfilled")
-  //         .map(
-  //           (result) =>
-  //             (result as PromiseFulfilledResult<string | undefined>).value
-  //         )
-  //         .filter((value) => value !== undefined) as string[];
-
-  //       setPictureUrl(images);
-  //     } else {
-  //       // If props.name is a single string, fetch the image for that string
-  //       const image = await getCardImage(temp);
-  //       setPictureUrl(image ? [image] : []);
-  //     }
-  //   } catch (error) {
-  //     console.error(`Trouble fetching ${temp}'s image: , `, error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchImages();
-  // }, [props.name]);
-
   let commanderImages: any[] = [];
 
-  if (Array.isArray(props.listOfUrls[props.index])) {
+  console.log(
+    "Now looking at this commander: ",
+    props.commanders,
+    props.listOfUrls[props.index]
+  );
+
+  if (Array.isArray(props.commanders)) {
+    console.log("IN DA LOOP LOOKING AT ", props.commanders[props.index]);
+    console.log("HERE IS THE IMAGES", props.listOfUrls[props.index]);
     const imageUrls = [
-      props.listOfUrls[props.index][0],
-      props.listOfUrls[props.index][1],
+      props.listOfUrls[props.index] || "",
+      props.listOfUrls[props.index] || "",
     ];
 
+    console.log("Before teh push");
     imageUrls.forEach((image) => {
+      console.log("ADDING IN: ", image);
       commanderImages.push(
         <StyledImage src={image} alt={`Commander Image ${image}`} />
       );
     });
   } else {
-    const image = [props.listOfUrls[props.index]];
+    const imageUrl = props.listOfUrls[props.index];
     commanderImages.push(
-      <StyledImage src={image} alt={`Commander Image ${image}`} />
+      <StyledImage src={imageUrl} alt={`Commander Image ${imageUrl}`} />
     );
   }
 
-  console.log(props.commanders);
+  console.log("HERE ARE THE COMMANDER IMAGES");
 
   return (
     <>
