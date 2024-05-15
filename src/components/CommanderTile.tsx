@@ -112,9 +112,7 @@ export const CommanderTile = (props: CardInfoProps) => {
             </StyledCardName>
           ) : (
             <StyledCardName>
-              {Array.isArray(props.commanders[props.index])
-                ? formatNameForDisplay(props.commanders[props.index])
-                : "No commander found"}
+              {formatNameForDisplay(props.commanders)}
             </StyledCardName>
           )}
           <ImageWrapper>
