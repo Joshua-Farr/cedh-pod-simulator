@@ -1,0 +1,14 @@
+import { useState } from "react";
+
+interface CardInfoProps {
+  commanders: string[];
+  commanderUrls: string[];
+}
+
+export const CommanderTile = (props: CardInfoProps) => {
+  const [pictureUrl, setPictureUrl] = useState<string | string[] | undefined>();
+
+  console.log();
+
+  console.log("CREATING A COMMANDER TILE FOR: ", props.commanders);
+};

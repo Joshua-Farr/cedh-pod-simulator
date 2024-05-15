@@ -23,7 +23,9 @@ export const OpeningHand: React.FC<handProps> = ({ hand }) => {
   `;
 
   let handOfSeven = hand.map((card) => {
-    return <MagicCard url={card} />;
+    const randomNum = Math.floor(Math.random() * 1000000);
+
+    return <MagicCard key={randomNum} url={card} />;
   });
 
   return <HandWrapper>{handOfSeven}</HandWrapper>;

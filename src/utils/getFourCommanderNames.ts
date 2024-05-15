@@ -14,8 +14,25 @@ export const getFourCommanderNames = (
 
   shuffleArray(allCommanders);
 
-  console.log("THESE ARE THE GENERATED COMMANDERS:", allCommanders);
   return formatCommanderNames(allCommanders);
+};
+
+export const getFourCommanders = (
+  myCommander: string,
+  commanderList: string[]
+): string | any[] => {
+  let allCommanders: any = [myCommander];
+
+  for (let i = 0; i < 3; i++) {
+    const random = Math.floor(Math.random() * commanderList.length);
+    allCommanders.push(commanderList[random]);
+    commanderList.splice(random, 1);
+  }
+
+  shuffleArray(allCommanders);
+
+  console.log("THESE ARE THE GENERATED COMMANDERS:", allCommanders);
+  return allCommanders;
 };
 
 function shuffleArray(array: any[]) {

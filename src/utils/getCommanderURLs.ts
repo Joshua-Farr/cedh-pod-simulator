@@ -1,5 +1,5 @@
 import { formatCommanderNames } from "./formatCommanderNames";
-import { getAllCardImages, getCardImage } from "./magicAPI";
+import { getAllCardImages } from "./magicAPI";
 
 export const getCommanderURLs = async (commanderList: string[] | string) => {
   try {
@@ -7,33 +7,25 @@ export const getCommanderURLs = async (commanderList: string[] | string) => {
       throw new Error("Commander list is empty or undefined");
     }
 
-    let handWithURLs: string[] = [];
+    const commanderArray = Array.isArray(commanderList)
+      ? commanderList
+      : [commanderList];
 
-    if (!Array.isArray(commanderList)) {
-      const url = getCardImage(commanderList);
-      console.log("COmmander URL", url);
-      return [url || ""];
-    } else {
-      const filteredCommanderList = commanderList.filter(Boolean); // Remove undefined values
-      const formattedCommanderNames = formatCommanderNames(
-        filteredCommanderList
-      );
+    let commanderURLS: string[] = [];
 
-      // const formattedCommanderNames = formatCommanderNames(commanderList);
-      const commanders = await getAllCardImages(formattedCommanderNames);
+    const formattedCommanderNames = formatCommanderNames(commanderArray);
 
-      console.log(`Here are the commander URLs: ${commanders}`);
+    const commanders = await getAllCardImages(formattedCommanderNames);
 
-      for (const card of await commanders) {
-        if (card && card.image_uris && card.image_uris.large) {
-          handWithURLs.push(card?.image_uris?.large || "");
-        }
+    for (const card of await commanders) {
+      if (card && card.image_uris && card.image_uris.large) {
+        commanderURLS.push(card?.image_uris?.large || "");
       }
     }
 
-    return handWithURLs;
+    return commanderURLS;
   } catch (error) {
-    console.error("Error fetching commander:", error);
+    console.error("Error fetching commander from the API!: ", error);
     throw error;
   }
 };
