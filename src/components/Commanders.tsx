@@ -5,13 +5,16 @@ import { formatNameForDisplay } from "../utils/formatNameForDisplay";
 
 interface CommandersProps {
   currentCommanders: string[];
+  loading: boolean;
+  setLoading: (status: boolean) => void;
 }
 
 export const Commanders: React.FC<CommandersProps> = ({
   currentCommanders,
+  setLoading,
+  loading,
 }) => {
   const [commanderImages, setCommanderImages] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchImages = async (commanders: string[]) => {
@@ -43,7 +46,6 @@ export const Commanders: React.FC<CommandersProps> = ({
             commanderUrlArray.push(results.shift());
           }
         }
-        setLoading(false);
         setCommanderImages(commanderUrlArray);
         console.log(commanderUrlArray);
       } catch (error) {
@@ -52,16 +54,20 @@ export const Commanders: React.FC<CommandersProps> = ({
     };
 
     fetchImages(currentCommanders);
+    setLoading(false);
   }, [currentCommanders]);
 
   const commanders = currentCommanders.map((commander: string, index) => {
+    const randomNumber = Math.floor(Math.random() * 10000000000);
+
     return (
       <CommanderTile
-        key={commander}
+        key={randomNumber}
         commanders={commander}
         index={index}
         listOfUrls={commanderImages}
         loading={loading}
+        setLoading={(status: boolean) => setLoading(status)}
       />
     );
   });

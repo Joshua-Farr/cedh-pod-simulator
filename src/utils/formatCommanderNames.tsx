@@ -5,12 +5,14 @@ export const formatCommanderNames = (names: string | string[]): string[] => {
 
   for (let i = 0; i < names.length; i++) {
     let temp: any = [];
-    if (names[i].includes("/")) {
-      temp = names[i].split(" / ");
-    } else {
-      temp = names[i];
+    if (names[i]) {
+      if (names[i].includes("/")) {
+        temp = names[i].split(" / ");
+      } else {
+        temp = names[i];
+      }
+      updatedNames.push(temp);
     }
-    updatedNames.push(temp);
   }
   return updatedNames;
 };

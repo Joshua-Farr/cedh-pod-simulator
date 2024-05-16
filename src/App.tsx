@@ -8,7 +8,7 @@ import { grindToDustDecklist, topFiftyCommanders } from "./commanderList";
 import { Commanders } from "./components/Commanders";
 import { fetchHand } from "./utils/fetchHandOfSeven";
 import { getFourCommanderNames } from "./utils/getFourCommanderNames";
-import { getCardImage } from "./utils/magicAPI";
+// import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ export const CommanderContext = createContext<{
 });
 
 function App() {
-  // const [, setModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
@@ -89,6 +89,10 @@ function App() {
     }));
   };
 
+  const toggleLoadingStatus = (status: boolean) => {
+    setLoading(status);
+  };
+
   useEffect(() => {
     fetchCommandersAndSetUrls().then(fetchHandAndSetUrls);
   }, []);
@@ -110,6 +114,8 @@ function App() {
           <TableWrapper>
             <Commanders
               currentCommanders={commanderSettings.currentCommanders}
+              loading={loading}
+              setLoading={(status: boolean) => toggleLoadingStatus(status)}
             />
           </TableWrapper>
           <ButtonBar
@@ -117,7 +123,7 @@ function App() {
               console.log("toggled!");
             }}
             // toggleModal}
-            // render={toggleState}
+            loading={loading}
             newHand={() => fetchHandAndSetUrls()}
             newCommanders={() => fetchCommandersAndSetUrls()}
           />

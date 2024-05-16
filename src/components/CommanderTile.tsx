@@ -6,6 +6,7 @@ interface CardInfoProps {
   index: number;
   listOfUrls: any[];
   loading: boolean;
+  setLoading: (status: boolean) => void;
 }
 
 const StyledTile = styled.div`
@@ -75,22 +76,36 @@ export const CommanderTile = (props: CardInfoProps) => {
     const imageUrls = [imageUrl1, imageUrl2];
 
     imageUrls.forEach((image) => {
+      const randomNumber = Math.floor(Math.random() * 10000000000);
+
       commanderImages.push(
-        <StyledImage src={image} alt={`Commander Image ${image}`} />
+        <StyledImage
+          src={image}
+          alt={`Commander Image ${image}`}
+          key={randomNumber}
+        />
       );
     });
   } else {
     if (props.commanders[props.index] === "Esika, God of the Tree") {
+      const randomNumber = Math.floor(Math.random() * 10000000000);
+
       commanderImages.push(
         <StyledImage
           src="https://cards.scryfall.io/large/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg?1631050188"
           alt={`Commander Image Esika!`}
+          key={randomNumber}
         />
       );
     } else {
       const imageUrl = props.listOfUrls[props.index];
+      const randomNumber = Math.floor(Math.random() * 10000000000);
       commanderImages.push(
-        <StyledImage src={imageUrl} alt={`Commander Image ${imageUrl}`} />
+        <StyledImage
+          src={imageUrl}
+          alt={`Commander Image ${imageUrl}`}
+          key={randomNumber}
+        />
       );
     }
   }

@@ -23,18 +23,22 @@ type ButtonProps = {
   toggle: () => void;
   newHand: () => void;
   newCommanders: () => void;
+  loading: boolean;
 };
 
 export const ButtonBar = (props: ButtonProps) => {
   return (
     <Wrapper>
       {/* <Button onClick={() => props.toggle()}>Change Commander</Button> */}
-      <Button onClick={() => props.newCommanders()}>Randomize Pod</Button>
+      <Button onClick={() => props.newCommanders()} disabled={props.loading}>
+        Randomize Pod
+      </Button>
       <Button
         onClick={() => {
           console.log("*** Randomizing Player Hand!");
           props.newHand();
         }}
+        disabled={props.loading}
       >
         Draw New Hand
       </Button>
