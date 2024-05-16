@@ -14,7 +14,6 @@ export const getFourCommanderNames = (
 
   shuffleArray(allCommanders);
 
-  console.log("THESE ARE THE GENERATED COMMANDERS:", allCommanders);
   return formatCommanderNames(allCommanders);
 };
 

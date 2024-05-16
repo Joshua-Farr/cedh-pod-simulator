@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { MagicCard } from "./MagicCard";
 
-
 interface handProps {
   hand: string[];
 }
 
-export const OpeningHand: React.FC<handProps> = ( {hand}) => {
+export const OpeningHand: React.FC<handProps> = ({ hand }) => {
   const HandWrapper = styled.div`
     border-radius: 15px;
     border: 1px solid white;
@@ -24,7 +23,9 @@ export const OpeningHand: React.FC<handProps> = ( {hand}) => {
   `;
 
   let handOfSeven = hand.map((card) => {
-    return <MagicCard url={card} />;
+    const randomNum = Math.floor(Math.random() * 1000000);
+
+    return <MagicCard key={randomNum} url={card} />;
   });
 
   return <HandWrapper>{handOfSeven}</HandWrapper>;
