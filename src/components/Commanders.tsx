@@ -25,21 +25,27 @@ export const Commanders: React.FC<CommandersProps> = ({
             for (let j = 0; j < commanders[i].length; j++) {
               parsedcommanders.push(formatNameForDisplay(commanders[i][j]));
             }
+          } else {
+            parsedcommanders.push(formatNameForDisplay(commanders[i]));
           }
-          parsedcommanders.push(formatNameForDisplay(commanders[i]));
         }
+        console.log("Commander Names Sent: ", parsedcommanders);
 
         const results = await getCommanderURLs(parsedcommanders);
-
-        // Rebuilding the array but with URLs
+        console.log("Returned URL Array: ", results);
         for (let i = 0; i < commanders.length; i++) {
           if (Array.isArray(commanders[i])) {
-            commanderUrlArray.push([results.shift(), results.shift()]);
+            console.log("Now looking at this commander", commanders[i]);
+            const [url1, url2] = [results.shift(), results.shift()];
+            console.log([url1, url2]);
+            commanderUrlArray.push([url1, url2]);
+          } else {
+            commanderUrlArray.push(results.shift());
           }
-          commanderUrlArray.push(results.shift());
         }
         setLoading(false);
         setCommanderImages(commanderUrlArray);
+        console.log(commanderUrlArray);
       } catch (error) {
         console.error(`Trouble fetching commanders: `, error);
       }

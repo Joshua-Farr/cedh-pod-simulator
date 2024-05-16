@@ -1,10 +1,7 @@
 const testCommanders = [
-  "Kinnan, Bonder Prodigy",
-  "Najeela, the Blade-Blossom",
+  "Malcolm, Keen-Eyed Navigator / Tymna the Weaver",
   "Tivit, Seller of Secrets",
   "Sisay, Weatherlight Captain",
-  "Dihada, Binder of Wills",
-  "Ob Nixilis, Captive Kingpin",
 ];
 
 const allCommanders: string[] = [
@@ -51,13 +48,13 @@ const allCommanders: string[] = [
   "Liberator, Urza's Battlethopter",
   "Elsha of the Infinite",
   "Kediss, Emberclaw Familiar / Malcolm, Keen-Eyed Navigator",
-  "Slicer, Hired Muscle / Slicer, High-Speed Antagonist",
+  // "Slicer, Hired Muscle",
   "Tevesh Szat, Doom of Fools / Thrasios, Triton Hero",
   "Halana, Kessig Ranger / Tymna the Weaver",
   "Urza, Lord High Artificer",
   "Dargo, the Shipwrecker / Tymna the Weaver",
   "Akiri, Line-Slinger / Thrasios, Triton Hero",
-  "Esika, God of the Tree / The Prismatic Bridge",
+  // "Esika, God of the Tree",
   "Shalai and Hallar",
   "Jenson Carthalion, Druid Exile",
   "Heliod, the Radiant Dawn / Heliod, the Warped Eclipse",
@@ -126,7 +123,7 @@ const allCommanders: string[] = [
   "The First Sliver",
   "Zirda, the Dawnwaker",
   "Jhoira, Ageless Innovator",
-  "Etali, Primal Conqueror / Etali, Primal Sickness",
+  "Etali, Primal Conqueror",
   "Gyruda, Doom of Depths",
   "Kraum, Ludevic's Opus / Thrasios, Triton Hero",
   "Nezahal, Primal Tide",
@@ -257,13 +254,13 @@ const topFiftyCommanders: string[] = [
   "Liberator, Urza's Battlethopter",
   "Elsha of the Infinite",
   "Kediss, Emberclaw Familiar / Malcolm, Keen-Eyed Navigator",
-  "Slicer, Hired Muscle / Slicer, High-Speed Antagonist",
+  // "Slicer, Hired Muscle",
   "Tevesh Szat, Doom of Fools / Thrasios, Triton Hero",
   "Halana, Kessig Ranger / Tymna the Weaver",
   "Urza, Lord High Artificer",
   "Dargo, the Shipwrecker / Tymna the Weaver",
   "Akiri, Line-Slinger / Thrasios, Triton Hero",
-  "Esika, God of the Tree / The Prismatic Bridge",
+  // "Esika, God of the Tree",
   "Shalai and Hallar",
 ];
 

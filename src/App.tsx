@@ -4,14 +4,11 @@ import { ButtonBar } from "./components/ButtonBar";
 // import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
-import {
-  grindToDustDecklist,
-  testCommanders,
-  topFiftyCommanders,
-} from "./commanderList";
+import { grindToDustDecklist, topFiftyCommanders } from "./commanderList";
 import { Commanders } from "./components/Commanders";
 import { fetchHand } from "./utils/fetchHandOfSeven";
 import { getFourCommanderNames } from "./utils/getFourCommanderNames";
+import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
   display: flex;
@@ -71,6 +68,7 @@ function App() {
   });
 
   const fetchCommandersAndSetUrls = async () => {
+    //Change this for list of commanders
     const commanderList = topFiftyCommanders;
     const commanders = await getFourCommanderNames(
       "Kinnan, Bonder Prodigy",
@@ -94,12 +92,6 @@ function App() {
   useEffect(() => {
     fetchCommandersAndSetUrls().then(fetchHandAndSetUrls);
   }, []);
-
-  useEffect(() => {
-    console.log(
-      `Here are the commander Settings: Commander: ${commanderSettings.currentCommanders}`
-    );
-  }, [commanderSettings]);
 
   // const toggleModal = () => {
   //   setModal((prev) => !prev);

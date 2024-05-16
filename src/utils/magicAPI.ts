@@ -77,12 +77,14 @@ const getTinyCardImage = async (name: string) => {
 };
 
 export const getAllCardImages = async (cardList: string[]) => {
+  // console.log("Looking for these cards: ", cardList);
+
   const collection = cardList.map((card) => {
     return Scry.CardIdentifier.byName(card);
   });
   const cardUrls = await Scry.Cards.collection(...collection).waitForAll();
 
-  console.log(cardUrls);
+  // console.log(cardUrls);
   return cardUrls;
 };
 

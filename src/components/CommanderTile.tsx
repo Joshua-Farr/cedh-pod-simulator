@@ -64,35 +64,36 @@ const CommanderWrapper = styled.div`
 export const CommanderTile = (props: CardInfoProps) => {
   let commanderImages: any[] = [];
 
-  console.log(
-    "Now looking at this commander: ",
-    props.commanders,
-    props.listOfUrls[props.index]
-  );
-
   if (Array.isArray(props.commanders)) {
-    console.log("IN DA LOOP LOOKING AT ", props.commanders[props.index]);
-    console.log("HERE IS THE IMAGES", props.listOfUrls[props.index]);
-    const imageUrls = [
-      props.listOfUrls[props.index] || "",
-      props.listOfUrls[props.index] || "",
-    ];
+    let imageUrl1 = "";
+    let imageUrl2 = "";
 
-    console.log("Before teh push");
+    if (props.listOfUrls[props.index]) {
+      imageUrl1 = props.listOfUrls[props.index][0] || "";
+      imageUrl2 = props.listOfUrls[props.index][1] || "";
+    }
+    const imageUrls = [imageUrl1, imageUrl2];
+
     imageUrls.forEach((image) => {
-      console.log("ADDING IN: ", image);
       commanderImages.push(
         <StyledImage src={image} alt={`Commander Image ${image}`} />
       );
     });
   } else {
-    const imageUrl = props.listOfUrls[props.index];
-    commanderImages.push(
-      <StyledImage src={imageUrl} alt={`Commander Image ${imageUrl}`} />
-    );
+    if (props.commanders[props.index] === "Esika, God of the Tree") {
+      commanderImages.push(
+        <StyledImage
+          src="https://cards.scryfall.io/large/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg?1631050188"
+          alt={`Commander Image Esika!`}
+        />
+      );
+    } else {
+      const imageUrl = props.listOfUrls[props.index];
+      commanderImages.push(
+        <StyledImage src={imageUrl} alt={`Commander Image ${imageUrl}`} />
+      );
+    }
   }
-
-  console.log("HERE ARE THE COMMANDER IMAGES");
 
   return (
     <>
