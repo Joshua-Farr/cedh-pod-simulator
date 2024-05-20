@@ -57,7 +57,7 @@ function App() {
   const [modal, setModal] = useState(false);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
-    commander: "Magda, Brazen Outlaw",
+    commander: "Kinnan, Bonder Prodigy",
     decklist: grindToDustDecklist,
     currentCommanders: [],
     hand: [

@@ -80,9 +80,6 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     );
   });
 
-  console.log("SETTING COMMANDER TO JOEEEE");
-  setCommander("Joe");
-
   const updateGlobalState = () => {
     if (tempCommanderSettings?.commander) {
       const commander = tempCommanderSettings.commander;
