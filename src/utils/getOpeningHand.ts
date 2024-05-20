@@ -1,5 +1,5 @@
 export const getHandOfSeven = (decklist: string[]): string[] => {
-  let tempDecklist = decklist;
+  let tempDecklist = [...decklist];
   const playerHand = [];
 
   for (let i = 0; i < 7; i++) {

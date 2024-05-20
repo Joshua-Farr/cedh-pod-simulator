@@ -35,7 +35,6 @@ export const ButtonBar = (props: ButtonProps) => {
       </Button>
       <Button
         onClick={() => {
-          console.log("*** Randomizing Player Hand!");
           props.newHand();
         }}
         disabled={props.loading}

@@ -31,7 +31,6 @@ export const Commanders: React.FC<CommandersProps> = ({
             parsedcommanders.push(formatNameForDisplay(commanders[i]));
           }
         }
-        console.log("Commander Names Sent: ", parsedcommanders);
 
         const results = await getCommanderURLs(parsedcommanders);
         for (let i = 0; i < commanders.length; i++) {

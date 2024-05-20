@@ -8,6 +8,7 @@ import { grindToDustDecklist, topFiftyCommanders } from "./commanderList";
 import { Commanders } from "./components/Commanders";
 import { fetchHand } from "./utils/fetchHandOfSeven";
 import { getFourCommanderNames } from "./utils/getFourCommanderNames";
+import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 // import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
@@ -36,21 +37,24 @@ const Title = styled.span`
   margin: 0;
 `;
 
-export const CommanderContext = createContext<{
+type CommanderContextType = {
   commanderSettings: Commander;
-  setCommanderSettings: React.Dispatch<React.SetStateAction<Commander>>;
-}>({
+  setCommander: (name: string) => void;
+};
+
+export const CommanderContext = createContext<CommanderContextType>({
   commanderSettings: {
     commander: "Kinnan, Bonder Prodigy",
     decklist: grindToDustDecklist,
     currentCommanders: [],
     hand: [],
   },
-  setCommanderSettings: () => {},
+  setCommander: () => {},
 });
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
@@ -68,16 +72,22 @@ function App() {
   });
 
   const fetchCommandersAndSetUrls = async () => {
-    //Change this variable for to a different commander list as desired
-
     const commanders = await getFourCommanderNames(
-      "Kinnan, Bonder Prodigy",
+      commanderSettings.commander,
       topFiftyCommanders
     );
-    console.log(`Here are your new commanders: `, commanders);
+
     setCommanderSettings((prev) => ({
       ...prev,
       currentCommanders: commanders,
+    }));
+  };
+
+  const setCommander = (name: string) => {
+    console.log("SET COMMANDER CALLED FOR: ", name);
+    setCommanderSettings((prev) => ({
+      ...prev,
+      commander: name,
     }));
   };
 
@@ -98,16 +108,20 @@ function App() {
     fetchCommandersAndSetUrls().then(fetchHandAndSetUrls);
   }, []);
 
-  // const toggleModal = () => {
-  //   setModal((prev) => !prev);
-  // };
+  useEffect(() => {
+    console.log("Commander settings have been updated to: ", commanderSettings);
+  }, [commanderSettings]);
+
+  const toggleModal = () => {
+    setModal((prev) => !prev);
+  };
 
   return (
     <>
       <CommanderContext.Provider
         value={{
           commanderSettings,
-          setCommanderSettings,
+          setCommander,
         }}
       >
         <Wrapper>
@@ -121,9 +135,8 @@ function App() {
           </TableWrapper>
           <ButtonBar
             toggle={() => {
-              console.log("toggled!");
+              toggleModal();
             }}
-            // toggleModal}
             loading={loading}
             newHand={() => fetchHandAndSetUrls()}
             newCommanders={() => fetchCommandersAndSetUrls()}
@@ -131,7 +144,7 @@ function App() {
           <OpeningHand hand={commanderSettings.hand} />
         </Wrapper>
       </CommanderContext.Provider>
-      {/* {modal && <ChooseCommanderModal toggle={toggleModal} />} */}
+      {modal && <ChooseCommanderModal toggle={toggleModal} />}
     </>
   );
 }
