@@ -68,12 +68,13 @@ function App() {
   });
 
   const fetchCommandersAndSetUrls = async () => {
-    //Change this for list of commanders
-    const commanderList = topFiftyCommanders;
+    //Change this variable for to a different commander list as desired
+
     const commanders = await getFourCommanderNames(
       "Kinnan, Bonder Prodigy",
-      commanderList
+      topFiftyCommanders
     );
+    console.log(`Here are your new commanders: `, commanders);
     setCommanderSettings((prev) => ({
       ...prev,
       currentCommanders: commanders,
