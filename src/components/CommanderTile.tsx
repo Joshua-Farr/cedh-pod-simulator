@@ -32,10 +32,6 @@ const StyledTile = styled.div`
   }
 `;
 
-const StyledCommander = styled(StyledTile)`
-  background-color: #343330;
-`;
-
 const ImageWrapper = styled.div`
   // border: 2px solid green;
 `;
