@@ -19,11 +19,7 @@ export const getFourCommanderNames = (
   let allCommanders: any = [myCommander];
 
   const tempCommanderList = [...commanderList];
-  console.log(
-    `Here are the commanders passed to getFourCommander Names: `,
-    myCommander,
-    tempCommanderList
-  );
+
   for (let i = 0; i < 3; i++) {
     const random = Math.floor(Math.random() * tempCommanderList.length);
     allCommanders.push(tempCommanderList[random]);
