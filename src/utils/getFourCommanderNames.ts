@@ -1,27 +1,36 @@
 import { formatCommanderNames } from "./formatCommanderNames";
 
+function shuffleArray(array: any[]) {
+  const tempArray = array;
+  for (var i = tempArray.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = tempArray[i];
+    tempArray[i] = tempArray[j];
+    tempArray[j] = temp;
+  }
+
+  return tempArray;
+}
+
 export const getFourCommanderNames = (
   myCommander: string,
   commanderList: string[]
 ): string | any[] => {
   let allCommanders: any = [myCommander];
 
+  const tempCommanderList = [...commanderList];
+  console.log(
+    `Here are the commanders passed to getFourCommander Names: `,
+    myCommander,
+    tempCommanderList
+  );
   for (let i = 0; i < 3; i++) {
-    const random = Math.floor(Math.random() * commanderList.length);
-    allCommanders.push(commanderList[random]);
-    commanderList.splice(random, 1);
+    const random = Math.floor(Math.random() * tempCommanderList.length);
+    allCommanders.push(tempCommanderList[random]);
+    tempCommanderList.splice(random, 1);
   }
 
-  shuffleArray(allCommanders);
+  const shuffledCommanders = shuffleArray(allCommanders);
 
-  return formatCommanderNames(allCommanders);
+  return formatCommanderNames(shuffledCommanders);
 };
-
-function shuffleArray(array: any[]) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-}

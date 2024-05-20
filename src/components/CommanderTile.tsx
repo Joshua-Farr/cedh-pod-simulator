@@ -6,6 +6,7 @@ interface CardInfoProps {
   index: number;
   listOfUrls: any[];
   loading: boolean;
+  setLoading: (status: boolean) => void;
 }
 
 const StyledTile = styled.div`
@@ -40,13 +41,13 @@ const ImageWrapper = styled.div`
 `;
 
 const StyledImage = styled.img`
-  // max-height: 100%;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  //   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-  //     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-  height: 250px;
+  // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-height: 250px;
   pointer-events: none;
+  max-width: 100%;
+  width: auto;
+  height: auto;
 `;
 
 const StyledCardName = styled.span`
@@ -57,8 +58,9 @@ const StyledCardName = styled.span`
 const CommanderWrapper = styled.div`
   display: flex;
   gap: 5px;
+
   // max-width: 250px;
-  // border: 2px solid green;
+  // border: 2px solid red;
 `;
 
 export const CommanderTile = (props: CardInfoProps) => {
@@ -75,22 +77,36 @@ export const CommanderTile = (props: CardInfoProps) => {
     const imageUrls = [imageUrl1, imageUrl2];
 
     imageUrls.forEach((image) => {
+      const randomNumber = Math.floor(Math.random() * 10000000000);
+
       commanderImages.push(
-        <StyledImage src={image} alt={`Commander Image ${image}`} />
+        <StyledImage
+          src={image}
+          alt={`Commander Image ${image}`}
+          key={randomNumber}
+        />
       );
     });
   } else {
     if (props.commanders[props.index] === "Esika, God of the Tree") {
+      const randomNumber = Math.floor(Math.random() * 10000000000);
+
       commanderImages.push(
         <StyledImage
           src="https://cards.scryfall.io/large/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg?1631050188"
           alt={`Commander Image Esika!`}
+          key={randomNumber}
         />
       );
     } else {
       const imageUrl = props.listOfUrls[props.index];
+      const randomNumber = Math.floor(Math.random() * 10000000000);
       commanderImages.push(
-        <StyledImage src={imageUrl} alt={`Commander Image ${imageUrl}`} />
+        <StyledImage
+          src={imageUrl}
+          alt={`Commander Image ${imageUrl}`}
+          key={randomNumber}
+        />
       );
     }
   }

@@ -5,14 +5,16 @@ import { formatNameForDisplay } from "../utils/formatNameForDisplay";
 
 interface CommandersProps {
   currentCommanders: string[];
+  loading: boolean;
+  setLoading: (status: boolean) => void;
 }
 
 export const Commanders: React.FC<CommandersProps> = ({
   currentCommanders,
+  setLoading,
+  loading,
 }) => {
   const [commanderImages, setCommanderImages] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
   useEffect(() => {
     const fetchImages = async (commanders: string[]) => {
       try {
@@ -32,36 +34,37 @@ export const Commanders: React.FC<CommandersProps> = ({
         console.log("Commander Names Sent: ", parsedcommanders);
 
         const results = await getCommanderURLs(parsedcommanders);
-        console.log("Returned URL Array: ", results);
         for (let i = 0; i < commanders.length; i++) {
           if (Array.isArray(commanders[i])) {
-            console.log("Now looking at this commander", commanders[i]);
             const [url1, url2] = [results.shift(), results.shift()];
-            console.log([url1, url2]);
+            // console.log([url1, url2]);
             commanderUrlArray.push([url1, url2]);
           } else {
             commanderUrlArray.push(results.shift());
           }
         }
-        setLoading(false);
         setCommanderImages(commanderUrlArray);
-        console.log(commanderUrlArray);
+        // console.log(commanderUrlArray);
       } catch (error) {
         console.error(`Trouble fetching commanders: `, error);
       }
     };
 
     fetchImages(currentCommanders);
+    setLoading(false);
   }, [currentCommanders]);
 
   const commanders = currentCommanders.map((commander: string, index) => {
+    const randomNumber = Math.floor(Math.random() * 10000000000);
+
     return (
       <CommanderTile
-        key={commander}
+        key={randomNumber}
         commanders={commander}
         index={index}
         listOfUrls={commanderImages}
         loading={loading}
+        setLoading={(status: boolean) => setLoading(status)}
       />
     );
   });

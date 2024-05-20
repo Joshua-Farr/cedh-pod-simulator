@@ -8,7 +8,7 @@ import { grindToDustDecklist, topFiftyCommanders } from "./commanderList";
 import { Commanders } from "./components/Commanders";
 import { fetchHand } from "./utils/fetchHandOfSeven";
 import { getFourCommanderNames } from "./utils/getFourCommanderNames";
-import { getCardImage } from "./utils/magicAPI";
+// import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ export const CommanderContext = createContext<{
 });
 
 function App() {
-  // const [, setModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
@@ -68,12 +68,13 @@ function App() {
   });
 
   const fetchCommandersAndSetUrls = async () => {
-    //Change this for list of commanders
-    const commanderList = topFiftyCommanders;
+    //Change this variable for to a different commander list as desired
+
     const commanders = await getFourCommanderNames(
       "Kinnan, Bonder Prodigy",
-      commanderList
+      topFiftyCommanders
     );
+    console.log(`Here are your new commanders: `, commanders);
     setCommanderSettings((prev) => ({
       ...prev,
       currentCommanders: commanders,
@@ -87,6 +88,10 @@ function App() {
       ...prev,
       hand: hand?.filter((card) => card !== undefined) as unknown as string[],
     }));
+  };
+
+  const toggleLoadingStatus = (status: boolean) => {
+    setLoading(status);
   };
 
   useEffect(() => {
@@ -110,6 +115,8 @@ function App() {
           <TableWrapper>
             <Commanders
               currentCommanders={commanderSettings.currentCommanders}
+              loading={loading}
+              setLoading={(status: boolean) => toggleLoadingStatus(status)}
             />
           </TableWrapper>
           <ButtonBar
@@ -117,7 +124,7 @@ function App() {
               console.log("toggled!");
             }}
             // toggleModal}
-            // render={toggleState}
+            loading={loading}
             newHand={() => fetchHandAndSetUrls()}
             newCommanders={() => fetchCommandersAndSetUrls()}
           />
