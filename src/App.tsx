@@ -25,7 +25,9 @@ const Wrapper = styled.div`
 `;
 
 const TableWrapper = styled.div`
-  width: 100%;
+  // width: 100%;
+  margin-inline: 1.25em;
+
   display: flex;
   align-items: center;
   justify-content: center;
