@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-basis: auto
   justify-content: center;
   height: 100vh;
   width: 100%;
@@ -34,7 +35,7 @@ const TableWrapper = styled.div`
 
 const Title = styled.span`
   font-size: 2rem;
-  margin: 0;
+  // margin: 0;
 `;
 
 type CommanderContextType = {
