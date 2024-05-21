@@ -92,6 +92,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     console.log("ATTEMPTING TO RUN UPDATETEMP DECKLIST: ", decklistArray);
     setTempCommanderSettings((prev) => {
       console.log("Inside setTempCommanderSettings callback");
+      // Ensure the state update is triggered correctly
       return { ...prev, decklist: decklistArray };
     });
     console.log("OUTSIDE OF THE SET TEMP COMMANDER SETTINGS!");
