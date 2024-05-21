@@ -12,9 +12,9 @@ export const fetchHand = async (decklist: string[]) => {
 
     for (const card of await cards) {
       if (card.layout === "modal_dfc" || card.layout === "transform") {
-        handWithURLs.push(card.card_faces[0]?.image_uris?.small || "");
+        handWithURLs.push(card.card_faces[0]?.image_uris?.normal || "");
       } else {
-        handWithURLs.push(card?.image_uris?.small || "");
+        handWithURLs.push(card?.image_uris?.normal || "");
       }
     }
 

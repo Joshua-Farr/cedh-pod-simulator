@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { formatNameForDisplay } from "../utils/formatNameForDisplay";
+import { useEffect, useState } from "react";
 
 interface CardInfoProps {
   commanders: string | string[];
@@ -15,7 +16,7 @@ const StyledTile = styled.div`
   padding: 1.5em 1.35em;
   background-color: #16324f;
 
-  height: 100%;
+  min-height: 100%;
 
   color: white;
   display: flex;
@@ -63,6 +64,16 @@ const CommanderWrapper = styled.div`
 `;
 
 export const CommanderTile = (props: CardInfoProps) => {
+  const [imageLoading, setImageLoading] = useState(true);
+
+  const handleImageLoaded = () => {
+    setImageLoading(false);
+  };
+
+  useEffect(() => {
+    setImageLoading(false);
+  }, [props.commanders, props.index]);
+
   let commanderImages: any[] = [];
 
   if (Array.isArray(props.commanders)) {
@@ -81,34 +92,24 @@ export const CommanderTile = (props: CardInfoProps) => {
       commanderImages.push(
         <StyledImage
           $pair
-          src={image}
+          src={imageLoading ? "src/assets/cardback.jpg" : image}
           alt={`Commander Image ${image}`}
           key={randomNumber}
+          onLoad={handleImageLoaded}
         />
       );
     });
   } else {
-    if (props.commanders[props.index] === "Esika, God of the Tree") {
-      const randomNumber = Math.floor(Math.random() * 10000000000);
-
-      commanderImages.push(
-        <StyledImage
-          src="https://cards.scryfall.io/large/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg?1631050188"
-          alt={`Commander Image Esika!`}
-          key={randomNumber}
-        />
-      );
-    } else {
-      const imageUrl = props.listOfUrls[props.index];
-      const randomNumber = Math.floor(Math.random() * 10000000000);
-      commanderImages.push(
-        <StyledImage
-          src={imageUrl}
-          alt={`Commander Image ${imageUrl}`}
-          key={randomNumber}
-        />
-      );
-    }
+    const imageUrl = props.listOfUrls[props.index];
+    const randomNumber = Math.floor(Math.random() * 10000000000);
+    commanderImages.push(
+      <StyledImage
+        src={imageLoading ? "src/assets/cardback.jpg" : imageUrl}
+        alt={`Commander Image ${imageUrl}`}
+        key={randomNumber}
+        onLoad={handleImageLoaded}
+      />
+    );
   }
 
   return (
