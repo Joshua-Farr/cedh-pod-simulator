@@ -15,6 +15,8 @@ const StyledTile = styled.div`
   padding: 1.5em 1.35em;
   background-color: #16324f;
 
+  height: 100%;
+
   color: white;
   display: flex;
   flex-direction: column;
@@ -32,16 +34,14 @@ const StyledTile = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
-  // border: 2px solid green;
-`;
+const ImageWrapper = styled.div``;
 
-const StyledImage = styled.img`
+const StyledImage = styled.img<{ $pair?: boolean }>`
   border-radius: 10px;
   // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-height: 250px;
   pointer-events: none;
-  max-width: 100%;
+  max-width: ${(props) => (props.$pair ? "50%" : "100%")};
   width: auto;
   height: auto;
 `;
@@ -54,9 +54,10 @@ const StyledCardName = styled.span`
 const CommanderWrapper = styled.div`
   display: flex;
   gap: 5px;
-
+  // flex-basis: auto
   // max-width: 250px;
-  // border: 2px solid red;
+  border: 2px solid pink;
+  object-fit: contain;
 `;
 
 export const CommanderTile = (props: CardInfoProps) => {
@@ -77,6 +78,7 @@ export const CommanderTile = (props: CardInfoProps) => {
 
       commanderImages.push(
         <StyledImage
+          $pair
           src={image}
           alt={`Commander Image ${image}`}
           key={randomNumber}

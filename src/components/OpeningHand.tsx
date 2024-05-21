@@ -20,6 +20,8 @@ export const OpeningHand: React.FC<handProps> = ({ hand }) => {
     //   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-bottom: 1em;
     user-select: none;
+    max-width: 100%;
+    max-height: 100%;
   `;
 
   let handOfSeven = hand.map((card) => {

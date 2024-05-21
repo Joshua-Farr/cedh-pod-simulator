@@ -15,12 +15,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-basis: auto
   justify-content: center;
   height: 100vh;
   width: 100%;
   gap: 20px;
   position: absolute;
-  // border: 3px solid red;
+  border: 3px solid red;
 `;
 
 const TableWrapper = styled.div`
@@ -29,12 +30,12 @@ const TableWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1em;
-  // border: 2px solid green;
+  border: 2px solid green;
 `;
 
 const Title = styled.span`
   font-size: 2rem;
-  margin: 0;
+  // margin: 0;
 `;
 
 type CommanderContextType = {

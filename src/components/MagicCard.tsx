@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 interface MagicCardProps {
-  url: string ;
+  url: string;
 }
 
-const Card = styled.img`
+const Card = styled.div`
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  height: 200px;
+  max-width: 100%;
+  max-height: 100%;
+  border: 2px solid orange;
 
   &:hover {
     cursor: pointer;
@@ -16,6 +18,17 @@ const Card = styled.img`
   }
 `;
 
+const StyledImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  display: block;
+`;
+
 export const MagicCard = (props: MagicCardProps) => {
-  return <Card src={props.url} />;
+  return (
+    <Card>
+      <StyledImage src={props.url} />
+    </Card>
+  );
 };
