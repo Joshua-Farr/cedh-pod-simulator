@@ -41,7 +41,7 @@ const StyledImage = styled.img<{ $pair?: boolean }>`
   // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-height: 250px;
   pointer-events: none;
-  max-width: ${(props) => (props.$pair ? "50%" : "100%")};
+  max-width: ${(props) => (props.$pair ? "48%" : "100%")};
   width: auto;
   height: auto;
 `;
@@ -53,10 +53,12 @@ const StyledCardName = styled.span`
 
 const CommanderWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   // flex-basis: auto
   // max-width: 250px;
-  border: 2px solid pink;
+  // border: 2px solid pink;
   object-fit: contain;
 `;
 

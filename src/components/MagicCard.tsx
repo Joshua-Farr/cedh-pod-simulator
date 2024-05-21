@@ -7,9 +7,10 @@ interface MagicCardProps {
 const Card = styled.div`
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  max-width: 100%;
-  max-height: 100%;
-  border: 2px solid orange;
+  width: 100%;
+  height: 100%;
+  // border: 2px solid orange;
+  overflow: hidden;
 
   &:hover {
     cursor: pointer;
@@ -19,10 +20,11 @@ const Card = styled.div`
 `;
 
 const StyledImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   display: block;
+  object-fit: cover;
 `;
 
 export const MagicCard = (props: MagicCardProps) => {

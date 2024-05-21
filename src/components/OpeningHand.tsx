@@ -22,6 +22,7 @@ export const OpeningHand: React.FC<handProps> = ({ hand }) => {
     user-select: none;
     max-width: 100%;
     max-height: 100%;
+    flex-shrink: 1;
   `;
 
   let handOfSeven = hand.map((card) => {
