@@ -38,7 +38,7 @@ const ImageWrapper = styled.div``;
 
 const StyledImage = styled.img<{ $pair?: boolean }>`
   border-radius: 10px;
-  // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-height: 250px;
   pointer-events: none;
   max-width: ${(props) => (props.$pair ? "48%" : "100%")};
