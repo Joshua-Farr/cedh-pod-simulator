@@ -4,11 +4,14 @@ import { Commander } from "../types/types";
 import { allCommanders } from "../commanderList";
 import { CommanderContext } from "../App";
 import { stringToArray } from "../utils/stringToArray";
+import { arrayToString } from "../utils/arrayToString";
 
 type ButtonProps = {
   toggle: () => void;
   setCommander: (name: string) => void;
   setDeckList: (name: string[]) => void;
+  setCommanderSettings: React.Dispatch<React.SetStateAction<Commander>>;
+  commanderSettings: Commander;
 };
 
 export const ChooseCommanderModal = (props: ButtonProps) => {
@@ -52,7 +55,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     }
   `;
 
-  const FormWrapper = styled.div`
+  const FormWrapper = styled.form`
     display: flex;
     flex-direction: column;
     background-color: #0f1c2f;
@@ -64,10 +67,11 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
   const [tempCommanderSettings, setTempCommanderSettings] =
     useState<Commander>(commanderSettings);
 
-  const [decklist, setDecklist] = useState("");
-
   useEffect(() => {
-    updateGlobalState();
+    console.log(
+      "HERE IS THE TEMP SETTINGS DATA",
+      tempCommanderSettings.decklist
+    );
   }, [tempCommanderSettings]);
 
   const commanderOptions = allCommanders.map((commander: string) => {
@@ -80,19 +84,17 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
 
   const updateGlobalState = () => {
     if (tempCommanderSettings) {
-      const commander = tempCommanderSettings.commander;
-      props.setCommander(commander);
-
-      const decklist = tempCommanderSettings.decklist;
-
-      props.setDeckList(decklist);
+      props.setCommanderSettings(tempCommanderSettings);
     }
   };
 
   const updateTempDecklist = (decklistArray: string[]) => {
+    console.log("ATTEMPTING TO RUN UPDATETEMP DECKLIST: ", decklistArray);
     setTempCommanderSettings((prev) => {
+      console.log("Inside setTempCommanderSettings callback");
       return { ...prev, decklist: decklistArray };
     });
+    console.log("OUTSIDE OF THE SET TEMP COMMANDER SETTINGS!");
   };
 
   return (
@@ -117,6 +119,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
         </CommanderSelect>
         <h2>Upload Your Decklist:</h2>
         <DeckInput
+          defaultValue={arrayToString(commanderSettings.decklist)}
           id="decklist-input"
           name="decklist-input"
           placeholder={
@@ -125,6 +128,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
           }
           onChange={(e) => {
             const deckArray = stringToArray(e.target.value);
+            // updateTempDecklist(deckArray);
           }}
           onPaste={(e) => {
             e.preventDefault();
@@ -133,13 +137,19 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
             );
             e.currentTarget.value = pastedData;
             const deckArray = stringToArray(pastedData);
-            setTempCommanderSettings((prev) => {
-              return { ...prev, decklist: deckArray };
-            });
           }}
         />
         <Button
           onClick={() => {
+            console.log("UPDATING DECKLIST");
+            const decklistInput = document.getElementById(
+              "decklist-input"
+            ) as HTMLInputElement;
+            console.log("HERE IS THE DECKLIST: ", decklistInput);
+            const decklistArray = stringToArray(decklistInput.value);
+            console.log("HERE IS THE DECKLIST AS AN ARRAY: ", decklistArray);
+            updateTempDecklist(decklistArray);
+
             updateGlobalState();
             props.toggle();
           }}

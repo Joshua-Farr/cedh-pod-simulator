@@ -10,7 +10,7 @@ export const stringToArray = (input: string) => {
   for (let i = 0; i < tempArray.length; i++) {
     if (containsNumber(tempArray[i])) {
       const amount = extractNumber(tempArray[i]);
-      const value = tempArray[i].replace(/\d/, "");
+      const value = tempArray[i].replace(/\d\s/, "");
       tempArray.splice(i, 1);
 
       if (amount) {

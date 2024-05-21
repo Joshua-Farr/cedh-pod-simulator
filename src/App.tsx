@@ -154,6 +154,8 @@ function App() {
             toggle={toggleModal}
             setCommander={setCommander}
             setDeckList={setDeckList}
+            setCommanderSettings={setCommanderSettings}
+            commanderSettings={commanderSettings}
           />
         )}
       </CommanderContext.Provider>
