@@ -44,8 +44,8 @@ type CommanderContextType = {
 
 export const CommanderContext = createContext<CommanderContextType>({
   commanderSettings: {
-    commander: "Kinnan, Bonder Prodigy",
-    decklist: grindToDustDecklist,
+    commander: "",
+    decklist: [],
     currentCommanders: [],
     hand: [],
   },
@@ -84,11 +84,17 @@ function App() {
   };
 
   const setCommander = (name: string) => {
-    console.log("SET COMMANDER CALLED FOR: ", name);
     setCommanderSettings((prev) => ({
       ...prev,
       commander: name,
     }));
+  };
+
+  const setDeckList = (userDecklist: string[]) => {
+    console.log("SET DECKLIST TO : ", userDecklist);
+    setCommanderSettings((prev) => {
+      return { ...prev, decklist: userDecklist };
+    });
   };
 
   const fetchHandAndSetUrls = async () => {
@@ -106,7 +112,7 @@ function App() {
 
   useEffect(() => {
     fetchCommandersAndSetUrls().then(fetchHandAndSetUrls);
-  }, []);
+  }, [modal]);
 
   useEffect(() => {
     console.log("Commander settings have been updated to: ", commanderSettings);
@@ -143,8 +149,14 @@ function App() {
           />
           <OpeningHand hand={commanderSettings.hand} />
         </Wrapper>
+        {modal && (
+          <ChooseCommanderModal
+            toggle={toggleModal}
+            setCommander={setCommander}
+            setDeckList={setDeckList}
+          />
+        )}
       </CommanderContext.Provider>
-      {modal && <ChooseCommanderModal toggle={toggleModal} />}
     </>
   );
 }

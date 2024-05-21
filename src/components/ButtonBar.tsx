@@ -29,7 +29,7 @@ type ButtonProps = {
 export const ButtonBar = (props: ButtonProps) => {
   return (
     <Wrapper>
-      {/* <Button onClick={() => props.toggle()}>Change Commander</Button> */}
+      <Button onClick={() => props.toggle()}>Change Commander</Button>
       <Button onClick={() => props.newCommanders()} disabled={props.loading}>
         Randomize Pod
       </Button>
