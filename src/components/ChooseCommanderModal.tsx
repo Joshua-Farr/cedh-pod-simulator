@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { Commander } from "../types/types";
 import { allCommanders } from "../commanderList";
 import { CommanderContext } from "../App";
 import { stringToArray } from "../utils/stringToArray";
@@ -61,9 +60,6 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
   const { commanderSettings, setDeckList, setCommander } =
     useContext(CommanderContext);
 
-  const [tempCommanderSettings, setTempCommanderSettings] =
-    useState<Commander>(commanderSettings);
-
   const commanderOptions = allCommanders.map((commander: string) => {
     return (
       <option key={commander} id={commander} value={commander}>
@@ -83,7 +79,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
           }}
           required
         >
-          <option>{tempCommanderSettings.commander}</option>
+          <option>{commanderSettings.commander}</option>
           {commanderOptions}
         </CommanderSelect>
         <h2>Upload Your Decklist:</h2>
