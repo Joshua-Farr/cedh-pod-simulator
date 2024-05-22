@@ -92,11 +92,11 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
             "Paste your decklist here in MTGO format: \n1 Arcbound Ravager\n1 Welding Jar\n1 Ornithopter\netc..."
             //  const commanderSettings.decklist.toString()
           }
-          onChange={(e) => {
+          onChange={() => {
             // const decklistArray = stringToArray(e.target.value);
             // setDeckList(decklistArray);
           }}
-          onPaste={(e) => {
+          onPaste={() => {
             setTimeout(() => {
               const decklistInput = document.getElementById(
                 "decklist-input"
