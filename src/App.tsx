@@ -40,6 +40,7 @@ const Title = styled.span`
 type CommanderContextType = {
   commanderSettings: Commander;
   setCommander: (name: string) => void;
+  setDeckList: (name: string[]) => void;
 };
 
 export const CommanderContext = createContext<CommanderContextType>({
@@ -50,6 +51,7 @@ export const CommanderContext = createContext<CommanderContextType>({
     hand: [],
   },
   setCommander: () => {},
+  setDeckList: () => {},
 });
 
 function App() {
@@ -128,6 +130,7 @@ function App() {
         value={{
           commanderSettings,
           setCommander,
+          setDeckList,
         }}
       >
         <Wrapper>
@@ -149,15 +152,7 @@ function App() {
           />
           <OpeningHand hand={commanderSettings.hand} />
         </Wrapper>
-        {modal && (
-          <ChooseCommanderModal
-            toggle={toggleModal}
-            setCommander={setCommander}
-            setDeckList={setDeckList}
-            setCommanderSettings={setCommanderSettings}
-            commanderSettings={commanderSettings}
-          />
-        )}
+        {modal && <ChooseCommanderModal toggle={toggleModal} />}
       </CommanderContext.Provider>
     </>
   );
