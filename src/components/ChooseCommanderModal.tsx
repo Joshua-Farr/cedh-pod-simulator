@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { Commander } from "../types/types";
 import { allCommanders } from "../commanderList";
 import { CommanderContext } from "../App";
+import { stringToArray } from "../utils/stringToArray";
+import { arrayToString } from "../utils/arrayToString";
 
 type ButtonProps = {
   toggle: () => void;
@@ -49,79 +50,67 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     }
   `;
 
-  const FormWrapper = styled.div`
+  const FormWrapper = styled.form`
     display: flex;
     flex-direction: column;
     background-color: #0f1c2f;
     color: white;
   `;
 
-  const { commanderSettings, setCommander } = useContext(CommanderContext);
-
-  const [tempCommanderSettings, setTempCommanderSettings] = useState<Commander>(
-    { commander: "", decklist: [], currentCommanders: [], hand: [] }
-  );
-
-  useEffect(() => {
-    setTempCommanderSettings(commanderSettings);
-  }, [commanderSettings]);
-
-  //   const setDeckList = (userDecklist: string[]) => {
-  //     setTempCommanderSettings((prev) => {
-  //       return { ...prev, decklist: userDecklist };
-  //     });
-  //   };
+  const { commanderSettings, setDeckList, setCommander } =
+    useContext(CommanderContext);
 
   const commanderOptions = allCommanders.map((commander: string) => {
     return (
-      <option id={commander} value={commander}>
+      <option key={commander} id={commander} value={commander}>
         {commander}
       </option>
     );
   });
-
-  const updateGlobalState = () => {
-    if (tempCommanderSettings?.commander) {
-      const commander = tempCommanderSettings.commander;
-      console.log("Updating global commander to: ", commander);
-
-      setCommander(commander);
-    }
-  };
 
   return (
     <Wrapper>
       <FormWrapper>
         <h2>Choose A Commander:</h2>
         <CommanderSelect
-          value={tempCommanderSettings?.commander || ""}
+          value={commanderSettings?.commander || ""}
           onChange={(e) => {
-            setTempCommanderSettings((prev) => {
-              return { ...prev, commander: e.target.value };
-            });
+            setCommander(e.target.value);
           }}
+          required
         >
           <option>{commanderSettings.commander}</option>
           {commanderOptions}
         </CommanderSelect>
         <h2>Upload Your Decklist:</h2>
         <DeckInput
-          defaultValue={
-            "eg: \nArcbound Ravager\nWelding Jar\nOrnithopter\netc..."
+          defaultValue={arrayToString(commanderSettings.decklist)}
+          id="decklist-input"
+          name="decklist-input"
+          placeholder={
+            "Paste your decklist here in MTGO format: \n1 Arcbound Ravager\n1 Welding Jar\n1 Ornithopter\netc..."
+            //  const commanderSettings.decklist.toString()
           }
-          //   onChange={(e) => {
-          // const deckArray = e.target.value.replace(/\r\n/g, "\n").split("\n");
-          // setDeckList(deckArray);
-          //Set overall decklist to the one imported
-          //   }}
+          onPaste={(e) => {
+            e.preventDefault();
+            const pastedData = (e.clipboardData || window.Clipboard).getData(
+              "text"
+            );
+            e.currentTarget.value = pastedData;
+          }}
         />
         <Button
           onClick={() => {
-            updateGlobalState();
+            const decklistInput = document.getElementById(
+              "decklist-input"
+            ) as HTMLInputElement;
+            const decklistArray = stringToArray(decklistInput.value);
+            setDeckList(decklistArray);
+
             props.toggle();
           }}
         >
-          Use This Commander
+          Update Commander Settings
         </Button>
       </FormWrapper>
     </Wrapper>
