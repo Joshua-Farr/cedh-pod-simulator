@@ -45,10 +45,18 @@ const TableWrapper = styled.div`
 
 const Title = styled.span`
   font-size: 2rem;
-  // margin: 0;
+  margin: 0;
 
   @media only screen and (max-width: 750px) {
     font-size: 1rem;
+    margin-top: 0.5em;
+  }
+`;
+
+const Copyright = styled.h5`
+  @media only screen and (max-width: 750px) {
+    font-size: 0.75rem;
+    font-weight: 200;
   }
 `;
 
@@ -173,10 +181,10 @@ function App() {
             newCommanders={() => fetchCommandersAndSetUrls()}
           />
           <OpeningHand hand={commanderSettings.hand} />
-          <h5>
-            Website built in React.js by{" "}
-            <a href="https://joshfarr.com/">Josh Farr</a> | Copyright © 2024
-          </h5>
+          <Copyright>
+            Website built by <a href="https://joshfarr.com/">Josh Farr</a> |
+            Copyright © 2024
+          </Copyright>
         </Wrapper>
         {modal && <ChooseCommanderModal toggle={toggleModal} />}
       </CommanderContext.Provider>
