@@ -17,6 +17,9 @@ const Button = styled.button`
 const Wrapper = styled.div`
   display: flex;
   gap: 10px;
+  @media only screen and (max-width: 750px) {
+    margin-inline: 0.5em;
+  }
 `;
 
 type ButtonProps = {

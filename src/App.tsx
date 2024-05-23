@@ -21,7 +21,6 @@ const Wrapper = styled.div`
   width: 100%;
   gap: 20px;
   position: absolute;
-  // border: 3px solid red;
 `;
 
 const TableWrapper = styled.div`
@@ -32,7 +31,12 @@ const TableWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1em;
-  // border: 2px solid green;
+
+  @media only screen and (max-width: 750px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em;
+  }
 `;
 
 const Title = styled.span`
