@@ -75,6 +75,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
         <CommanderSelect
           value={commanderSettings?.commander || ""}
           onChange={(e) => {
+            e.preventDefault();
             setCommander(e.target.value);
           }}
           required
@@ -91,22 +92,28 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
             "Paste your decklist here in MTGO format: \n1 Arcbound Ravager\n1 Welding Jar\n1 Ornithopter\netc..."
             //  const commanderSettings.decklist.toString()
           }
-          onPaste={(e) => {
-            e.preventDefault();
-            const pastedData = (e.clipboardData || window.Clipboard).getData(
-              "text"
-            );
-            e.currentTarget.value = pastedData;
+          onChange={() => {
+            // const decklistArray = stringToArray(e.target.value);
+            // setDeckList(decklistArray);
+          }}
+          onPaste={() => {
+            setTimeout(() => {
+              const decklistInput = document.getElementById(
+                "decklist-input"
+              ) as HTMLInputElement;
+              const decklistArray = stringToArray(decklistInput.value);
+              setDeckList(decklistArray);
+            }, 0);
           }}
         />
         <Button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             const decklistInput = document.getElementById(
               "decklist-input"
             ) as HTMLInputElement;
             const decklistArray = stringToArray(decklistInput.value);
             setDeckList(decklistArray);
-
             props.toggle();
           }}
         >

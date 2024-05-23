@@ -9,6 +9,10 @@ import { Commanders } from "./components/Commanders";
 import { fetchHand } from "./utils/fetchHandOfSeven";
 import { getFourCommanderNames } from "./utils/getFourCommanderNames";
 import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
+import {
+  retrieveFromLocalStorage,
+  saveToLocalStorage,
+} from "./utils/localStorage";
 // import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
@@ -74,15 +78,29 @@ function App() {
     decklist: grindToDustDecklist,
     currentCommanders: [],
     hand: [
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
     ],
   });
+
+  useEffect(() => {
+    const savedData = retrieveFromLocalStorage();
+    setCommanderSettings(savedData);
+  }, []);
+
+  useEffect(() => {
+    fetchCommandersAndSetUrls().then(fetchHandAndSetUrls);
+  }, [modal]);
+
+  useEffect(() => {
+    console.log("Commander settings have been updated to: ", commanderSettings);
+    saveToLocalStorage(commanderSettings);
+  }, [commanderSettings]);
 
   const fetchCommandersAndSetUrls = async () => {
     const commanders = await getFourCommanderNames(
@@ -97,6 +115,7 @@ function App() {
   };
 
   const setCommander = (name: string) => {
+    console.log("SET COMMANDER TO : ", name);
     setCommanderSettings((prev) => ({
       ...prev,
       commander: name,
@@ -122,14 +141,6 @@ function App() {
   const toggleLoadingStatus = (status: boolean) => {
     setLoading(status);
   };
-
-  useEffect(() => {
-    fetchCommandersAndSetUrls().then(fetchHandAndSetUrls);
-  }, [modal]);
-
-  useEffect(() => {
-    console.log("Commander settings have been updated to: ", commanderSettings);
-  }, [commanderSettings]);
 
   const toggleModal = () => {
     setModal((prev) => !prev);
@@ -162,6 +173,10 @@ function App() {
             newCommanders={() => fetchCommandersAndSetUrls()}
           />
           <OpeningHand hand={commanderSettings.hand} />
+          <h5>
+            Website built in React.js by{" "}
+            <a href="https://joshfarr.com/">Josh Farr</a> | Copyright © 2024
+          </h5>
         </Wrapper>
         {modal && <ChooseCommanderModal toggle={toggleModal} />}
       </CommanderContext.Provider>

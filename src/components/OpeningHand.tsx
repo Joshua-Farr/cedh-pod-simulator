@@ -18,7 +18,6 @@ export const OpeningHand: React.FC<handProps> = ({ hand }) => {
     justify-content: center;
     text-align: center;
     //   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin-bottom: 1em;
     // margin-inline: 1.25em;
     user-select: none;
     max-width: 100%;
