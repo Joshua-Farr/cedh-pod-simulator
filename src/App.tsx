@@ -70,13 +70,13 @@ function App() {
     decklist: grindToDustDecklist,
     currentCommanders: [],
     hand: [
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
-      "src/assets/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
+      "/cardback.jpg",
     ],
   });
 

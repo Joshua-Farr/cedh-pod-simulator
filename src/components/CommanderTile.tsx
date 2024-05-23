@@ -38,7 +38,7 @@ const StyledTile = styled.div`
 const ImageWrapper = styled.div``;
 
 const StyledImage = styled.img<{ $pair?: boolean }>`
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-height: 250px;
   pointer-events: none;
@@ -92,7 +92,7 @@ export const CommanderTile = (props: CardInfoProps) => {
       commanderImages.push(
         <StyledImage
           $pair
-          src={imageLoading ? "src/assets/cardback.jpg" : image}
+          src={imageLoading ? "/cardback.jpg" : image}
           alt={`Commander Image ${image}`}
           key={randomNumber}
           onLoad={handleImageLoaded}
@@ -104,7 +104,7 @@ export const CommanderTile = (props: CardInfoProps) => {
     const randomNumber = Math.floor(Math.random() * 10000000000);
     commanderImages.push(
       <StyledImage
-        src={imageLoading ? "src/assets/cardback.jpg" : imageUrl}
+        src={imageLoading ? "/cardback.jpg" : imageUrl}
         alt={`Commander Image ${imageUrl}`}
         key={randomNumber}
         onLoad={handleImageLoaded}
@@ -117,10 +117,7 @@ export const CommanderTile = (props: CardInfoProps) => {
       {props.loading ? (
         <StyledTile>
           <StyledCardName>Loading Commander...</StyledCardName>
-          <StyledImage
-            src={"src/assets/cardback.jpg"}
-            alt={`Commander is loading!`}
-          />
+          <StyledImage src={"/cardback.jpg"} alt={`Commander is loading!`} />
         </StyledTile>
       ) : (
         <StyledTile>

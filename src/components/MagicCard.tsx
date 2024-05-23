@@ -5,7 +5,6 @@ interface MagicCardProps {
 }
 
 const Card = styled.div`
-  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100%;
   height: 100%;
@@ -22,7 +21,7 @@ const Card = styled.div`
 const StyledImage = styled.img`
   width: 100%;
   max-height: 210px;
-  border-radius: 10px;
+  border-radius: 8px;
   display: block;
   object-fit: cover;
 `;
