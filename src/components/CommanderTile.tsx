@@ -46,7 +46,7 @@ const StyledTile = styled.div`
 
 const ImageWrapper = styled.div`
   @media only screen and (max-width: 750px) {
-    height: 80%;
+    height: 70%;
   }
 `;
 
@@ -68,6 +68,11 @@ const StyledImage = styled.img<{ $pair?: boolean }>`
 const StyledCardName = styled.span`
   font-size: 1rem;
   margin-bottom: 1em;
+
+  @media only screen and (max-width: 750px) {
+    font-size: 0.75rem;
+    margin-bottom: 0.3em;
+  }
 `;
 
 const CommanderWrapper = styled.div`

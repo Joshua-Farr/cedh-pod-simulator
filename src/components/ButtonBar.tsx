@@ -12,13 +12,19 @@ const Button = styled.button`
     background-color: rgba(198, 146, 57, 0.655);
     transition: 0.33s ease-out;
   }
+  @media only screen and (max-width: 750px) {
+    padding: 0.25em 1em;
+    font-size: 0.75rem;
+    border-radius: 10px;
+    margin-inline: 0.25em;
+  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   @media only screen and (max-width: 750px) {
-    margin-inline: 0.5em;
+    gap: 0px;
   }
 `;
 

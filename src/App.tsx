@@ -42,6 +42,10 @@ const TableWrapper = styled.div`
 const Title = styled.span`
   font-size: 2rem;
   // margin: 0;
+
+  @media only screen and (max-width: 750px) {
+    font-size: 1rem;
+  }
 `;
 
 type CommanderContextType = {
