@@ -165,6 +165,10 @@ function App() {
             newCommanders={() => fetchCommandersAndSetUrls()}
           />
           <OpeningHand hand={commanderSettings.hand} />
+          <h5>
+            Website built in React.js by{" "}
+            <a href="https://joshfarr.com/">Josh Farr</a> | Copyright © 2024
+          </h5>
         </Wrapper>
         {modal && <ChooseCommanderModal toggle={toggleModal} />}
       </CommanderContext.Provider>
