@@ -13,6 +13,11 @@ import {
   retrieveFromLocalStorage,
   saveToLocalStorage,
 } from "./utils/localStorage";
+import {
+  getAllCardImages,
+  getCardImage,
+  getTinyCardImage,
+} from "./utils/magicAPI";
 // import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
@@ -59,6 +64,22 @@ const Copyright = styled.h5`
     font-weight: 200;
   }
 `;
+
+const cardDetails = await getTinyCardImage("Life/Death");
+console.log("HERE IS THE CARD!!!", cardDetails);
+
+const tempHand = [
+  "Polluted Delta",
+  "Struggle/Survive",
+  "Heaven/Earth",
+  "Talisman of Indulgence",
+  "Arcane Signet",
+  "Collision/Colossus",
+  "Status/Statue",
+];
+
+const tempHandUrls = await getAllCardImages(tempHand);
+console.log(tempHandUrls);
 
 type CommanderContextType = {
   commanderSettings: Commander;
