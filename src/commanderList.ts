@@ -4,7 +4,7 @@ const testCommanders = [
   "Sisay, Weatherlight Captain",
 ];
 
-const allCommanders: string[] = [
+export const allCommanders: string[] = [
   "Kraum, Ludevic's Opus / Tymna the Weaver",
   "Kinnan, Bonder Prodigy",
   "Najeela, the Blade-Blossom",
@@ -364,9 +364,4 @@ const grindToDustDecklist = [
   "Yavimaya Coast",
 ];
 
-export {
-  grindToDustDecklist,
-  allCommanders,
-  topFiftyCommanders,
-  testCommanders,
-};
+export { grindToDustDecklist, topFiftyCommanders, testCommanders };
