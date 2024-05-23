@@ -16,6 +16,13 @@ const Card = styled.div`
     transform: scale(1.08);
     transition: 0.1s ease-in;
   }
+
+  @media only screen and (max-width: 750px) {
+    &:hover {
+      border-radius: 6px;
+      // position: fixed;      
+      transform: scale(2);
+    }
 `;
 
 const StyledImage = styled.img`
@@ -24,6 +31,10 @@ const StyledImage = styled.img`
   border-radius: 8px;
   display: block;
   object-fit: cover;
+
+  @media only screen and (max-width: 750px) {
+    border-radius: 2px;
+  }
 `;
 
 export const MagicCard = (props: MagicCardProps) => {

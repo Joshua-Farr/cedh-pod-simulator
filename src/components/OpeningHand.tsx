@@ -23,6 +23,11 @@ export const OpeningHand: React.FC<handProps> = ({ hand }) => {
     max-width: 100%;
     max-height: 100%;
     flex-shrink: 1;
+
+    @media only screen and (max-width: 750px) {
+      padding: 0.5em 0.35em;
+      // height: 100%;
+    }
   `;
 
   let handOfSeven = hand.map((card) => {

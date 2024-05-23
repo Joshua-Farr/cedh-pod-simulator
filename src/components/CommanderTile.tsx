@@ -33,9 +33,22 @@ const StyledTile = styled.div`
     transform: scale(1.08);
     transition: 0.1s ease-in;
   }
+
+  @media only screen and (max-width: 750px) {
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    gap: 0em;
+    padding: 0.5em;
+    height: 30vh;
+    // justify-content: space-between;
+  }
 `;
 
-const ImageWrapper = styled.div``;
+const ImageWrapper = styled.div`
+  @media only screen and (max-width: 750px) {
+    height: 70%;
+  }
+`;
 
 const StyledImage = styled.img<{ $pair?: boolean }>`
   border-radius: 8px;
@@ -45,11 +58,21 @@ const StyledImage = styled.img<{ $pair?: boolean }>`
   max-width: ${(props) => (props.$pair ? "48%" : "100%")};
   width: auto;
   height: auto;
+
+  @media only screen and (max-width: 750px) {
+    max-height: 100%;
+    max-width: ${(props) => (props.$pair ? "48%" : "100%")};
+  }
 `;
 
 const StyledCardName = styled.span`
   font-size: 1rem;
   margin-bottom: 1em;
+
+  @media only screen and (max-width: 750px) {
+    font-size: 0.75rem;
+    margin-bottom: 0.3em;
+  }
 `;
 
 const CommanderWrapper = styled.div`
@@ -61,6 +84,9 @@ const CommanderWrapper = styled.div`
   // max-width: 250px;
   // border: 2px solid pink;
   object-fit: contain;
+  @media only screen and (max-width: 750px) {
+    height: 100%;
+  }
 `;
 
 export const CommanderTile = (props: CardInfoProps) => {
