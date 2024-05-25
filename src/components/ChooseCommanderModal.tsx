@@ -1,9 +1,8 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import styled from "styled-components";
-import { allCommanders } from "../commanderList";
-import { CommanderContext } from "../App";
-import { stringToArray } from "../utils/stringToArray";
-import { arrayToString } from "../utils/arrayToString";
+// import { CommanderContext } from "../App";
+// import { stringToArray } from "../utils/stringToArray";
+// import { arrayToString } from "../utils/arrayToString";
 import { moxFieldApi } from "../utils/moxfieldAPI";
 
 type ButtonProps = {
@@ -54,8 +53,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
   // const { commanderSettings, setDeckList, setCommander } =
   //   useContext(CommanderContext);
 
-  const decklist = moxFieldApi("4avwk6ybLEebTrsZmAdcNw");
-  console.log(decklist);
+  moxFieldApi("4avwk6ybLEebTrsZmAdcNw");
 
   return (
     <Wrapper>
