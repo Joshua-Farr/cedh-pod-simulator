@@ -18,6 +18,7 @@ import {
   getCardImage,
   getTinyCardImage,
 } from "./utils/magicAPI";
+import { getMoxfieldInformation, moxFieldApi } from "./utils/moxfieldAPI";
 // import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
@@ -116,6 +117,8 @@ function App() {
       "/cardback.jpg",
     ],
   });
+
+  moxFieldApi("IoeurfHWQkm9ZbIgNu3Fjw");
 
   useEffect(() => {
     const savedData = retrieveFromLocalStorage();
