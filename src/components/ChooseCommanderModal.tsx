@@ -1,9 +1,10 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-// import { CommanderContext } from "../App";
+import { CommanderContext } from "../App";
 // import { stringToArray } from "../utils/stringToArray";
 // import { arrayToString } from "../utils/arrayToString";
 import { moxFieldApi } from "../utils/moxfieldAPI";
+import { getDataFromMoxfieldJSON } from "../utils/getDataFromMoxFieldJSON";
 
 type ButtonProps = {
   toggle: () => void;
@@ -50,10 +51,20 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     color: white;
   `;
 
-  // const { commanderSettings, setDeckList, setCommander } =
-  //   useContext(CommanderContext);
+  const { setDeckList, setCommander } = useContext(CommanderContext);
 
   moxFieldApi("4avwk6ybLEebTrsZmAdcNw");
+
+  const processUrl = () => {
+    const { commander, decklist } = getDataFromMoxfieldJSON();
+    console.log(
+      " Here is the info recieved from Moxfield.com: ",
+      commander,
+      decklist
+    );
+    setCommander(commander);
+    setDeckList(decklist);
+  };
 
   return (
     <Wrapper>
@@ -63,6 +74,7 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
         <Button
           onClick={() => {
             props.toggle();
+            // processUrl();
           }}
         >
           Upload Decklist
