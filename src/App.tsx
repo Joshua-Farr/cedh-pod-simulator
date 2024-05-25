@@ -13,13 +13,8 @@ import {
   retrieveFromLocalStorage,
   saveToLocalStorage,
 } from "./utils/localStorage";
-import {
-  getAllCardImages,
-  getCardImage,
-  getTinyCardImage,
-} from "./utils/magicAPI";
-import { getMoxfieldInformation, moxFieldApi } from "./utils/moxfieldAPI";
-// import { getCardImage } from "./utils/magicAPI";
+import { getAllCardImages, getTinyCardImage } from "./utils/magicAPI";
+import { moxFieldApi } from "./utils/moxfieldAPI";
 
 const Wrapper = styled.div`
   display: flex;

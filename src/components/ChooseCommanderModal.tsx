@@ -4,6 +4,7 @@ import { allCommanders } from "../commanderList";
 import { CommanderContext } from "../App";
 import { stringToArray } from "../utils/stringToArray";
 import { arrayToString } from "../utils/arrayToString";
+import { moxFieldApi } from "../utils/moxfieldAPI";
 
 type ButtonProps = {
   toggle: () => void;
@@ -21,19 +22,12 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     background-color: #0f1c2f;
   `;
 
-  const DeckInput = styled.textarea`
+  const MoxfieldInput = styled.input`
     border-radius: 15px;
     padding: 1rem;
     width: 100%;
     margin-block: 1em;
-  `;
-
-  const CommanderSelect = styled.select`
-    border-radius: 15px;
-    width: 100%;
-    padding: 0.75rem 1rem;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    min-width: 100px;
   `;
 
   const Button = styled.button`
@@ -57,67 +51,23 @@ export const ChooseCommanderModal = (props: ButtonProps) => {
     color: white;
   `;
 
-  const { commanderSettings, setDeckList, setCommander } =
-    useContext(CommanderContext);
+  // const { commanderSettings, setDeckList, setCommander } =
+  //   useContext(CommanderContext);
 
-  const commanderOptions = allCommanders.map((commander: string) => {
-    return (
-      <option key={commander} id={commander} value={commander}>
-        {commander}
-      </option>
-    );
-  });
+  const decklist = moxFieldApi("4avwk6ybLEebTrsZmAdcNw");
+  console.log(decklist);
 
   return (
     <Wrapper>
+      <h2>Paste your Moxfield.com decklist URL:</h2>
       <FormWrapper>
-        <h2>Choose A Commander:</h2>
-        <CommanderSelect
-          value={commanderSettings?.commander || ""}
-          onChange={(e) => {
-            e.preventDefault();
-            setCommander(e.target.value);
-          }}
-          required
-        >
-          <option>{commanderSettings.commander}</option>
-          {commanderOptions}
-        </CommanderSelect>
-        <h2>Upload Your Decklist:</h2>
-        <DeckInput
-          defaultValue={arrayToString(commanderSettings.decklist)}
-          id="decklist-input"
-          name="decklist-input"
-          placeholder={
-            "Paste your decklist here in MTGO format: \n1 Arcbound Ravager\n1 Welding Jar\n1 Ornithopter\netc..."
-            //  const commanderSettings.decklist.toString()
-          }
-          onChange={() => {
-            // const decklistArray = stringToArray(e.target.value);
-            // setDeckList(decklistArray);
-          }}
-          onPaste={() => {
-            setTimeout(() => {
-              const decklistInput = document.getElementById(
-                "decklist-input"
-              ) as HTMLInputElement;
-              const decklistArray = stringToArray(decklistInput.value);
-              setDeckList(decklistArray);
-            }, 0);
-          }}
-        />
+        <MoxfieldInput></MoxfieldInput>
         <Button
-          onClick={(e) => {
-            e.preventDefault();
-            const decklistInput = document.getElementById(
-              "decklist-input"
-            ) as HTMLInputElement;
-            const decklistArray = stringToArray(decklistInput.value);
-            setDeckList(decklistArray);
+          onClick={() => {
             props.toggle();
           }}
         >
-          Update Commander Settings
+          Upload Decklist
         </Button>
       </FormWrapper>
     </Wrapper>

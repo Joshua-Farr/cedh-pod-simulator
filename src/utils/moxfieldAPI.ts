@@ -32,7 +32,7 @@ myHeaders.append("x-moxfield-version", "2024.05.23.3");
 
 export const moxFieldApi = async (deckID: string) => {
   const requestOptions: RequestInit = {
-    mode: "cors",
+    mode: "no-cors",
     method: "GET",
     headers: myHeaders,
     redirect: "follow",
