@@ -61,21 +61,18 @@ const Copyright = styled.h5`
   }
 `;
 
-const cardDetails = await getTinyCardImage("Life/Death");
-console.log("HERE IS THE CARD!!!", cardDetails);
+// const tempHand = [
+//   "Polluted Delta",
+//   "Struggle/Survive",
+//   "Heaven/Earth",
+//   "Talisman of Indulgence",
+//   "Arcane Signet",
+//   "Collision/Colossus",
+//   "Status/Statue",
+// ];
 
-const tempHand = [
-  "Polluted Delta",
-  "Struggle/Survive",
-  "Heaven/Earth",
-  "Talisman of Indulgence",
-  "Arcane Signet",
-  "Collision/Colossus",
-  "Status/Statue",
-];
-
-const tempHandUrls = await getAllCardImages(tempHand);
-console.log(tempHandUrls);
+// const tempHandUrls = await getAllCardImages(tempHand);
+// console.log(tempHandUrls);
 
 type CommanderContextType = {
   commanderSettings: Commander;
