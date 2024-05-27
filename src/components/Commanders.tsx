@@ -15,6 +15,9 @@ export const Commanders: React.FC<CommandersProps> = ({
   loading,
 }) => {
   const [commanderImages, setCommanderImages] = useState<any[]>([]);
+  // const [hasMyCommanderBeenPassed, setHasMyCommanderBeenPassed] =
+  //   useState<boolean>(true);
+
   useEffect(() => {
     const fetchImages = async (commanders: string[]) => {
       try {
@@ -36,14 +39,12 @@ export const Commanders: React.FC<CommandersProps> = ({
         for (let i = 0; i < commanders.length; i++) {
           if (Array.isArray(commanders[i])) {
             const [url1, url2] = [results.shift(), results.shift()];
-            // console.log([url1, url2]);
             commanderUrlArray.push([url1, url2]);
           } else {
             commanderUrlArray.push(results.shift());
           }
         }
         setCommanderImages(commanderUrlArray);
-        // console.log(commanderUrlArray);
       } catch (error) {
         console.error(`Trouble fetching commanders: `, error);
       }

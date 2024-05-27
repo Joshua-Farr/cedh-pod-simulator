@@ -17,10 +17,10 @@ import { getAllCardImages, getTinyCardImage } from "./utils/magicAPI";
 // import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-basis: auto
   justify-content: center;
   height: 100vh;
   width: 100%;

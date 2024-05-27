@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { formatNameForDisplay } from "../utils/formatNameForDisplay";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CommanderContext } from "../App";
 
 interface CardInfoProps {
   commanders: string | string[];
@@ -15,6 +16,41 @@ const StyledTile = styled.div`
   border: 1px solid white;
   padding: 1.5em 1.35em;
   background-color: #16324f;
+
+  min-height: 100%;
+
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+  object-fit: contain;
+
+  &:hover {
+    cursor: pointer;
+    // transform: scale(1.08);
+    transform: scale(1.08);
+    transition: 0.1s ease-in;
+  }
+
+  @media only screen and (max-width: 750px) {
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    gap: 0em;
+    padding: 0.5em;
+    height: 30vh;
+    // justify-content: space-between;
+  }
+`;
+
+const StyledCommanderTile = styled.div`
+  background-color: #343330;
+
+  border-radius: 15px;
+  border: 1px solid white;
+  padding: 1.5em 1.35em;
 
   min-height: 100%;
 
@@ -90,6 +126,8 @@ const CommanderWrapper = styled.div`
 `;
 
 export const CommanderTile = (props: CardInfoProps) => {
+  const { commanderSettings } = useContext(CommanderContext);
+
   const [imageLoading, setImageLoading] = useState(true);
 
   const handleImageLoaded = () => {
@@ -138,13 +176,35 @@ export const CommanderTile = (props: CardInfoProps) => {
     );
   }
 
+  console.log(
+    `Does ${props.commanders} equal ${commanderSettings.commander}? `,
+    props.commanders === commanderSettings.commander
+  );
   return (
     <>
-      {props.loading ? (
+      {/* {props.loading ? (
         <StyledTile>
           <StyledCardName>Loading Commander...</StyledCardName>
           <StyledImage src={"/cardback.jpg"} alt={`Commander is loading!`} />
-        </StyledTile>
+        </StyledTile> */}
+
+      {props.commanders === commanderSettings.commander ? (
+        <StyledCommanderTile>
+          {typeof props.commanders === "string" ? (
+            <StyledCardName>
+              {props.index + 1 + ". "}
+              {formatNameForDisplay(props.commanders)}
+            </StyledCardName>
+          ) : (
+            <StyledCardName>
+              {props.index + 1 + ". "}
+              {formatNameForDisplay(props.commanders)}
+            </StyledCardName>
+          )}
+          <ImageWrapper>
+            <CommanderWrapper>{commanderImages}</CommanderWrapper>
+          </ImageWrapper>
+        </StyledCommanderTile>
       ) : (
         <StyledTile>
           {typeof props.commanders === "string" ? (
