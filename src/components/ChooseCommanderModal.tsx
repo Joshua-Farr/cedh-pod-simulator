@@ -4,7 +4,7 @@ import { CommanderContext } from "../App";
 // import { stringToArray } from "../utils/stringToArray";
 // import { arrayToString } from "../utils/arrayToString";
 import { moxFieldApi } from "../utils/moxfieldAPI";
-import { getDataFromMoxfieldJSON } from "../utils/getDataFromMoxFieldJSON";
+import { getDataFromMoxfieldJSON } from "../utils/getDataFromMoxfieldJSON";
 
 type ButtonProps = {
   toggle: () => void;
