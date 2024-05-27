@@ -13,7 +13,7 @@ import {
   retrieveFromLocalStorage,
   saveToLocalStorage,
 } from "./utils/localStorage";
-import { getAllCardImages, getTinyCardImage } from "./utils/magicAPI";
+// import { getAllCardImages, getTinyCardImage } from "./utils/magicAPI";
 // import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
