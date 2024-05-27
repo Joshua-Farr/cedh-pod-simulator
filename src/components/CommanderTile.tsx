@@ -149,10 +149,12 @@ export const CommanderTile = (props: CardInfoProps) => {
         <StyledTile>
           {typeof props.commanders === "string" ? (
             <StyledCardName>
+              {props.index + 1 + ". "}
               {formatNameForDisplay(props.commanders)}
             </StyledCardName>
           ) : (
             <StyledCardName>
+              {props.index + 1 + ". "}
               {formatNameForDisplay(props.commanders)}
             </StyledCardName>
           )}
