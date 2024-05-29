@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { formatNameForDisplay } from "../utils/formatNameForDisplay";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CommanderContext } from "../App";
 
 interface CardInfoProps {
@@ -9,6 +9,8 @@ interface CardInfoProps {
   listOfUrls: any[];
   loading: boolean;
   setLoading: (status: boolean) => void;
+  getHighlightedCommanderStatus: () => boolean;
+  setHighlightPlayerCommanderStatus: (status: boolean) => void;
 }
 
 const StyledTile = styled.div`
@@ -130,6 +132,8 @@ export const CommanderTile = (props: CardInfoProps) => {
 
   const [imageLoading, setImageLoading] = useState(true);
 
+  const myCommanderStatus = props.getHighlightedCommanderStatus();
+
   const handleImageLoaded = () => {
     setImageLoading(false);
   };
@@ -188,7 +192,8 @@ export const CommanderTile = (props: CardInfoProps) => {
           <StyledImage src={"/cardback.jpg"} alt={`Commander is loading!`} />
         </StyledTile> */}
 
-      {props.commanders === commanderSettings.commander ? (
+      {props.commanders === commanderSettings.commander &&
+      !myCommanderStatus ? (
         <StyledCommanderTile>
           {typeof props.commanders === "string" ? (
             <StyledCardName>

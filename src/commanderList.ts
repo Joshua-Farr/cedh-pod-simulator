@@ -1,7 +1,7 @@
 const testCommanders = [
   "Malcolm, Keen-Eyed Navigator / Tymna the Weaver",
   "Tivit, Seller of Secrets",
-  "Sisay, Weatherlight Captain",
+  "Kinnan, Bonder Prodigy",
 ];
 
 export const allCommanders: string[] = [

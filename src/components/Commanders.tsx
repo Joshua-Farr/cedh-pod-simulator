@@ -15,8 +15,17 @@ export const Commanders: React.FC<CommandersProps> = ({
   loading,
 }) => {
   const [commanderImages, setCommanderImages] = useState<any[]>([]);
+  const [commanderHighlighted, setCommanderHighlighted] = useState(false);
   // const [hasMyCommanderBeenPassed, setHasMyCommanderBeenPassed] =
   //   useState<boolean>(true);
+
+  const setHighlightPlayerCommanderStatus = (status: boolean) => {
+    setCommanderHighlighted(status);
+  };
+
+  const getHighlightedCommanderStatus = () => {
+    return commanderHighlighted;
+  };
 
   useEffect(() => {
     const fetchImages = async (commanders: string[]) => {
@@ -65,6 +74,8 @@ export const Commanders: React.FC<CommandersProps> = ({
         listOfUrls={commanderImages}
         loading={loading}
         setLoading={(status: boolean) => setLoading(status)}
+        setHighlightPlayerCommanderStatus={setHighlightPlayerCommanderStatus}
+        getHighlightedCommanderStatus={getHighlightedCommanderStatus}
       />
     );
   });

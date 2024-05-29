@@ -4,7 +4,11 @@ import { ButtonBar } from "./components/ButtonBar";
 // import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
-import { grindToDustDecklist, topFiftyCommanders } from "./commanderList";
+import {
+  grindToDustDecklist,
+  testCommanders,
+  topFiftyCommanders,
+} from "./commanderList";
 import { Commanders } from "./components/Commanders";
 import { fetchHand } from "./utils/fetchHandOfSeven";
 import { getFourCommanderNames } from "./utils/getFourCommanderNames";
@@ -13,7 +17,7 @@ import {
   retrieveFromLocalStorage,
   saveToLocalStorage,
 } from "./utils/localStorage";
-import { getAllCardImages, getTinyCardImage } from "./utils/magicAPI";
+// import { getAllCardImages, getTinyCardImage } from "./utils/magicAPI";
 // import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
@@ -61,21 +65,21 @@ const Copyright = styled.h5`
   }
 `;
 
-const cardDetails = await getTinyCardImage("Life/Death");
-console.log("HERE IS THE CARD!!!", cardDetails);
+// const cardDetails = await getTinyCardImage("Life/Death");
+// console.log("HERE IS THE CARD!!!", cardDetails);
 
-const tempHand = [
-  "Polluted Delta",
-  "Struggle/Survive",
-  "Heaven/Earth",
-  "Talisman of Indulgence",
-  "Arcane Signet",
-  "Collision/Colossus",
-  "Status/Statue",
-];
+// const tempHand = [
+//   "Polluted Delta",
+//   "Struggle/Survive",
+//   "Heaven/Earth",
+//   "Talisman of Indulgence",
+//   "Arcane Signet",
+//   "Collision/Colossus",
+//   "Status/Statue",
+// ];
 
-const tempHandUrls = await getAllCardImages(tempHand);
-console.log(tempHandUrls);
+// const tempHandUrls = await getAllCardImages(tempHand);
+// console.log(tempHandUrls);
 
 type CommanderContextType = {
   commanderSettings: Commander;
@@ -101,7 +105,7 @@ function App() {
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
     decklist: grindToDustDecklist,
-    currentCommanders: [],
+    currentCommanders: testCommanders, //Set to empty array
     hand: [
       "/cardback.jpg",
       "/cardback.jpg",
@@ -130,7 +134,8 @@ function App() {
   const fetchCommandersAndSetUrls = async () => {
     const commanders = await getFourCommanderNames(
       commanderSettings.commander,
-      topFiftyCommanders
+      // topFiftyCommanders
+      testCommanders
     );
 
     setCommanderSettings((prev) => ({
