@@ -105,7 +105,7 @@ function App() {
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
     decklist: grindToDustDecklist,
-    currentCommanders: testCommanders, //Set to empty array
+    currentCommanders: [],
     hand: [
       "/cardback.jpg",
       "/cardback.jpg",
@@ -127,15 +127,14 @@ function App() {
   }, [modal]);
 
   useEffect(() => {
-    console.log("Commander settings have been updated to: ", commanderSettings);
+    // console.log("Commander settings have been updated to: ", commanderSettings);
     saveToLocalStorage(commanderSettings);
   }, [commanderSettings]);
 
   const fetchCommandersAndSetUrls = async () => {
     const commanders = await getFourCommanderNames(
       commanderSettings.commander,
-      // topFiftyCommanders
-      testCommanders
+      topFiftyCommanders
     );
 
     setCommanderSettings((prev) => ({

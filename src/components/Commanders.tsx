@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getCommanderURLs } from "../utils/getCommanderURLs";
 import { CommanderTile } from "./CommanderTile";
 import { formatNameForDisplay } from "../utils/formatNameForDisplay";
@@ -15,19 +15,11 @@ export const Commanders: React.FC<CommandersProps> = ({
   loading,
 }) => {
   const [commanderImages, setCommanderImages] = useState<any[]>([]);
-  const [commanderHighlighted, setCommanderHighlighted] = useState(false);
-  // const [hasMyCommanderBeenPassed, setHasMyCommanderBeenPassed] =
-  //   useState<boolean>(true);
 
-  const setHighlightPlayerCommanderStatus = (status: boolean) => {
-    setCommanderHighlighted(status);
-  };
-
-  const getHighlightedCommanderStatus = () => {
-    return commanderHighlighted;
-  };
+  const renderedCommandersRef = useRef<string[]>([]);
 
   useEffect(() => {
+    renderedCommandersRef.current = [];
     const fetchImages = async (commanders: string[]) => {
       try {
         let parsedcommanders: string[] = [];
@@ -63,8 +55,24 @@ export const Commanders: React.FC<CommandersProps> = ({
     setLoading(false);
   }, [currentCommanders]);
 
+  const isDuplicate = (commander: string | string[]) => {
+    const commanderName =
+      typeof commander === "string" ? commander : commander.join(" / ");
+
+    console.log(commanderName);
+
+    if (renderedCommandersRef.current.includes(commanderName)) {
+      return true;
+    } else {
+      renderedCommandersRef.current.push(commanderName);
+      return false;
+    }
+  };
+
   const commanders = currentCommanders.map((commander: string, index) => {
     const randomNumber = Math.floor(Math.random() * 10000000000);
+
+    const duplicateCommander = isDuplicate(commander);
 
     return (
       <CommanderTile
@@ -74,8 +82,7 @@ export const Commanders: React.FC<CommandersProps> = ({
         listOfUrls={commanderImages}
         loading={loading}
         setLoading={(status: boolean) => setLoading(status)}
-        setHighlightPlayerCommanderStatus={setHighlightPlayerCommanderStatus}
-        getHighlightedCommanderStatus={getHighlightedCommanderStatus}
+        duplicate={duplicateCommander}
       />
     );
   });
