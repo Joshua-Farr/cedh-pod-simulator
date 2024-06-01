@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { formatNameForDisplay } from "../utils/formatNameForDisplay";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CommanderContext } from "../App";
 
 interface CardInfoProps {
@@ -8,8 +8,9 @@ interface CardInfoProps {
   index: number;
   listOfUrls: any[];
   loading: boolean;
-  duplicate: boolean;
   setLoading: (status: boolean) => void;
+  getHighlightedCommanderStatus: () => boolean;
+  setHighlightPlayerCommanderStatus: (status: boolean) => void;
 }
 
 const StyledTile = styled.div`
@@ -131,13 +132,15 @@ export const CommanderTile = (props: CardInfoProps) => {
 
   const [imageLoading, setImageLoading] = useState(true);
 
+  const myCommanderStatus = props.getHighlightedCommanderStatus();
+
   const handleImageLoaded = () => {
     setImageLoading(false);
   };
 
-  // useEffect(() => {
-  //   setImageLoading(false);
-  // }, [props.commanders, props.index]);
+  useEffect(() => {
+    setImageLoading(false);
+  }, [props.commanders, props.index]);
 
   let commanderImages: any[] = [];
 
@@ -176,25 +179,50 @@ export const CommanderTile = (props: CardInfoProps) => {
       />
     );
   }
-  console.log(props.commanders, props.duplicate);
+
+  console.log(
+    `Does ${props.commanders} equal ${commanderSettings.commander}? `,
+    props.commanders === commanderSettings.commander
+  );
   return (
     <>
-      {props.commanders === commanderSettings.commander && !props.duplicate ? (
+      {/* {props.loading ? (
+        <StyledTile>
+          <StyledCardName>Loading Commander...</StyledCardName>
+          <StyledImage src={"/cardback.jpg"} alt={`Commander is loading!`} />
+        </StyledTile> */}
+
+      {props.commanders === commanderSettings.commander &&
+      !myCommanderStatus ? (
         <StyledCommanderTile>
-          <StyledCardName>
-            {props.index + 1 + ". "}
-            {formatNameForDisplay(props.commanders)}
-          </StyledCardName>
+          {typeof props.commanders === "string" ? (
+            <StyledCardName>
+              {props.index + 1 + ". "}
+              {formatNameForDisplay(props.commanders)}
+            </StyledCardName>
+          ) : (
+            <StyledCardName>
+              {props.index + 1 + ". "}
+              {formatNameForDisplay(props.commanders)}
+            </StyledCardName>
+          )}
           <ImageWrapper>
             <CommanderWrapper>{commanderImages}</CommanderWrapper>
           </ImageWrapper>
         </StyledCommanderTile>
       ) : (
         <StyledTile>
-          <StyledCardName>
-            {props.index + 1 + ". "}
-            {formatNameForDisplay(props.commanders)}
-          </StyledCardName>
+          {typeof props.commanders === "string" ? (
+            <StyledCardName>
+              {props.index + 1 + ". "}
+              {formatNameForDisplay(props.commanders)}
+            </StyledCardName>
+          ) : (
+            <StyledCardName>
+              {props.index + 1 + ". "}
+              {formatNameForDisplay(props.commanders)}
+            </StyledCardName>
+          )}
           <ImageWrapper>
             <CommanderWrapper>{commanderImages}</CommanderWrapper>
           </ImageWrapper>
