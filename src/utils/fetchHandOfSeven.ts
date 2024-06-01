@@ -3,7 +3,6 @@ import { getAllCardImages } from "./magicAPI";
 
 export const fetchHand = async (decklist: string[]) => {
   const playerHand = getHandOfSeven(decklist);
-  // console.log(`Here is your opening hand: ${playerHand}`);
 
   try {
     const cards = getAllCardImages(playerHand);
