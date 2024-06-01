@@ -1,14 +1,9 @@
 import styled from "styled-components";
 import { OpeningHand } from "./components/OpeningHand";
 import { ButtonBar } from "./components/ButtonBar";
-// import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
-import {
-  grindToDustDecklist,
-  testCommanders,
-  topFiftyCommanders,
-} from "./commanderList";
+import { grindToDustDecklist, topFiftyCommanders } from "./commanderList";
 import { Commanders } from "./components/Commanders";
 import { fetchHand } from "./utils/fetchHandOfSeven";
 import { getFourCommanderNames } from "./utils/getFourCommanderNames";
@@ -17,8 +12,6 @@ import {
   retrieveFromLocalStorage,
   saveToLocalStorage,
 } from "./utils/localStorage";
-// import { getAllCardImages, getTinyCardImage } from "./utils/magicAPI";
-// import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
   padding-top: 15px;
@@ -64,22 +57,6 @@ const Copyright = styled.h5`
     font-weight: 200;
   }
 `;
-
-// const cardDetails = await getTinyCardImage("Life/Death");
-// console.log("HERE IS THE CARD!!!", cardDetails);
-
-// const tempHand = [
-//   "Polluted Delta",
-//   "Struggle/Survive",
-//   "Heaven/Earth",
-//   "Talisman of Indulgence",
-//   "Arcane Signet",
-//   "Collision/Colossus",
-//   "Status/Statue",
-// ];
-
-// const tempHandUrls = await getAllCardImages(tempHand);
-// console.log(tempHandUrls);
 
 type CommanderContextType = {
   commanderSettings: Commander;
@@ -127,7 +104,6 @@ function App() {
   }, [modal]);
 
   useEffect(() => {
-    // console.log("Commander settings have been updated to: ", commanderSettings);
     saveToLocalStorage(commanderSettings);
   }, [commanderSettings]);
 
@@ -144,7 +120,6 @@ function App() {
   };
 
   const setCommander = (name: string) => {
-    console.log("SET COMMANDER TO : ", name);
     setCommanderSettings((prev) => ({
       ...prev,
       commander: name,
@@ -152,7 +127,6 @@ function App() {
   };
 
   const setDeckList = (userDecklist: string[]) => {
-    console.log("SET DECKLIST TO : ", userDecklist);
     setCommanderSettings((prev) => {
       return { ...prev, decklist: userDecklist };
     });
