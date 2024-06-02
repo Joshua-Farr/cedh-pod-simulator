@@ -111,8 +111,7 @@ function App() {
   const fetchCommandersAndSetUrls = async () => {
     const commanders = await getFourCommanderNames(
       commanderSettings.commander,
-      // topFiftyCommanders
-      testCommanders
+      topFiftyCommanders
     );
 
     setCommanderSettings((prev) => ({
