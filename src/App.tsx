@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { OpeningHand } from "./components/OpeningHand";
 import { ButtonBar } from "./components/ButtonBar";
-// import { ChooseCommanderModal } from "./components/ChooseCommanderModal";
 import { createContext, useEffect, useState } from "react";
 import { Commander } from "./types/types";
 import { grindToDustDecklist, topFiftyCommanders } from "./commanderList";
@@ -13,14 +12,12 @@ import {
   retrieveFromLocalStorage,
   saveToLocalStorage,
 } from "./utils/localStorage";
-// import { getAllCardImages, getTinyCardImage } from "./utils/magicAPI";
-// import { getCardImage } from "./utils/magicAPI";
 
 const Wrapper = styled.div`
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-basis: auto
   justify-content: center;
   height: 100vh;
   width: 100%;
@@ -61,19 +58,6 @@ const Copyright = styled.h5`
   }
 `;
 
-// const tempHand = [
-//   "Polluted Delta",
-//   "Struggle/Survive",
-//   "Heaven/Earth",
-//   "Talisman of Indulgence",
-//   "Arcane Signet",
-//   "Collision/Colossus",
-//   "Status/Statue",
-// ];
-
-// const tempHandUrls = await getAllCardImages(tempHand);
-// console.log(tempHandUrls);
-
 type CommanderContextType = {
   commanderSettings: Commander;
   setCommander: (name: string) => void;
@@ -98,7 +82,7 @@ function App() {
   const [commanderSettings, setCommanderSettings] = useState<Commander>({
     commander: "Kinnan, Bonder Prodigy",
     decklist: grindToDustDecklist,
-    currentCommanders: [],
+    currentCommanders: [], //Set to empty array
     hand: [
       "/cardback.jpg",
       "/cardback.jpg",
@@ -137,7 +121,6 @@ function App() {
   };
 
   const setCommander = (name: string) => {
-    console.log("SET COMMANDER TO : ", name);
     setCommanderSettings((prev) => ({
       ...prev,
       commander: name,
@@ -145,7 +128,6 @@ function App() {
   };
 
   const setDeckList = (userDecklist: string[]) => {
-    console.log("SET DECKLIST TO : ", userDecklist);
     setCommanderSettings((prev) => {
       return { ...prev, decklist: userDecklist };
     });

@@ -15,6 +15,18 @@ export const Commanders: React.FC<CommandersProps> = ({
   loading,
 }) => {
   const [commanderImages, setCommanderImages] = useState<any[]>([]);
+  const [commanderHighlighted, setCommanderHighlighted] = useState(false);
+  // const [hasMyCommanderBeenPassed, setHasMyCommanderBeenPassed] =
+  //   useState<boolean>(true);
+
+  const setHighlightPlayerCommanderStatus = (status: boolean) => {
+    setCommanderHighlighted(status);
+  };
+
+  const getHighlightedCommanderStatus = () => {
+    return commanderHighlighted;
+  };
+
   useEffect(() => {
     const fetchImages = async (commanders: string[]) => {
       try {
@@ -36,14 +48,12 @@ export const Commanders: React.FC<CommandersProps> = ({
         for (let i = 0; i < commanders.length; i++) {
           if (Array.isArray(commanders[i])) {
             const [url1, url2] = [results.shift(), results.shift()];
-            // console.log([url1, url2]);
             commanderUrlArray.push([url1, url2]);
           } else {
             commanderUrlArray.push(results.shift());
           }
         }
         setCommanderImages(commanderUrlArray);
-        // console.log(commanderUrlArray);
       } catch (error) {
         console.error(`Trouble fetching commanders: `, error);
       }
@@ -64,6 +74,8 @@ export const Commanders: React.FC<CommandersProps> = ({
         listOfUrls={commanderImages}
         loading={loading}
         setLoading={(status: boolean) => setLoading(status)}
+        setHighlightPlayerCommanderStatus={setHighlightPlayerCommanderStatus}
+        getHighlightedCommanderStatus={getHighlightedCommanderStatus}
       />
     );
   });
