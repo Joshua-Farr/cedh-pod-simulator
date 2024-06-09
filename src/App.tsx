@@ -12,6 +12,7 @@ import {
   retrieveFromLocalStorage,
   saveToLocalStorage,
 } from "./utils/localStorage";
+import { moxFieldApi } from "./utils/moxfieldAPI";
 
 const Wrapper = styled.div`
   padding-top: 15px;
@@ -97,6 +98,7 @@ function App() {
   useEffect(() => {
     const savedData = retrieveFromLocalStorage();
     setCommanderSettings(savedData);
+    moxFieldApi("4avwk6ybLEebTrsZmAdcNw");
   }, []);
 
   useEffect(() => {

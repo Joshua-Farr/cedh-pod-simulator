@@ -20,7 +20,6 @@ myHeaders.append(
   '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"'
 );
 myHeaders.append("sec-ch-ua-mobile", "?1");
-myHeaders.append("sec-ch-ua-platform", '"Android"');
 myHeaders.append("sec-fetch-dest", "empty");
 myHeaders.append("sec-fetch-mode", "cors");
 myHeaders.append("sec-fetch-site", "same-site");
